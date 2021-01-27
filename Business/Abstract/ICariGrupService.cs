@@ -12,6 +12,6 @@ namespace Business.Abstract
         IResult Update(CariGrup cariGrup);
         IResult Delete(CariGrup cariGrup);
         IDataResult<List<CariGrup>> GetByCariId(int cariId);
-        IDataResult<List<CariGrup>> GetByCariGrupKodId(int cariGrupKodId);
+        IDataResult<List<CariGrup>> GetListByCariGrupKodId(int cariGrupKodId);
     }
 }

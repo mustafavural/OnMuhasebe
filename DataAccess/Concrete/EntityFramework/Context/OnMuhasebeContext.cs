@@ -17,7 +17,6 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<StokGrup> StokGruplar { get; set; }
         public DbSet<StokGrupKod> StokGrupKodlar { get; set; }
         public DbSet<StokHareket> StokHareketler { get; set; }
-        public DbSet<Cari> Cariler { get; set; }
         public DbSet<SahisCari> SahisCariler { get; set; }
         public DbSet<SirketCari> SirketCariler { get; set; }
         public DbSet<CariGrup> CariGruplar { get; set; }

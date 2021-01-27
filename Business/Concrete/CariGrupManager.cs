@@ -19,7 +19,7 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public IDataResult<List<CariGrup>> GetByCariGrupKodId(int cariGrupKodId)
+        public IDataResult<List<CariGrup>> GetListByCariGrupKodId(int cariGrupKodId)
         {
             throw new NotImplementedException();
         }

@@ -1,5 +1,5 @@
 ﻿using Business.Abstract;
-using Entities.Concrete;
+using Core.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -15,49 +15,30 @@ namespace ConsoleUI
             this.stokGrupKodService = stokGrupKodService;
         }
 
-
-
-
+        public void EkranaYaz<T>(List<T> tablo) where T : class, IEntity, new()
+        {
+            foreach (var satir in tablo)
+            {
+                foreach (var sutun in satir.GetType().GetProperties())
+                {
+                    Console.Write(satir.GetType().GetProperty(sutun.Name).GetValue(satir) + " ");
+                }
+                Console.WriteLine();
+            }
+            Console.ReadLine();
+        }
 
         public void Run(string[] args)
         {
             var getList = stokService.GetList();
-            ekranayaz(getList.Data);
+            EkranaYaz(getList.Data);
             var getListByGrupAd = stokService.GetListByGrupAd("MürekkepPüskürtmeli");
-            ekranayaz(getListByGrupAd.Data);
+            EkranaYaz(getListByGrupAd.Data);
             var getListByGrupKod = stokService.GetListByGrupKod(23);
-            ekranayaz(getListByGrupKod.Data);
+            EkranaYaz(getListByGrupKod.Data);
             var getKodList = stokGrupKodService.GetList();
-            ekranayaz(getKodList.Data);
+            EkranaYaz(getKodList.Data);
             Console.WriteLine(getKodList.Message);
-        }
-
-
-
-
-        public void ekranayaz(List<Stok> list)
-        {
-            foreach (var item in list)
-            {
-                foreach (var i in item.GetType().GetProperties())
-                {
-                    Console.Write(item.GetType().GetProperty(i.Name).GetValue(item) + " ");
-                }
-                Console.WriteLine();
-            }
-            Console.ReadLine();
-        }
-        public void ekranayaz(List<StokGrupKod> list)
-        {
-            foreach (var item in list)
-            {
-                foreach (var i in item.GetType().GetProperties())
-                {
-                    Console.Write(item.GetType().GetProperty(i.Name).GetValue(item) + " ");
-                }
-                Console.WriteLine();
-            }
-            Console.ReadLine();
         }
     }
 }
