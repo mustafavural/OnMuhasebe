@@ -1,4 +1,5 @@
 ﻿using Castle.DynamicProxy;
+using System;
 
 namespace Core.Utilities.Interceptors.Autofac
 {
@@ -12,7 +13,7 @@ namespace Core.Utilities.Interceptors.Autofac
         {
 
         }
-        protected virtual void OnException(IInvocation invocation, System.Exception e)
+        protected virtual void OnException(IInvocation invocation, Exception e)
         {
 
         }
@@ -28,7 +29,7 @@ namespace Core.Utilities.Interceptors.Autofac
             {
                 invocation.Proceed();
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 isSuccess = false;
                 OnException(invocation, e);
