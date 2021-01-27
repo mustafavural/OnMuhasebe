@@ -33,5 +33,17 @@ namespace Business.Constans
         public static string SahisCariInserted = "Şahıs Cari başarıyla eklendi.";
         public static string SahisCariDeleted = "Şahıs Cari başarıyla silindi.";
         public static string SahisCariUpdated = "Şahıs Cari baarıyla güncellendi.";
+
+        public static string CariAddedToGrup = "Cari başarıyla gruba eklendi.";
+        public static string CariDeletedFromGrup = "Cari başarıyla gruptan çıkarıldı.";
+        public static string CariTransferredGrup = "Carinin grup bilgisi başarıyla güncellendi.";
+
+        public static string CariGrupKodAdded = "Yeni Cari Grup Kod başarıyla eklendi.";
+        public static string CariGrupKodUpdated = "Cari Grup Kod başarıyla güncellendi.";
+        public static string CariGrupKodDeleted = "Cari Grup Kod başarıyla silindi.";
+
+        public static string CariActivityAdded = "Stok Hareket başarıyla eklendi.";
+        public static string CariActivityDeleted = "Stok Hareket başarıyla silindi.";
+        public static string CariActivityUpdated = "Stok Hareket başarıyla güncellendi.";
     }
 }

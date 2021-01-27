@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Business.Constans;
 using Core.Utilities.Result;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -9,29 +11,39 @@ namespace Business.Concrete
 {
     public class CariGrupManager : ICariGrupService
     {
+        ICariGrupDal _cariGrupDal;
+
+        public CariGrupManager(ICariGrupDal cariGrupDal)
+        {
+            _cariGrupDal = cariGrupDal;
+        }
+
         public IResult Add(CariGrup cariGrup)
         {
-            throw new NotImplementedException();
+            _cariGrupDal.Add(cariGrup);
+            return new SuccessResult(Messages.CariAddedToGrup);
         }
 
         public IResult Delete(CariGrup cariGrup)
         {
-            throw new NotImplementedException();
-        }
-
-        public IDataResult<List<CariGrup>> GetListByCariGrupKodId(int cariGrupKodId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IDataResult<List<CariGrup>> GetByCariId(int cariId)
-        {
-            throw new NotImplementedException();
+            _cariGrupDal.Delete(cariGrup);
+            return new SuccessResult(Messages.CariDeletedFromGrup);
         }
 
         public IResult Update(CariGrup cariGrup)
         {
-            throw new NotImplementedException();
+            _cariGrupDal.Update(cariGrup);
+            return new SuccessResult(Messages.CariTransferredGrup);
+        }
+
+        public IDataResult<List<CariGrup>> GetListByCariGrupKodId(int cariGrupKodId)
+        {
+            return new SuccessDataResult<List<CariGrup>>(_cariGrupDal.GetAll(p => p.CariGrupKodId == cariGrupKodId));
+        }
+
+        public IDataResult<List<CariGrup>> GetByCariId(int cariId)
+        {
+            return new SuccessDataResult<List<CariGrup>>(_cariGrupDal.GetAll(p => p.CariId == cariId));
         }
     }
 }

@@ -24,16 +24,21 @@ namespace Business.Concrete
             return new SuccessResult(Messages.StockActivityAdded);
         }
 
+        public IResult Delete(StokHareket stokHareket)
+        {
+            _stokHareketDal.Delete(stokHareket);
+            return new SuccessResult(Messages.StockActivityDeleted);
+        }
+
         public IResult Update(StokHareket stokHareket)
         {
             _stokHareketDal.Update(stokHareket);
             return new SuccessResult(Messages.StockActivityUpdated);
         }
 
-        public IResult Delete(StokHareket stokHareket)
+        public IDataResult<StokHareket> GetById(int stokHareketId)
         {
-            _stokHareketDal.Delete(stokHareket);
-            return new SuccessResult(Messages.StockActivityDeleted);
+            return new SuccessDataResult<StokHareket>(_stokHareketDal.Get(p => p.Id == stokHareketId));
         }
 
         public IDataResult<List<StokHareket>> GetByDepoId(int depoId)
@@ -44,11 +49,6 @@ namespace Business.Concrete
         public IDataResult<List<StokHareket>> GetByFaturaId(int faturaId)
         {
             return new SuccessDataResult<List<StokHareket>>(_stokHareketDal.GetAll(p => p.FaturaId == faturaId));
-        }
-
-        public IDataResult<StokHareket> GetById(int stokHareketId)
-        {
-            return new SuccessDataResult<StokHareket>(_stokHareketDal.Get(p => p.Id == stokHareketId));
         }
 
         public IDataResult<List<StokHareket>> GetByStokId(int stokId)
