@@ -15,9 +15,10 @@ namespace DataAccess.Concrete.EntityFramework.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Cari>()
-                .HasOne(c => c.SahisCari)
-                .WithOne(s => s.Cari);
+            modelBuilder.Entity<SirketCari>()
+                .Ignore(p => p.Cari);
+            modelBuilder.Entity<SahisCari>()
+                .Ignore(p => p.Cari);
         }
 
         public DbSet<Stok> Stoklar { get; set; }
@@ -30,8 +31,5 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<CariGrup> CariGruplar { get; set; }
         public DbSet<CariGrupKod> CariGrupKodlar { get; set; }
         public DbSet<CariHareket> CariHareketler { get; set; }
-
-
-
     }
 }

@@ -23,115 +23,59 @@ namespace Business.Concrete
             _cariGrupKodService = cariGrupKodService;
         }
 
+        public IResult Add(SirketCari cari)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IResult Delete(SirketCari cari)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<SirketCari> GetById(int cariId)
+        {
+            return new SuccessDataResult<SirketCari>(_sirketCariDal.GetById(cariId));
+        }
+
+        public IDataResult<SirketCari> GetByKod(string cariKod)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<SirketCari> GetByUnvan(string cariUnvan)
+        {
+            throw new NotImplementedException();
+        }
+
         public IDataResult<SirketCari> GetByVergiNo(string VergiNo)
         {
-            SirketCari temp = _sirketCariDal.Get(p => p.VergiNo == VergiNo);
-            SirketCari dataresult = (SirketCari)_cariDal.Get(p => p.Id == temp.Id);
-            dataresult.VergiNo = temp.VergiNo;
-            return new SuccessDataResult<SirketCari>(dataresult);
-        }
-
-        public IDataResult<SirketCari> GetById(int sirketCariId)
-        {
-            SirketCari dataresult = (SirketCari)_cariDal.Get(p => p.Id == sirketCariId);
-            dataresult.VergiNo = _sirketCariDal.Get(p => p.Id == dataresult.Id).VergiNo;
-            return new SuccessDataResult<SirketCari>(dataresult);
-        }
-
-        public IDataResult<SirketCari> GetByKod(string sirketCariKod)
-        {
-            SirketCari dataresult = (SirketCari)_cariDal.Get(p => p.Kod == sirketCariKod);
-            dataresult.VergiNo = _sirketCariDal.Get(p => p.Id == dataresult.Id).VergiNo;
-            return new SuccessDataResult<SirketCari>(dataresult);
-        }
-
-        public IDataResult<SirketCari> GetByUnvan(string sirketCariUnvan)
-        {
-            SirketCari dataresult = (SirketCari)_cariDal.Get(p => p.Unvan == sirketCariUnvan);
-            dataresult.VergiNo = _sirketCariDal.Get(p => p.Id == dataresult.Id).VergiNo;
-            return new SuccessDataResult<SirketCari>(dataresult);
+            throw new NotImplementedException();
         }
 
         public IDataResult<List<SirketCari>> GetList()
         {
-            var result = _cariDal.GetAll().Join(_sirketCariDal.GetAll(),
-                c => c.Id, s => s.Id,
-                (c, s) =>
-                new SirketCari()
-                {
-                    Id = c.Id,
-                    Kod = c.Kod,
-                    Unvan = c.Unvan,
-                    VergiDairesi = c.VergiDairesi,
-                    VergiNo = s.VergiNo
-                }).ToList();
-            return new SuccessDataResult<List<SirketCari>>(result);
-        }
-
-        public IDataResult<List<SirketCari>> GetListByVergiDairesi(string sirketVergiDairesi)
-        {
-            var result = _cariDal.GetAll(p => 
-                    p.VergiDairesi == sirketVergiDairesi).Join(_sirketCariDal.GetAll(), c => c.Id, s => s.Id, (c, s) =>
-                    new SirketCari()
-                    {
-                        Id = c.Id,
-                        Kod = c.Kod,
-                        Unvan = c.Unvan,
-                        VergiDairesi = c.VergiDairesi,
-                        VergiNo = s.VergiNo
-                    }).ToList();
-            return new SuccessDataResult<List<SirketCari>>(result);
-        }
-
-        public IDataResult<List<SirketCari>> GetListByGrupKodId(int grupKodId)
-        {
-            var result = _cariDal.GetAll(p =>
-                _cariGrupService.GetListByCariGrupKodId(grupKodId).Data.Select(s => s.CariId).Contains(p.Id))
-                .Join(_sirketCariDal.GetAll(), c => c.Id, s => s.Id, (c, s) =>
-                    new SirketCari()
-                    {
-                        Id = c.Id,
-                        Kod = c.Kod,
-                        Unvan = c.Unvan,
-                        VergiDairesi = c.VergiDairesi,
-                        VergiNo = s.VergiNo
-                    }).ToList();
-            return new SuccessDataResult<List<SirketCari>>(result);
+            throw new NotImplementedException();
         }
 
         public IDataResult<List<SirketCari>> GetListByGrupAd(string grupKodAd)
         {
-            return new SuccessDataResult<List<SirketCari>>(_sirketCariDal.GetAll());
-            var result = _cariDal.GetAll(p =>
-                    _cariGrupService.GetListByCariGrupKodId(_cariGrupKodService.GetByAd(grupKodAd).Data.Id).Data.Select(s => s.Id).Contains(p.Id))
-                    .Join(_sirketCariDal.GetAll(), c => c.Id, s => s.Id, (c, s) =>
-                    new SirketCari()
-                    {
-                        Id = c.Id,
-                        Kod = c.Kod,
-                        Unvan = c.Unvan,
-                        VergiDairesi = c.VergiDairesi,
-                        VergiNo = s.VergiNo
-                    }).ToList();
-            return new SuccessDataResult<List<SirketCari>>(result);
+            throw new NotImplementedException();
         }
 
-        public IResult Add(SirketCari sirketCari)
+        public IDataResult<List<SirketCari>> GetListByGrupKodId(int grupKodId)
         {
-            _sirketCariDal.Add(sirketCari);
-            return new SuccessResult(Messages.SirketCariInserted);
+            throw new NotImplementedException();
         }
 
-        public IResult Delete(SirketCari sirketCari)
+        public IDataResult<List<SirketCari>> GetListByVergiDairesi(string vergiDairesi)
         {
-            _sirketCariDal.Delete(sirketCari);
-            return new SuccessResult(Messages.SirketCariDeleted);
+            throw new NotImplementedException();
         }
 
-        public IResult Update(SirketCari sirketCari)
+        public IResult Update(SirketCari cari)
         {
-            _sirketCariDal.Update(sirketCari);
-            return new SuccessResult(Messages.SirketCariUpdated);
+            throw new NotImplementedException();
         }
     }
 }

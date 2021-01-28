@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Entities.Concrete
@@ -9,7 +10,6 @@ namespace Entities.Concrete
     {
         public int CariId { get; set; }
         public string VergiNo { get; set; }
-
 
         public Cari Cari { get; set; }
     }

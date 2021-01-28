@@ -23,64 +23,59 @@ namespace Business.Concrete
             _cariGrupKodService = cariGrupKodService;
         }
 
+        public IResult Add(SahisCari cari)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IResult Delete(SahisCari cari)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<SahisCari> GetById(int cariId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<SahisCari> GetByKod(string cariKod)
+        {
+            throw new NotImplementedException();
+        }
+
         public IDataResult<SahisCari> GetByTCNo(string TCNo)
         {
-            return new SuccessDataResult<SahisCari>(_sahisCariDal.Get(p => p.TCNo == TCNo));
+            throw new NotImplementedException();
         }
 
-        public IDataResult<SahisCari> GetById(int sahisCariId)
+        public IDataResult<SahisCari> GetByUnvan(string cariUnvan)
         {
-            return new SuccessDataResult<SahisCari>(_sahisCariDal.Get(p => p.Id == sahisCariId));
-        }
-
-        public IDataResult<SahisCari> GetByKod(string sahisCariKod)
-        {
-            return new SuccessDataResult<SahisCari>(_sahisCariDal.Get(p => p.Kod == sahisCariKod));
-        }
-
-        public IDataResult<SahisCari> GetByUnvan(string sahisCariUnvan)
-        {
-            return new SuccessDataResult<SahisCari>(_sahisCariDal.Get(p => p.Unvan == sahisCariUnvan));
+            throw new NotImplementedException();
         }
 
         public IDataResult<List<SahisCari>> GetList()
         {
-            return new SuccessDataResult<List<SahisCari>>(_sahisCariDal.GetAll());
-        }
-
-        public IDataResult<List<SahisCari>> GetListByVergiDairesi(string sahisVergiDairesi)
-        {
-            return new SuccessDataResult<List<SahisCari>>(_sahisCariDal.GetAll(p => p.VergiDairesi == sahisVergiDairesi));
-        }
-
-        public IDataResult<List<SahisCari>> GetListByGrupKodId(int grupKodId)
-        {
-            return new SuccessDataResult<List<SahisCari>>(_sahisCariDal.GetAll(p =>
-            _cariGrupService.GetListByCariGrupKodId(grupKodId).Data.Select(s => s.CariId).Contains(p.Id)));
+            throw new NotImplementedException();
         }
 
         public IDataResult<List<SahisCari>> GetListByGrupAd(string grupKodAd)
         {
-            return new SuccessDataResult<List<SahisCari>>(_sahisCariDal.GetAll(p =>
-            _cariGrupService.GetListByCariGrupKodId(_cariGrupKodService.GetByAd(grupKodAd).Data.Id).Data.Select(s => s.Id).Contains(p.Id)));
+            throw new NotImplementedException();
         }
 
-        public IResult Add(SahisCari sahisCari)
+        public IDataResult<List<SahisCari>> GetListByGrupKodId(int grupKodId)
         {
-            _sahisCariDal.Add(sahisCari);
-            return new SuccessResult(Messages.SahisCariInserted);
+            throw new NotImplementedException();
         }
 
-        public IResult Delete(SahisCari sahisCari)
+        public IDataResult<List<SahisCari>> GetListByVergiDairesi(string vergiDairesi)
         {
-            _sahisCariDal.Delete(sahisCari);
-            return new SuccessResult(Messages.SahisCariDeleted);
+            throw new NotImplementedException();
         }
 
-        public IResult Update(SahisCari sahisCari)
+        public IResult Update(SahisCari cari)
         {
-            _sahisCariDal.Update(sahisCari);
-            return new SuccessResult(Messages.SahisCariUpdated);
+            throw new NotImplementedException();
         }
     }
 }

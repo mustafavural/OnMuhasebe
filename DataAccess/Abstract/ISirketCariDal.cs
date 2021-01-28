@@ -8,6 +8,6 @@ namespace DataAccess.Abstract
 {
     public interface ISirketCariDal : IEntityRepository<SirketCari>
     {
-
+        SirketCari GetById(int cariId);
     }
 }

@@ -10,11 +10,13 @@ namespace ConsoleUI
         IStokService stokService;
         IStokGrupKodService stokGrupKodService;
         ISahisCariService sahisCariService;
-        public Program(IStokService stokService, IStokGrupKodService stokGrupKodService, ISahisCariService sahisCariService)
+        ISirketCariService sirketCariService;
+        public Program(IStokService stokService, IStokGrupKodService stokGrupKodService, ISahisCariService sahisCariService, ISirketCariService sirketCariService)
         {
             this.stokService = stokService;
             this.stokGrupKodService = stokGrupKodService;
             this.sahisCariService = sahisCariService;
+            this.sirketCariService = sirketCariService;
         }
 
         public void EkranaYaz<T>(List<T> tablo) where T : class, IEntity, new()
@@ -51,9 +53,12 @@ namespace ConsoleUI
             //var getKodList = stokGrupKodService.GetList();
             //EkranaYaz(getKodList.Data);
             //Console.WriteLine(getKodList.Message);
-            var getSahisCariList = sahisCariService.GetByTCNo("22178323378");
-            EkranaYaz(getSahisCariList.Data);
-            Console.WriteLine(getSahisCariList.Message);
+            //var getSahisCariList = sahisCariService.GetByTCNo("22178323378");
+            //EkranaYaz(getSahisCariList.Data);
+            //Console.WriteLine(getSahisCariList.Message);
+            var getSirketCariList = sirketCariService.GetById(8);
+            EkranaYaz(getSirketCariList.Data);
+            Console.WriteLine(getSirketCariList.Message);
         }
     }
 }
