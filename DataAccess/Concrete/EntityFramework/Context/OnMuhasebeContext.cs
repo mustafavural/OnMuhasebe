@@ -13,6 +13,13 @@ namespace DataAccess.Concrete.EntityFramework.Context
             optionsBuilder.UseSqlServer(
                 connectionString: @"Server=.\SQLEXPRESS;Database=OnMuhasebe;user id=sa;password=sapass");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Cari>()
+                .HasOne(c => c.SahisCari)
+                .WithOne(s => s.Cari);
+        }
+
         public DbSet<Stok> Stoklar { get; set; }
         public DbSet<StokGrup> StokGruplar { get; set; }
         public DbSet<StokGrupKod> StokGrupKodlar { get; set; }
@@ -23,6 +30,8 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<CariGrup> CariGruplar { get; set; }
         public DbSet<CariGrupKod> CariGrupKodlar { get; set; }
         public DbSet<CariHareket> CariHareketler { get; set; }
+
+
 
     }
 }

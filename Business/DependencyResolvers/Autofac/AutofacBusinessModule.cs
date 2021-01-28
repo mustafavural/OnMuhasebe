@@ -22,6 +22,7 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<SahisCariManager>().As<ISahisCariService>();
             builder.RegisterType<SirketCariManager>().As<ISirketCariService>();
+            builder.RegisterType<EFCariDal>().As<ICariDal>();
             builder.RegisterType<CariGrupManager>().As<ICariGrupService>();
             builder.RegisterType<CariGrupKodManager>().As<ICariGrupKodService>();
             builder.RegisterType<CariHareketManager>().As<ICariHareketService>();

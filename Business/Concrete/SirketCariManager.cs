@@ -57,7 +57,7 @@ namespace Business.Concrete
             var result = _cariDal.GetAll().Join(_sirketCariDal.GetAll(),
                 c => c.Id, s => s.Id,
                 (c, s) =>
-                new
+                new SirketCari()
                 {
                     Id = c.Id,
                     Kod = c.Kod,
@@ -70,19 +70,50 @@ namespace Business.Concrete
 
         public IDataResult<List<SirketCari>> GetListByVergiDairesi(string sirketVergiDairesi)
         {
-            return new SuccessDataResult<List<SirketCari>>(_sirketCariDal.GetAll(p => p.VergiDairesi == sirketVergiDairesi));
+            var result = _cariDal.GetAll(p => 
+                    p.VergiDairesi == sirketVergiDairesi).Join(_sirketCariDal.GetAll(), c => c.Id, s => s.Id, (c, s) =>
+                    new SirketCari()
+                    {
+                        Id = c.Id,
+                        Kod = c.Kod,
+                        Unvan = c.Unvan,
+                        VergiDairesi = c.VergiDairesi,
+                        VergiNo = s.VergiNo
+                    }).ToList();
+            return new SuccessDataResult<List<SirketCari>>(result);
         }
 
         public IDataResult<List<SirketCari>> GetListByGrupKodId(int grupKodId)
         {
-            return new SuccessDataResult<List<SirketCari>>(_sirketCariDal.GetAll(p =>
-            _cariGrupService.GetListByCariGrupKodId(grupKodId).Data.Select(s => s.CariId).Contains(p.Id)));
+            var result = _cariDal.GetAll(p =>
+                _cariGrupService.GetListByCariGrupKodId(grupKodId).Data.Select(s => s.CariId).Contains(p.Id))
+                .Join(_sirketCariDal.GetAll(), c => c.Id, s => s.Id, (c, s) =>
+                    new SirketCari()
+                    {
+                        Id = c.Id,
+                        Kod = c.Kod,
+                        Unvan = c.Unvan,
+                        VergiDairesi = c.VergiDairesi,
+                        VergiNo = s.VergiNo
+                    }).ToList();
+            return new SuccessDataResult<List<SirketCari>>(result);
         }
 
         public IDataResult<List<SirketCari>> GetListByGrupAd(string grupKodAd)
         {
-            return new SuccessDataResult<List<SirketCari>>(_sirketCariDal.GetAll(p =>
-            _cariGrupService.GetListByCariGrupKodId(_cariGrupKodService.GetByAd(grupKodAd).Data.Id).Data.Select(s => s.Id).Contains(p.Id)));
+            return new SuccessDataResult<List<SirketCari>>(_sirketCariDal.GetAll());
+            var result = _cariDal.GetAll(p =>
+                    _cariGrupService.GetListByCariGrupKodId(_cariGrupKodService.GetByAd(grupKodAd).Data.Id).Data.Select(s => s.Id).Contains(p.Id))
+                    .Join(_sirketCariDal.GetAll(), c => c.Id, s => s.Id, (c, s) =>
+                    new SirketCari()
+                    {
+                        Id = c.Id,
+                        Kod = c.Kod,
+                        Unvan = c.Unvan,
+                        VergiDairesi = c.VergiDairesi,
+                        VergiNo = s.VergiNo
+                    }).ToList();
+            return new SuccessDataResult<List<SirketCari>>(result);
         }
 
         public IResult Add(SirketCari sirketCari)
