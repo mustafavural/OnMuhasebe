@@ -5,7 +5,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EFSahisCariDal : EFEntityRepositoryBase<SahisCari, OnMuhasebeContext>, ISahisCariDal
+    public class EFCariDal : EFEntityRepositoryBase<Cari, OnMuhasebeContext>, ICariDal
     {
 
     }

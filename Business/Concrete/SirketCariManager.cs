@@ -11,39 +11,61 @@ namespace Business.Concrete
 {
     public class SirketCariManager : ISirketCariService
     {
+        ICariDal _cariDal;
         ISirketCariDal _sirketCariDal;
         ICariGrupService _cariGrupService;
         ICariGrupKodService _cariGrupKodService;
-        public SirketCariManager(ISirketCariDal sirketCariDal, ICariGrupService cariGrupService, ICariGrupKodService cariGrupKodService)
+        public SirketCariManager(ISirketCariDal sirketCariDal, ICariGrupKodService cariGrupKodService, ICariGrupService cariGrupService, ICariDal cariDal)
         {
+            _cariDal = cariDal;
             _sirketCariDal = sirketCariDal;
-            _cariGrupKodService = cariGrupKodService;
             _cariGrupService = cariGrupService;
-        }
-
-        public IDataResult<SirketCari> GetById(int sirketCariId)
-        {
-            return new SuccessDataResult<SirketCari>(_sirketCariDal.Get(p => p.Id == sirketCariId));
-        }
-
-        public IDataResult<SirketCari> GetByKod(string sirketCariKod)
-        {
-            return new SuccessDataResult<SirketCari>(_sirketCariDal.Get(p => p.Kod == sirketCariKod));
-        }
-
-        public IDataResult<SirketCari> GetByUnvan(string sirketCariUnvan)
-        {
-            return new SuccessDataResult<SirketCari>(_sirketCariDal.Get(p => p.Unvan == sirketCariUnvan));
+            _cariGrupKodService = cariGrupKodService;
         }
 
         public IDataResult<SirketCari> GetByVergiNo(string VergiNo)
         {
-            return new SuccessDataResult<SirketCari>(_sirketCariDal.Get(p => p.VergiNo == VergiNo));
+            SirketCari temp = _sirketCariDal.Get(p => p.VergiNo == VergiNo);
+            SirketCari dataresult = (SirketCari)_cariDal.Get(p => p.Id == temp.Id);
+            dataresult.VergiNo = temp.VergiNo;
+            return new SuccessDataResult<SirketCari>(dataresult);
+        }
+
+        public IDataResult<SirketCari> GetById(int sirketCariId)
+        {
+            SirketCari dataresult = (SirketCari)_cariDal.Get(p => p.Id == sirketCariId);
+            dataresult.VergiNo = _sirketCariDal.Get(p => p.Id == dataresult.Id).VergiNo;
+            return new SuccessDataResult<SirketCari>(dataresult);
+        }
+
+        public IDataResult<SirketCari> GetByKod(string sirketCariKod)
+        {
+            SirketCari dataresult = (SirketCari)_cariDal.Get(p => p.Kod == sirketCariKod);
+            dataresult.VergiNo = _sirketCariDal.Get(p => p.Id == dataresult.Id).VergiNo;
+            return new SuccessDataResult<SirketCari>(dataresult);
+        }
+
+        public IDataResult<SirketCari> GetByUnvan(string sirketCariUnvan)
+        {
+            SirketCari dataresult = (SirketCari)_cariDal.Get(p => p.Unvan == sirketCariUnvan);
+            dataresult.VergiNo = _sirketCariDal.Get(p => p.Id == dataresult.Id).VergiNo;
+            return new SuccessDataResult<SirketCari>(dataresult);
         }
 
         public IDataResult<List<SirketCari>> GetList()
         {
-            return new SuccessDataResult<List<SirketCari>>(_sirketCariDal.GetAll());
+            var result = _cariDal.GetAll().Join(_sirketCariDal.GetAll(),
+                c => c.Id, s => s.Id,
+                (c, s) =>
+                new
+                {
+                    Id = c.Id,
+                    Kod = c.Kod,
+                    Unvan = c.Unvan,
+                    VergiDairesi = c.VergiDairesi,
+                    VergiNo = s.VergiNo
+                }).ToList();
+            return new SuccessDataResult<List<SirketCari>>(result);
         }
 
         public IDataResult<List<SirketCari>> GetListByVergiDairesi(string sirketVergiDairesi)

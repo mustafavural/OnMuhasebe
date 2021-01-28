@@ -11,14 +11,21 @@ namespace Business.Concrete
 {
     public class SahisCariManager : ISahisCariService
     {
+        ICariDal _cariDal;
         ISahisCariDal _sahisCariDal;
         ICariGrupService _cariGrupService;
         ICariGrupKodService _cariGrupKodService;
-        public SahisCariManager(ISahisCariDal sirketCariDal, ICariGrupService cariGrupService, ICariGrupKodService cariGrupKodService)
+        public SahisCariManager(ISahisCariDal sahisCariDal, ICariGrupService cariGrupService, ICariGrupKodService cariGrupKodService, ICariDal cariDal)
         {
-            _sahisCariDal = sirketCariDal;
-            _cariGrupKodService = cariGrupKodService;
+            _cariDal = cariDal;
+            _sahisCariDal = sahisCariDal;
             _cariGrupService = cariGrupService;
+            _cariGrupKodService = cariGrupKodService;
+        }
+
+        public IDataResult<SahisCari> GetByTCNo(string TCNo)
+        {
+            return new SuccessDataResult<SahisCari>(_sahisCariDal.Get(p => p.TCNo == TCNo));
         }
 
         public IDataResult<SahisCari> GetById(int sahisCariId)
@@ -29,11 +36,6 @@ namespace Business.Concrete
         public IDataResult<SahisCari> GetByKod(string sahisCariKod)
         {
             return new SuccessDataResult<SahisCari>(_sahisCariDal.Get(p => p.Kod == sahisCariKod));
-        }
-
-        public IDataResult<SahisCari> GetByTCNo(string TCNo)
-        {
-            return new SuccessDataResult<SahisCari>(_sahisCariDal.Get(p => p.TCNo == TCNo));
         }
 
         public IDataResult<SahisCari> GetByUnvan(string sahisCariUnvan)
