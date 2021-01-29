@@ -12,7 +12,6 @@ namespace Business.Abstract
         IDataResult<SahisCari> GetByTCNo(string TCNo);
         IDataResult<List<SahisCari>> GetList();
         IDataResult<List<SahisCari>> GetListByVergiDairesi(string vergiDairesi);
-        IDataResult<List<SahisCari>> GetListByGrupKodId(int grupKodId);
         IDataResult<List<SahisCari>> GetListByGrupAd(string grupKodAd);
         IResult Add(SahisCari cari);
         IResult Delete(SahisCari cari);

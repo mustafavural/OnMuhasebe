@@ -1,15 +1,14 @@
 ﻿using Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Entities.Concrete
 {
-    public class SahisCari : Cari
+    public class SahisCari : IEntity
     {
+        public int Id { get; set; }
         public int CariId { get; set; }
         public string TCNo { get; set; }
-        public Cari Cari { get; set; }
+        public string Kod { get; set; }
+        public string Unvan { get; set; }
+        public string VergiDairesi { get; set; }
     }
 }

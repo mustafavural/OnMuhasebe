@@ -15,10 +15,13 @@ namespace DataAccess.Concrete.EntityFramework.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SirketCari>()
-                .Ignore(p => p.Cari);
-            modelBuilder.Entity<SahisCari>()
-                .Ignore(p => p.Cari);
+            modelBuilder.Entity<SirketCari>().Ignore(p => p.Kod);
+            modelBuilder.Entity<SirketCari>().Ignore(p => p.Unvan);
+            modelBuilder.Entity<SirketCari>().Ignore(p => p.VergiDairesi);
+
+            modelBuilder.Entity<SahisCari>().Ignore(p => p.Kod);
+            modelBuilder.Entity<SahisCari>().Ignore(p => p.Unvan);
+            modelBuilder.Entity<SahisCari>().Ignore(p => p.VergiDairesi);
         }
 
         public DbSet<Stok> Stoklar { get; set; }

@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Core.Entities;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 
@@ -25,6 +26,7 @@ namespace ConsoleUI
             {
                 foreach (var sutun in satir.GetType().GetProperties())
                 {
+                    Console.Write(satir.GetType().GetProperty(sutun.Name).Name + " ");
                     Console.Write(satir.GetType().GetProperty(sutun.Name).GetValue(satir) + " ");
                 }
                 Console.WriteLine();
@@ -36,6 +38,7 @@ namespace ConsoleUI
         {
             foreach (var sutun in satir.GetType().GetProperties())
             {
+                Console.Write(satir.GetType().GetProperty(sutun.Name).Name + " ");
                 Console.Write(satir.GetType().GetProperty(sutun.Name).GetValue(satir) + " ");
             }
             Console.WriteLine();
@@ -44,21 +47,10 @@ namespace ConsoleUI
 
         public void Run(string[] args)
         {
-            //var getList = stokService.GetList();
-            //EkranaYaz(getList.Data);
-            //var getListByGrupAd = stokService.GetListByGrupAd("MürekkepPüskürtmeli");
-            //EkranaYaz(getListByGrupAd.Data);
-            //var getListByGrupKod = stokService.GetListByGrupKod(23);
-            //EkranaYaz(getListByGrupKod.Data);
-            //var getKodList = stokGrupKodService.GetList();
-            //EkranaYaz(getKodList.Data);
-            //Console.WriteLine(getKodList.Message);
-            //var getSahisCariList = sahisCariService.GetByTCNo("22178323378");
-            //EkranaYaz(getSahisCariList.Data);
-            //Console.WriteLine(getSahisCariList.Message);
-            var getSirketCariList = sirketCariService.GetById(8);
-            EkranaYaz(getSirketCariList.Data);
-            Console.WriteLine(getSirketCariList.Message);
+            var deleted = sirketCariService.Delete(new SirketCari { Kod = "33", Unvan = "Yavuz", VergiDairesi = "küçükçekmece", VergiNo = "1234567890" });
+            //var getSirketCariList = sirketCariService.GetListByVergiDairesi("küçükçekmece");
+            //EkranaYaz(delet);
+            Console.WriteLine(deleted.Message);
         }
     }
 }
