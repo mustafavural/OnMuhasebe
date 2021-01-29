@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Business.DependencyResolvers.Autofac;
+using ConsoleUI.EntityTest;
 
 namespace ConsoleUI
 {
@@ -17,6 +18,7 @@ namespace ConsoleUI
             var builder = new ContainerBuilder();
 
             builder.RegisterType<Program>().AsSelf();
+            builder.RegisterType<CarilerTest>().AsSelf();
             builder.RegisterModule(new AutofacBusinessModule());
 
             return builder.Build();

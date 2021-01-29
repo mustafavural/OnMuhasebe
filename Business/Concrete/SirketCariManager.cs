@@ -62,7 +62,7 @@ namespace Business.Concrete
 
         public IResult Add(SirketCari cari)
         {
-            _cariDal.Add(_cariDal.Get(p => p.Kod == cari.Kod));
+            _cariDal.Add(new Cari { Kod = cari.Kod, Unvan = cari.Unvan, VergiDairesi = cari.VergiDairesi });
             _sirketCariDal.Add(new SirketCari { CariId = _cariDal.Get(p => p.Kod == cari.Kod).Id, VergiNo = cari.VergiNo });
             return new SuccessResult(Messages.CariInserted);
         }
@@ -76,8 +76,13 @@ namespace Business.Concrete
 
         public IResult Update(SirketCari cari)
         {
-            _sirketCariDal.Update(_sirketCariDal.Get(p => p.VergiNo == cari.VergiNo));
-            _cariDal.Update(new Cari { Kod = cari.Kod, Unvan = cari.Unvan, VergiDairesi = cari.VergiDairesi });
+            var updateCari = _sirketCariDal.Get(p => p.VergiNo == cari.VergiNo);
+            updateCari.Kod = cari.Kod;
+            updateCari.Unvan = cari.Unvan;
+            updateCari.VergiDairesi = cari.VergiDairesi;
+            updateCari.VergiNo = cari.VergiNo;
+            _sirketCariDal.Update(updateCari);
+            _cariDal.Update(new Cari { Id = updateCari.CariId, Kod = updateCari.Kod, Unvan = updateCari.Unvan, VergiDairesi = updateCari.VergiDairesi });
             return new SuccessResult(Messages.CariUpdated);
         }
     }

@@ -62,7 +62,7 @@ namespace Business.Concrete
 
         public IResult Add(SahisCari cari)
         {
-            _cariDal.Add(_cariDal.Get(p => p.Kod == cari.Kod));
+            _cariDal.Add(new Cari { Kod = cari.Kod, Unvan = cari.Unvan, VergiDairesi = cari.VergiDairesi });
             _sahisCariDal.Add(new SahisCari { CariId = _cariDal.Get(p => p.Kod == cari.Kod).Id, TCNo = cari.TCNo });
             return new SuccessResult(Messages.CariInserted);
         }
@@ -76,8 +76,13 @@ namespace Business.Concrete
 
         public IResult Update(SahisCari cari)
         {
-            _sahisCariDal.Update(_sahisCariDal.Get(p => p.TCNo == cari.TCNo));
-            _cariDal.Update(new Cari { Kod = cari.Kod, Unvan = cari.Unvan, VergiDairesi = cari.VergiDairesi });
+            var updateCari = _sahisCariDal.Get(p => p.TCNo == cari.TCNo);
+            updateCari.Kod = cari.Kod;
+            updateCari.Unvan = cari.Unvan;
+            updateCari.VergiDairesi = cari.VergiDairesi;
+            updateCari.TCNo = cari.TCNo;
+            _sahisCariDal.Update(updateCari);
+            _cariDal.Update(new Cari { Id = updateCari.CariId, Kod = updateCari.Kod, Unvan = updateCari.Unvan, VergiDairesi = updateCari.VergiDairesi });
             return new SuccessResult(Messages.CariUpdated);
         }
     }

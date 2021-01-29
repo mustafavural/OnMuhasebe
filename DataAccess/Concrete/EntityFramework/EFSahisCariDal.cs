@@ -27,7 +27,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  VergiDairesi = c.VergiDairesi,
                                  TCNo = s.TCNo
                              };
-                return result.Where(filter).ToList();
+                return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
         }
     }

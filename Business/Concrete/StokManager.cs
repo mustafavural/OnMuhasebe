@@ -1,12 +1,10 @@
 ﻿using Business.Abstract;
+using Business.Constans;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Core.Utilities.Messages;
-using Business.Constans;
 using System.Linq;
 
 namespace Business.Concrete
