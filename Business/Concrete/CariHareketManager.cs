@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
-using Business.Constans;
+using Business.Constants;
+using Business.ValidationRules.FluentValidation.Cariler;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -12,18 +14,27 @@ namespace Business.Concrete
     public class CariHareketManager : ICariHareketService
     {
         ICariHareketDal _cariHareketDal;
+
+        public CariHareketManager(ICariHareketDal cariHareketDal)
+        {
+            _cariHareketDal = cariHareketDal;
+        }
+
+        [ValidationAspect(typeof(CariHareketValidator), Priority = 1)]
         public IResult Add(CariHareket cariHareket)
         {
             _cariHareketDal.Add(cariHareket);
             return new SuccessResult(Messages.CariActivityAdded);
         }
 
+        [ValidationAspect(typeof(CariHareketValidator), Priority = 1)]
         public IResult Delete(CariHareket cariHareket)
         {
             _cariHareketDal.Delete(cariHareket);
             return new SuccessResult(Messages.CariActivityDeleted);
         }
 
+        [ValidationAspect(typeof(CariHareketValidator), Priority = 1)]
         public IResult Update(CariHareket cariHareket)
         {
             _cariHareketDal.Add(cariHareket);

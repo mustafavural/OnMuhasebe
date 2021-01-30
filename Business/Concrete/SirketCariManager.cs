@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
-using Business.Constans;
+using Business.Constants;
+using Business.ValidationRules.FluentValidation.Cariler;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -60,6 +62,8 @@ namespace Business.Concrete
                 _cariGrupKodService.GetByAd(grupKodAd).Data.Id).Data.Select(s => s.Id).Contains(p.Id)).ToList());
         }
 
+        [ValidationAspect(typeof(CariValidator), Priority = 1)]
+        [ValidationAspect(typeof(SirketCariValidator), Priority = 2)]
         public IResult Add(SirketCari cari)
         {
             _cariDal.Add(new Cari { Kod = cari.Kod, Unvan = cari.Unvan, VergiDairesi = cari.VergiDairesi });
@@ -67,6 +71,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CariInserted);
         }
 
+        [ValidationAspect(typeof(CariValidator), Priority = 1)]
+        [ValidationAspect(typeof(SirketCariValidator), Priority = 2)]
         public IResult Delete(SirketCari cari)
         {
             _sirketCariDal.Delete(_sirketCariDal.Get(p => p.VergiNo == cari.VergiNo));
@@ -74,6 +80,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CariDeleted);
         }
 
+        [ValidationAspect(typeof(CariValidator), Priority = 1)]
+        [ValidationAspect(typeof(SirketCariValidator), Priority = 2)]
         public IResult Update(SirketCari cari)
         {
             var updateCari = _sirketCariDal.Get(p => p.VergiNo == cari.VergiNo);

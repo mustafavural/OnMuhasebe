@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
-using Business.Constans;
+using Business.Constants;
+using Business.ValidationRules.FluentValidation.Stoklar;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -19,12 +21,14 @@ namespace Business.Concrete
             _stokGrupService = stokGrupService;
         }
 
+        [ValidationAspect(typeof(StokGrupKodValidator), Priority = 1)]
         public IResult Add(StokGrupKod stokGrupKod)
         {
             _stokGrupKodDal.Add(stokGrupKod);
             return new SuccessResult(Messages.StokGrupKodAdded);
         }
 
+        [ValidationAspect(typeof(StokGrupKodValidator), Priority = 1)]
         public IResult Delete(StokGrupKod stokGrupKod)
         {
             _stokGrupKodDal.Delete(stokGrupKod);
@@ -57,6 +61,7 @@ namespace Business.Concrete
             p.Id == _stokGrupService.GetByStokId(stokId).Data.Select(s => s.StokGrupKodId).Single()));
         }
 
+        [ValidationAspect(typeof(StokGrupKodValidator), Priority = 1)]
         public IResult Update(StokGrupKod stokGrupKod)
         {
             _stokGrupKodDal.Update(stokGrupKod);

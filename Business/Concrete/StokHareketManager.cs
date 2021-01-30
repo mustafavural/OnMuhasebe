@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
-using Business.Constans;
+using Business.Constants;
+using Business.ValidationRules.FluentValidation.Stoklar;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -16,18 +18,21 @@ namespace Business.Concrete
             _stokHareketDal = stokHareketDal;
         }
 
+        [ValidationAspect(typeof(StokHareketValidator), Priority = 1)]
         public IResult Add(StokHareket stokHareket)
         {
             _stokHareketDal.Add(stokHareket);
             return new SuccessResult(Messages.StockActivityAdded);
         }
 
+        [ValidationAspect(typeof(StokHareketValidator), Priority = 1)]
         public IResult Delete(StokHareket stokHareket)
         {
             _stokHareketDal.Delete(stokHareket);
             return new SuccessResult(Messages.StockActivityDeleted);
         }
 
+        [ValidationAspect(typeof(StokHareketValidator), Priority = 1)]
         public IResult Update(StokHareket stokHareket)
         {
             _stokHareketDal.Update(stokHareket);

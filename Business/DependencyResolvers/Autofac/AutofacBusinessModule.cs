@@ -1,6 +1,9 @@
 ﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
+using Core.Utilities.Interceptors.Autofac;
+using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 
@@ -32,6 +35,18 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EFCariGrupDal>().As<ICariGrupDal>();
             builder.RegisterType<EFCariGrupKodDal>().As<ICariGrupKodDal>();
             builder.RegisterType<EFCariHareketDal>().As<ICariHareketDal>();
+
+            builder.RegisterType<AuthManager>().As<IAuthService>();
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            builder.RegisterAssemblyTypes(assembly)
+               .AsImplementedInterfaces()
+               .EnableInterfaceInterceptors
+                (new Castle.DynamicProxy.ProxyGenerationOptions
+                {
+                    Selector = new AspectInterceptorSelector()
+                }).SingleInstance();
         }
     }
 }

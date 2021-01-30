@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
-using Business.Constans;
+using Business.Constants;
+using Business.ValidationRules.FluentValidation.Cariler;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,18 +22,21 @@ namespace Business.Concrete
             _cariGrupService = cariGrupService;
         }
 
+        [ValidationAspect(typeof(CariGrupKodValidator), Priority = 1)]
         public IResult Add(CariGrupKod cariGrupKod)
         {
             _cariGrupKodDal.Add(cariGrupKod);
             return new SuccessResult(Messages.CariGrupKodAdded);
         }
 
+        [ValidationAspect(typeof(CariGrupKodValidator), Priority = 1)]
         public IResult Delete(CariGrupKod cariGrupKod)
         {
             _cariGrupKodDal.Delete(cariGrupKod);
             return new SuccessResult(Messages.CariGrupKodUpdated);
         }
 
+        [ValidationAspect(typeof(CariGrupKodValidator), Priority = 1)]
         public IResult Update(CariGrupKod cariGrupKod)
         {
             _cariGrupKodDal.Update(cariGrupKod);

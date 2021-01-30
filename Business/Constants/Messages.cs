@@ -1,4 +1,7 @@
-﻿namespace Business.Constans
+﻿using Entities.Concrete;
+using System.Collections.Generic;
+
+namespace Business.Constants
 {
     public static class Messages
     {
@@ -24,11 +27,11 @@
 
         public static string SirketCariInserted = "Şirket Cari başarıyla eklendi.";
         public static string SirketCariDeleted = "Şirket Cari başarıyla silindi.";
-        public static string SirketCariUpdated = "Şirket Cari baarıyla güncellendi.";
+        public static string SirketCariUpdated = "Şirket Cari başarıyla güncellendi.";
 
         public static string SahisCariInserted = "Şahıs Cari başarıyla eklendi.";
         public static string SahisCariDeleted = "Şahıs Cari başarıyla silindi.";
-        public static string SahisCariUpdated = "Şahıs Cari baarıyla güncellendi.";
+        public static string SahisCariUpdated = "Şahıs Cari başarıyla güncellendi.";
 
         public static string CariAddedToGrup = "Cari başarıyla gruba eklendi.";
         public static string CariDeletedFromGrup = "Cari başarıyla gruptan çıkarıldı.";
@@ -41,5 +44,27 @@
         public static string CariActivityAdded = "Stok Hareket başarıyla eklendi.";
         public static string CariActivityDeleted = "Stok Hareket başarıyla silindi.";
         public static string CariActivityUpdated = "Stok Hareket başarıyla güncellendi.";
+
+        #region StokBusinessRules
+        public static string StokAlreadyExists = "Stok kartı zaten mevcut.";
+        public static string StokIdNotExists = "Stok Id bulunamadı.";
+        public static string StokKodNotExists = "Stok Kod bulunamadı.";
+        public static string StokBarkodNotExists = "Stok Barkod bulunamadı.";
+        public static string StokAdNotExists = "Stok Ad bulunamadı.";
+        public static string StokKdvNotExists = "Stok KDV bulunamadı.";
+        public static string StokGrupKodIdNotExists = "Stok GrupKodId bulunamadı.";
+        public static string StokGrupKodAdNotExists = "Stok GrupKodAd bulunamadı.";
+        #endregion
+
+        #region Secure
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Şifre yanlış";
+        public static string SuccessfulLogin = "Sisteme giriş başarılı";
+        public static string UserAlreadyExist = "Bu kullanıcı zaten mevcut";
+        public static string UserRegistered = "Kullanıcı başarıyla kaydedildi";
+        public static string AccessTokenCreated = "AccessToken başarıyla oluşturuldu";
+
+        public static string AuthorizationDenied = "Yetkiniz yok";
+        #endregion
     }
 }

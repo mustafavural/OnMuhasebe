@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
-using Business.Constans;
+using Business.Constants;
+using Business.ValidationRules.FluentValidation.Cariler;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -60,6 +62,8 @@ namespace Business.Concrete
             return new SuccessDataResult<List<SahisCari>>(_sahisCariDal.GetBy(p => p.VergiDairesi == vergiDairesi));
         }
 
+        [ValidationAspect(typeof(CariValidator), Priority = 1)]
+        [ValidationAspect(typeof(SahisCariValidator), Priority = 2)]
         public IResult Add(SahisCari cari)
         {
             _cariDal.Add(new Cari { Kod = cari.Kod, Unvan = cari.Unvan, VergiDairesi = cari.VergiDairesi });
@@ -67,6 +71,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CariInserted);
         }
 
+        [ValidationAspect(typeof(CariValidator), Priority = 1)]
+        [ValidationAspect(typeof(SahisCariValidator), Priority = 2)]
         public IResult Delete(SahisCari cari)
         {
             _sahisCariDal.Delete(_sahisCariDal.Get(p => p.TCNo == cari.TCNo));
@@ -74,6 +80,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CariDeleted);
         }
 
+        [ValidationAspect(typeof(CariValidator), Priority = 1)]
+        [ValidationAspect(typeof(SahisCariValidator), Priority = 2)]
         public IResult Update(SahisCari cari)
         {
             var updateCari = _sahisCariDal.Get(p => p.TCNo == cari.TCNo);

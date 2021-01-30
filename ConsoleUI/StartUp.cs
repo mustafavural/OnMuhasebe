@@ -19,6 +19,7 @@ namespace ConsoleUI
 
             builder.RegisterType<Program>().AsSelf();
             builder.RegisterType<CarilerTest>().AsSelf();
+            builder.RegisterType<StoklarTest>().AsSelf();
             builder.RegisterModule(new AutofacBusinessModule());
 
             return builder.Build();

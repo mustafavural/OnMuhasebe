@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework.Context
@@ -20,7 +21,9 @@ namespace DataAccess.Concrete.EntityFramework.Context
             modelBuilder.Entity<SahisCari>().Ignore(p => p.Unvan);
             modelBuilder.Entity<SahisCari>().Ignore(p => p.VergiDairesi);
         }
-
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<Stok> Stoklar { get; set; }
         public DbSet<StokGrup> StokGruplar { get; set; }
         public DbSet<StokGrupKod> StokGrupKodlar { get; set; }
