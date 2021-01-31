@@ -1,45 +1,31 @@
-﻿using ConsoleUI.EntityTest;
-using Core.DependencyResolvers;
-using Core.Extensions;
-using Core.Utilities.Security.JWT;
+﻿using Autofac;
+using Business.DependencyResolvers.Autofac;
+using ConsoleUI.EntityTest;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace ConsoleUI
 {
-    public class Program
+    class Program
     {
-        public IConfiguration Configuration { get; }
-        CarilerTest cariTest;
-        StoklarTest stokTest;
-        public Program(CarilerTest cariTest, StoklarTest stokTest, IConfiguration configuration)
+        public static void Main()
         {
-            this.cariTest = cariTest;
-            this.stokTest = stokTest;
-            this.Configuration = configuration;
+            var container = ConfigureContainer();
+            var program = container.Resolve<Startup>();
+            program.ConfigureServices(new ServiceCollection());
+            program.Run();
         }
-        public void ConfigureServices(IServiceCollection services)
+        private static IContainer ConfigureContainer()
         {
-            services.AddDependencyResolvers(new Core.Utilities.IoC.ICoreModule[]
-            {
-                new CoreModule(),
-            });
-        }
+            var builder = new ContainerBuilder();
 
-        public void Run(string[] args)
-        {
-            //    cariTest.SirketTestYap();
-            //    Console.WriteLine("Şirket Testi Bitti");
-            //    Console.ReadLine();
+            builder.RegisterModule(new AutofacBusinessModule());
+            builder.RegisterType<Startup>().AsSelf();
+            builder.RegisterType<ConfigurationRoot>().As<IConfiguration>();
+            builder.RegisterType<CarilerTest>().AsSelf();
+            builder.RegisterType<StoklarTest>().AsSelf();
 
-            //    cariTest.SahisTestYap();
-            //    Console.WriteLine("Şahıs Testi Bitti");
-            //    Console.ReadLine();
-
-            stokTest.StokTestYap();
-            Console.WriteLine("Stok Testi Bitti");
-            Console.ReadLine();
+            return builder.Build();
         }
     }
 }

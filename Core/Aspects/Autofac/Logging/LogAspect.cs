@@ -1,6 +1,7 @@
 ﻿using Castle.DynamicProxy;
 using Core.CrossCuttingConcerns.Logging;
 using Core.CrossCuttingConcerns.Logging.Log4Net;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 using Core.Utilities.Interceptors.Autofac;
 using Core.Utilities.Messages;
 using System;
@@ -11,8 +12,9 @@ namespace Core.Aspects.Autofac.Logging
     public class LogAspect : MethodInterception
     {
         private LoggerServiceBase _loggerServiceBase;
-        public LogAspect(Type loggerService)
+        public LogAspect()
         {
+            Type loggerService = typeof(DatabaseLogger);
             if (loggerService.BaseType != typeof(LoggerServiceBase))
             {
                 throw new System.Exception(AspectMessages.WrongLoggerType);
@@ -26,7 +28,14 @@ namespace Core.Aspects.Autofac.Logging
             _loggerServiceBase.Info(GetLogDetail(invocation));
         }
 
-        private LogDetail GetLogDetail(IInvocation invocation)
+        protected override void OnException(IInvocation invocation, System.Exception e)
+        {
+            LogDetailWithException logDetailWithException = GetLogDetailWithException(invocation);
+            logDetailWithException.ExceptionMessage = e.Message;
+            _loggerServiceBase.Error(logDetailWithException);
+        }
+
+        private List<LogParameter> GetLogParameters(IInvocation invocation)
         {
             var logParameters = new List<LogParameter>();
             for (int i = 0; i < invocation.Arguments.Length; i++)
@@ -35,17 +44,29 @@ namespace Core.Aspects.Autofac.Logging
                 {
                     Name = invocation.GetConcreteMethod().GetParameters()[i].Name,
                     Value = invocation.Arguments[i],
-                    Type = invocation.Arguments[i].GetType().Name
+                    Type = invocation.Arguments[i].GetType().Name,
+                    DateTime = DateTime.Now
                 });
             }
+            return logParameters;
+        }
 
-            var logDetail = new LogDetail
+        private LogDetail GetLogDetail(IInvocation invocation)
+        {
+            return new LogDetail
             {
                 MethodName = invocation.Method.Name,
-                LogParameters = logParameters
+                LogParameters = GetLogParameters(invocation)
             };
+        }
 
-            return logDetail;
+        private LogDetailWithException GetLogDetailWithException(IInvocation invocation)
+        {
+            return new LogDetailWithException
+            {
+                MethodName = invocation.Method.Name,
+                LogParameters = GetLogParameters(invocation)
+            };
         }
     }
 }

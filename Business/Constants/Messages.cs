@@ -1,7 +1,4 @@
-﻿using Entities.Concrete;
-using System.Collections.Generic;
-
-namespace Business.Constants
+﻿namespace Business.Constants
 {
     public static class Messages
     {
@@ -65,6 +62,17 @@ namespace Business.Constants
         public static string AccessTokenCreated = "AccessToken başarıyla oluşturuldu";
 
         public static string AuthorizationDenied = "Yetkiniz yok";
+        #endregion
+
+        #region CariBusinessRules
+        public static string CariAlreadyExists = "Cari Kartı Zaten Mevcut.";
+        public static string CariIdNotExists = "Cari Id Bulunamadı.";
+        public static string CariKodNotExists = "Cari Kod Bulunamadı.";
+        public static string CariUnvanNotExists = "Cari Unvan Bulunamadı.";
+        public static string SahisCariTCNoNotExists = "Şahıs Cari TC No Bulunamadı.";
+        public static string SirketCariVergiNoNotExists = "Şirket Cari Vergi No Bulunamadı.";
+        public static string CariGrupKodAdNotExists = "CariGrupKod Adı Bulunamadı.";
+        public static string CariVergiDairesiNotExists = "Cari Vergi Dairesi Bulunamadı.";
         #endregion
     }
 }

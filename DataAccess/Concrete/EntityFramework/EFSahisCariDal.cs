@@ -2,6 +2,7 @@
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.Context;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,64 @@ namespace DataAccess.Concrete.EntityFramework
                                  TCNo = s.TCNo
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
+            }
+        }
+
+        private Cari GetBaseCari(SahisCari sahisCari)
+        {
+            return new Cari
+            {
+                Id = sahisCari.CariId,
+                Kod = sahisCari.Kod,
+                Unvan = sahisCari.Unvan,
+                VergiDairesi = sahisCari.VergiDairesi
+            };
+        }
+
+        public new void Add(SahisCari sahisCari)
+        {
+            using (var context = new OnMuhasebeContext())
+            {
+                var cari = this.GetBaseCari(sahisCari);
+                var cariAdded = context.Entry(cari);
+                cariAdded.State = EntityState.Added;
+                context.SaveChanges();
+
+                sahisCari.CariId = cariAdded.Entity.Id;
+                var sahiCariAdded = context.Entry(sahisCari);
+                sahiCariAdded.State = EntityState.Added;
+                context.SaveChanges();
+            }
+        }
+
+        public new void Delete(SahisCari sahisCari)
+        {
+            using (var context = new OnMuhasebeContext())
+            {
+                var sahiCariDeleted = context.Entry(sahisCari);
+                sahiCariDeleted.State = EntityState.Deleted;
+                context.SaveChanges();
+
+                var cari = this.GetBaseCari(sahisCari);
+                var cariDeleted = context.Entry(cari);
+                cariDeleted.State = EntityState.Deleted;
+                context.SaveChanges();
+            }
+        }
+
+        public new void Update(SahisCari sahisCari)
+        {
+            using (var context = new OnMuhasebeContext())
+            {
+                var cari = this.GetBaseCari(sahisCari);
+                var cariUpdated = context.Entry(cari);
+                cariUpdated.State = EntityState.Modified;
+                context.SaveChanges();
+
+                sahisCari.CariId = cariUpdated.Entity.Id;
+                var sahiCariUpdated = context.Entry(sahisCari);
+                sahiCariUpdated.State = EntityState.Modified;
+                context.SaveChanges();
             }
         }
     }
