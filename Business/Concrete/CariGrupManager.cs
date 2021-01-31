@@ -19,19 +19,19 @@ namespace Business.Concrete
         public IResult Add(CariGrup cariGrup)
         {
             _cariGrupDal.Add(cariGrup);
-            return new SuccessResult(Messages.CariAddedToGrup);
+            return new SuccessResult(Messages.SuccessMessages.CariAddedToGrup);
         }
 
         public IResult Delete(CariGrup cariGrup)
         {
             _cariGrupDal.Delete(cariGrup);
-            return new SuccessResult(Messages.CariDeletedFromGrup);
+            return new SuccessResult(Messages.SuccessMessages.CariDeletedFromGrup);
         }
 
         public IResult Update(CariGrup cariGrup)
         {
             _cariGrupDal.Update(cariGrup);
-            return new SuccessResult(Messages.CariTransferredGrup);
+            return new SuccessResult(Messages.SuccessMessages.CariTransferredToGrup);
         }
 
         public IDataResult<List<CariGrup>> GetListByCariGrupKodId(int cariGrupKodId)

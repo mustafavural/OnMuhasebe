@@ -14,8 +14,8 @@ namespace ConsoleUI.EntityTest
         {
             this._sirketCariService = sirketCariService;
             this._sahisCariService = sahisCariService;
-            this._sirketCari = new SirketCari { Kod = "06-001", Unvan = "Symantec", VergiDairesi = "Kocatepe", VergiNo = "1234567890" };
-            this._sahisCari = new SahisCari { Kod = "06-001", Unvan = "Seyhan VURAL", VergiDairesi = "Sincan", TCNo = "22178323378" };
+            this._sirketCari = new SirketCari { Kod = "06-001", Unvan = "Symantec", VergiDairesi = "Sincan", VergiNo = "1234567890" };
+            this._sahisCari = new SahisCari { Kod = "35-001", Unvan = "Seyhan VURAL", VergiDairesi = "Alsancak", TCNo = "22178323378" };
         }
         public void SirketTestYap()
         {
@@ -47,7 +47,7 @@ namespace ConsoleUI.EntityTest
         {
             #region addDeleteUpdate
             Console.WriteLine(_sahisCariService.Add(_sahisCari).Message);
-            var updateIcin = _sahisCariService.GetByKod("06-001").Data;
+            var updateIcin = _sahisCariService.GetByKod("35-001").Data;
             updateIcin.Unvan = "Değiştirildi";
             Console.WriteLine(_sahisCariService.Update(updateIcin).Message);
             base.EkranaYaz(_sahisCariService.GetById(updateIcin.CariId).Data);

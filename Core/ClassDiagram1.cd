@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Core.Utilities.Business.BusinessRules" Collapsed="true">
+    <Position X="22.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Utilities\Business\BusinessRules.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Utilities.Interceptors.Autofac.AspectInterceptorSelector" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Interceptors\Autofac\AspectInterceptorSelector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Core.Utilities.Interceptors.Autofac.MethodInterception" Collapsed="true">
+    <Position X="7.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAgAAAAgAAAAg=</HashCode>
+      <FileName>Utilities\Interceptors\Autofac\MethodInterception.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Utilities.Interceptors.Autofac.MethodInterceptionBaseAttribute" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Utilities\Interceptors\Autofac\MethodInterceptionBaseAttribute.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Core.Utilities.IoC.ServiceTool" Collapsed="true">
+    <Position X="20.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAQAAAAAAAAA=</HashCode>
+      <FileName>Utilities\IoC\ServiceTool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Utilities.Messages.AspectMessages" Collapsed="true">
+    <Position X="20.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Utilities\Messages\AspectMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Utilities.Result.DataResult&lt;T&gt;" Collapsed="true">
+    <Position X="6.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Result\DataResult.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Core.Utilities.Result.ErrorDataResult&lt;T&gt;" Collapsed="true">
+    <Position X="5.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Result\ErrorDataResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Utilities.Result.ErrorResult" Collapsed="true">
+    <Position X="0.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Result\ErrorResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Utilities.Result.Result" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Utilities\Result\Result.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Core.Utilities.Result.SuccessDataResult&lt;T&gt;" Collapsed="true">
+    <Position X="7.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Result\SuccessDataResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Utilities.Result.SuccessResult" Collapsed="true">
+    <Position X="3" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Result\SuccessResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Utilities.Security.Encryption.SecurityKeyHelper" Collapsed="true">
+    <Position X="25.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Security\Encryption\SecurityKeyHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Utilities.Security.Encryption.SigningCredentialsHelper" Collapsed="true">
+    <Position X="22.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Security\Encryption\SigningCredentialsHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Utilities.Security.Hashing.HashingHelper" Collapsed="true">
+    <Position X="25.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Security\Hashing\HashingHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Utilities.Security.JWT.AccessToken" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Utilities\Security\JWT\AccessToken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Utilities.Security.JWT.JwtHelper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAACAAAAAAAAACAAAAAAAgABACAAAAAA=</HashCode>
+      <FileName>Utilities\Security\JWT\JwtHelper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Core.Utilities.Security.JWT.TokenOptions" Collapsed="true">
+    <Position X="24" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAEAAAAAAAAAAAAAAAAAAAIAAAAAAAQAAA=</HashCode>
+      <FileName>Utilities\Security\JWT\TokenOptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Aspects.Autofac.Caching.CacheAspect" Collapsed="true">
+    <Position X="12.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAgCAAAA=</HashCode>
+      <FileName>Aspects\Autofac\Caching\CachAspect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Aspects.Autofac.Caching.CacheRemoveAspect" Collapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAACAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Aspects\Autofac\Caching\CacheRemoveAspect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Aspects.Autofac.Exception.ExceptionLogAspect" Collapsed="true">
+    <Position X="1" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAQAAAAgAAAAA=</HashCode>
+      <FileName>Aspects\Autofac\Exception\ExceptionLogAspect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Aspects.Autofac.Logging.LogAspect" Collapsed="true">
+    <Position X="3.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAEAAAAAAEAQAAAAgAAAAg=</HashCode>
+      <FileName>Aspects\Autofac\Logging\LogAspect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Aspects.Autofac.Performance.PerformanceAspect" Collapsed="true">
+    <Position X="5.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAgQAAAAAAAAg=</HashCode>
+      <FileName>Aspects\Autofac\Performance\PerformanceAspect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Aspects.Autofac.Transaction.TransactionScopeAspect" Collapsed="true">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Aspects\Autofac\Transaction\TransactionScopeAspect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Aspects.Autofac.Validation.ValidationAspect" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAg=</HashCode>
+      <FileName>Aspects\Autofac\Validation\ValidationAspect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Extensions.ClaimExtensions" Collapsed="true">
+    <Position X="24" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAQAAACAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Extensions\ClaimExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Extensions.ClaimsPrincipalExtensions" Collapsed="true">
+    <Position X="25.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\ClaimsPrincipalExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Extensions.ErrorDetails" Collapsed="true">
+    <Position X="20.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAIAAAIAAAAAA=</HashCode>
+      <FileName>Extensions\ErrorDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Extensions.ExceptionMiddleware" Collapsed="true">
+    <Position X="22.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\ExceptionMiddleware.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Extensions.ExceptionMiddlewareExtensions" Collapsed="true">
+    <Position X="24" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\ExceptionMiddlewareExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Extensions.ServiceCollectionExtensions" Collapsed="true">
+    <Position X="18.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\ServiceCollectionExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.CrossCuttingConcerns.Caching.Microsoft.MemoryCacheManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAIAAAAAAIAAAABAAAAABAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CrossCuttingConcerns\Caching\Microsoft\MemoryCacheManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Core.CrossCuttingConcerns.Logging.Log4Net.Layouts.JsonLayout" Collapsed="true">
+    <Position X="17" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CrossCuttingConcerns\Logging\Log4Net\Layouts\JsonLayout.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.CrossCuttingConcerns.Logging.Log4Net.Loggers.DatabaseLogger" Collapsed="true">
+    <Position X="0.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CrossCuttingConcerns\Logging\Log4Net\Loggers\DatabaseLogger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.CrossCuttingConcerns.Logging.Log4Net.Loggers.FileLogger" Collapsed="true">
+    <Position X="2.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CrossCuttingConcerns\Logging\Log4Net\Loggers\FileLogger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.CrossCuttingConcerns.Logging.Log4Net.LoggerServiceBase" Collapsed="true">
+    <Position X="1.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAfAAAAAAAAAAQCAAAAEAAAAAAEAEAAA=</HashCode>
+      <FileName>CrossCuttingConcerns\Logging\Log4Net\LoggerServiceBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.CrossCuttingConcerns.Logging.Log4Net.SerializableLogEvent" Collapsed="true">
+    <Position X="17" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAIAAAAAA=</HashCode>
+      <FileName>CrossCuttingConcerns\Logging\Log4Net\SerializableLogEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.CrossCuttingConcerns.Logging.LogDetail" Collapsed="true">
+    <Position X="5.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEACAAAAAAA=</HashCode>
+      <FileName>CrossCuttingConcerns\Logging\LogDetail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.CrossCuttingConcerns.Logging.LogDetailWithException" Collapsed="true">
+    <Position X="5.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CrossCuttingConcerns\Logging\LogDetailWithException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.CrossCuttingConcerns.Logging.LogParameter" Collapsed="true">
+    <Position X="20.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAQAgAAAAAAA=</HashCode>
+      <FileName>CrossCuttingConcerns\Logging\LogParameter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.CrossCuttingConcerns.Validation.ValidationTools.FluentValidation.ValidationTool" Collapsed="true">
+    <Position X="18.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CrossCuttingConcerns\Validation\ValidationTools\FluentValidation\ValidationTool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Core.Entities.Concrete.OperationClaim" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Concrete\OperationClaim.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Core.Entities.Concrete.User" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACCAEAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Entities\Concrete\User.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Core.Entities.Concrete.UserOperationClaim" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAIAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Concrete\UserOperationClaim.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Core.DataAccess.EntityFramework.EFEntityRepositoryBase&lt;TEntity, TContext&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAABAAAAAAAAAAAEAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>DataAccess\EntityFramework\EFEntityRepositoryBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Core.DependencyResolvers.CoreModule" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DependencyResolvers\CoreModule.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="Core.Utilities.IoC.ICoreModule" Collapsed="true">
+    <Position X="18.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\IoC\ICoreModule.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.Utilities.Result.IDataResult&lt;T&gt;" Collapsed="true">
+    <Position X="8.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Result\IDataResult.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.Utilities.Result.IResult" Collapsed="true">
+    <Position X="8.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Utilities\Result\IResult.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.Utilities.Security.JWT.ITokenHelper" Collapsed="true">
+    <Position X="25.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Security\JWT\ITokenHelper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.CrossCuttingConcerns.Caching.ICacheManager" Collapsed="true">
+    <Position X="17" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAIAAAAAAAAAAABAAAAABAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CrossCuttingConcerns\Caching\ICashManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.Entities.IDto" Collapsed="true">
+    <Position X="20.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\IDto.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.Entities.IEntity" Collapsed="true">
+    <Position X="22.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\IEntity.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Core.DataAccess.IEntityRepository&lt;T&gt;" Collapsed="true">
+    <Position X="24" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAABAAAAAAAAAAAEAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>DataAccess\IEntityRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

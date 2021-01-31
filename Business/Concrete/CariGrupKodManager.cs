@@ -26,21 +26,21 @@ namespace Business.Concrete
         public IResult Add(CariGrupKod cariGrupKod)
         {
             _cariGrupKodDal.Add(cariGrupKod);
-            return new SuccessResult(Messages.CariGrupKodAdded);
+            return new SuccessResult(Messages.SuccessMessages.CariGrupKodAdded);
         }
 
         [ValidationAspect(typeof(CariGrupKodValidator), Priority = 1)]
         public IResult Delete(CariGrupKod cariGrupKod)
         {
             _cariGrupKodDal.Delete(cariGrupKod);
-            return new SuccessResult(Messages.CariGrupKodUpdated);
+            return new SuccessResult(Messages.SuccessMessages.CariGrupKodUpdated);
         }
 
         [ValidationAspect(typeof(CariGrupKodValidator), Priority = 1)]
         public IResult Update(CariGrupKod cariGrupKod)
         {
             _cariGrupKodDal.Update(cariGrupKod);
-            return new SuccessResult(Messages.CariGrupKodDeleted);
+            return new SuccessResult(Messages.SuccessMessages.CariGrupKodDeleted);
         }
         public IDataResult<CariGrupKod> GetById(int cariGrupKodId)
         {

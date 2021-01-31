@@ -24,21 +24,21 @@ namespace Business.Concrete
         public IResult Add(CariHareket cariHareket)
         {
             _cariHareketDal.Add(cariHareket);
-            return new SuccessResult(Messages.CariActivityAdded);
+            return new SuccessResult(Messages.SuccessMessages.CariActivityAdded);
         }
 
         [ValidationAspect(typeof(CariHareketValidator), Priority = 1)]
         public IResult Delete(CariHareket cariHareket)
         {
             _cariHareketDal.Delete(cariHareket);
-            return new SuccessResult(Messages.CariActivityDeleted);
+            return new SuccessResult(Messages.SuccessMessages.CariActivityDeleted);
         }
 
         [ValidationAspect(typeof(CariHareketValidator), Priority = 1)]
         public IResult Update(CariHareket cariHareket)
         {
             _cariHareketDal.Add(cariHareket);
-            return new SuccessResult(Messages.CariActivityUpdated);
+            return new SuccessResult(Messages.SuccessMessages.CariActivityUpdated);
         }
 
         public IDataResult<CariHareket> GetById(int cariHareketId)

@@ -21,20 +21,6 @@ namespace Business.Concrete
             _stokGrupService = stokGrupService;
         }
 
-        [ValidationAspect(typeof(StokGrupKodValidator), Priority = 1)]
-        public IResult Add(StokGrupKod stokGrupKod)
-        {
-            _stokGrupKodDal.Add(stokGrupKod);
-            return new SuccessResult(Messages.StokGrupKodAdded);
-        }
-
-        [ValidationAspect(typeof(StokGrupKodValidator), Priority = 1)]
-        public IResult Delete(StokGrupKod stokGrupKod)
-        {
-            _stokGrupKodDal.Delete(stokGrupKod);
-            return new SuccessResult(Messages.StokGrupKodDeleted);
-        }
-
         public IDataResult<StokGrupKod> GetByAd(string stokGrupKodAd)
         {
             return new SuccessDataResult<StokGrupKod>(_stokGrupKodDal.Get(p => p.Ad == stokGrupKodAd));
@@ -62,10 +48,24 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(StokGrupKodValidator), Priority = 1)]
+        public IResult Add(StokGrupKod stokGrupKod)
+        {
+            _stokGrupKodDal.Add(stokGrupKod);
+            return new SuccessResult(Messages.SuccessMessages.StokGrupKodAdded);
+        }
+
+        [ValidationAspect(typeof(StokGrupKodValidator), Priority = 1)]
+        public IResult Delete(StokGrupKod stokGrupKod)
+        {
+            _stokGrupKodDal.Delete(stokGrupKod);
+            return new SuccessResult(Messages.SuccessMessages.StokGrupKodDeleted);
+        }
+
+        [ValidationAspect(typeof(StokGrupKodValidator), Priority = 1)]
         public IResult Update(StokGrupKod stokGrupKod)
         {
             _stokGrupKodDal.Update(stokGrupKod);
-            return new SuccessResult(Messages.StokGrupKodUpdated);
+            return new SuccessResult(Messages.SuccessMessages.StokGrupKodUpdated);
         }
     }
 }

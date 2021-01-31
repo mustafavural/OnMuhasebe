@@ -7,12 +7,12 @@ using System.Linq;
 
 namespace Core.Aspects.Autofac.Caching
 {
-    public class CachAspect : MethodInterception
+    public class CacheAspect : MethodInterception
     {
         int _duration;
         ICacheManager _cacheManager;
 
-        public CachAspect(int duration = 60)
+        public CacheAspect(int duration = 60)
         {
             _duration = duration;
             _cacheManager = ServiceTool.ServiceProvider.GetService<ICacheManager>();

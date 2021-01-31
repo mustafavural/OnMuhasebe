@@ -34,7 +34,7 @@ namespace Business.Concrete
             var result = _stokDal.Get(p => p.Kod == stok.Kod) != null;
             if (result)
             {
-                return new ErrorResult(Messages.StokAlreadyExists);
+                return new ErrorResult(Messages.ErrorMessages.StokAlreadyExists);
             }
             return new SuccessResult();
         }
@@ -43,7 +43,7 @@ namespace Business.Concrete
             var result = _stokDal.Get(p => p.Id == id) == null;
             if (result)
             {
-                return new ErrorDataResult<Stok>(Messages.StokIdNotExists);
+                return new ErrorDataResult<Stok>(Messages.ErrorMessages.StokIdNotExists);
             }
             return new SuccessDataResult<Stok>();
         }
@@ -52,7 +52,7 @@ namespace Business.Concrete
             var result = _stokDal.Get(p => p.Kod == kod) == null;
             if (result)
             {
-                return new ErrorDataResult<Stok>(Messages.StokKodNotExists);
+                return new ErrorDataResult<Stok>(Messages.ErrorMessages.StokKodNotExists);
             }
             return new SuccessDataResult<Stok>();
         }
@@ -61,7 +61,7 @@ namespace Business.Concrete
             var result = _stokDal.Get(p => p.Barkod == barkod) == null;
             if (result)
             {
-                return new ErrorDataResult<Stok>(Messages.StokBarkodNotExists);
+                return new ErrorDataResult<Stok>(Messages.ErrorMessages.StokBarkodNotExists);
             }
             return new SuccessDataResult<Stok>();
         }
@@ -70,7 +70,7 @@ namespace Business.Concrete
             var result = _stokDal.Get(p => p.Ad == ad) == null;
             if (result)
             {
-                return new ErrorDataResult<Stok>(Messages.StokAdNotExists);
+                return new ErrorDataResult<Stok>(Messages.ErrorMessages.StokAdNotExists);
             }
             return new SuccessDataResult<Stok>();
         }
@@ -79,7 +79,7 @@ namespace Business.Concrete
             var result = _stokGrupKodService.GetByAd(grupKodAd) == null;
             if (result)
             {
-                return new ErrorDataResult<List<Stok>>(Messages.StokGrupKodAdNotExists);
+                return new ErrorDataResult<List<Stok>>(Messages.ErrorMessages.StokGrupKodAdNotExists);
             }
             return new SuccessDataResult<List<Stok>>();
         }
@@ -88,7 +88,7 @@ namespace Business.Concrete
             var result = _stokDal.GetAll(p => p.KDV == kdv) == null;
             if (result)
             {
-                return new ErrorDataResult<List<Stok>>(Messages.StokKdvNotExists);
+                return new ErrorDataResult<List<Stok>>(Messages.ErrorMessages.StokKdvNotExists);
             }
             return new SuccessDataResult<List<Stok>>();
         }
@@ -97,13 +97,13 @@ namespace Business.Concrete
             var result = _stokGrupKodService.GetById(grupKodId) == null;
             if (result)
             {
-                return new ErrorDataResult<List<Stok>>(Messages.StokGrupKodIdNotExists);
+                return new ErrorDataResult<List<Stok>>(Messages.ErrorMessages.StokGrupKodIdNotExists);
             }
             return new SuccessDataResult<List<Stok>>();
         }
         #endregion
 
-        [PerformanceAspect(1), CachAspect(), LogAspect()]
+        [PerformanceAspect(1), CacheAspect(), LogAspect()]
         public IDataResult<Stok> GetById(int stokId)
         {
             IResult result = BusinessRules.Run(
@@ -114,7 +114,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Stok>(_stokDal.Get(p => p.Id == stokId));
         }
 
-        [PerformanceAspect(1), CachAspect(), LogAspect()]
+        [PerformanceAspect(1), CacheAspect(), LogAspect()]
         public IDataResult<Stok> GetByKod(string stokKod)
         {
             IResult result = BusinessRules.Run(
@@ -125,7 +125,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Stok>(_stokDal.Get(p => p.Kod == stokKod));
         }
 
-        [PerformanceAspect(1), CachAspect(), LogAspect()]
+        [PerformanceAspect(1), CacheAspect(), LogAspect()]
         public IDataResult<Stok> GetByBarkod(string stokBarkod)
         {
             IResult result = BusinessRules.Run(
@@ -136,7 +136,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Stok>(_stokDal.Get(p => p.Barkod == stokBarkod));
         }
 
-        [PerformanceAspect(1), CachAspect(), LogAspect()]
+        [PerformanceAspect(1), CacheAspect(), LogAspect()]
         public IDataResult<Stok> GetByAd(string stokAd)
         {
             IResult result = BusinessRules.Run(
@@ -147,13 +147,13 @@ namespace Business.Concrete
             return new SuccessDataResult<Stok>(_stokDal.Get(p => p.Ad == stokAd));
         }
 
-        [PerformanceAspect(1), CachAspect(), LogAspect()]
+        [PerformanceAspect(1), CacheAspect(), LogAspect()]
         public IDataResult<List<Stok>> GetList()
         {
             return new SuccessDataResult<List<Stok>>(_stokDal.GetAll());
         }
 
-        [PerformanceAspect(1), CachAspect(), LogAspect()]
+        [PerformanceAspect(1), CacheAspect(), LogAspect()]
         public IDataResult<List<Stok>> GetListByKDV(int KDV)
         {
             IResult result = BusinessRules.Run(
@@ -164,7 +164,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Stok>>(_stokDal.GetAll(p => p.KDV == KDV));
         }
 
-        [PerformanceAspect(1), CachAspect(), LogAspect()]
+        [PerformanceAspect(1), CacheAspect(), LogAspect()]
         public IDataResult<List<Stok>> GetListByGrupAd(string grupKodAd)
         {
             IResult result = BusinessRules.Run(
@@ -177,7 +177,7 @@ namespace Business.Concrete
                 _stokGrupKodService.GetByAd(grupKodAd).Data.Id).Data.Select(s => s.StokId).Contains(p.Id)));
         }
 
-        [PerformanceAspect(1), CachAspect(), LogAspect()]
+        [PerformanceAspect(1), CacheAspect(), LogAspect()]
         public IDataResult<List<Stok>> GetListByGrupKod(int grupKodId)
         {
             IResult result = BusinessRules.Run(
@@ -201,7 +201,7 @@ namespace Business.Concrete
                 return result;
 
             _stokDal.Add(stok);
-            return new SuccessResult(Messages.StokInserted);
+            return new SuccessResult(Messages.SuccessMessages.StokInserted);
         }
 
         [PerformanceAspect(1)]
@@ -216,7 +216,7 @@ namespace Business.Concrete
                 return result;
 
             _stokDal.Delete(stok);
-            return new SuccessResult(Messages.StokDeleted);
+            return new SuccessResult(Messages.SuccessMessages.StokDeleted);
         }
 
         [PerformanceAspect(1)]
@@ -231,7 +231,7 @@ namespace Business.Concrete
                 return result;
 
             _stokDal.Update(stok);
-            return new SuccessResult(Messages.StokUpdated);
+            return new SuccessResult(Messages.SuccessMessages.StokUpdated);
         }
     }
 }

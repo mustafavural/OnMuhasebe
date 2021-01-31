@@ -1,6 +1,7 @@
 ﻿using ConsoleUI.EntityTest;
 using Core.DependencyResolvers;
 using Core.Extensions;
+using Core.Utilities.IoC;
 using Core.Utilities.Security.JWT;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,8 +22,8 @@ namespace ConsoleUI
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
-            services.AddDependencyResolvers(new Core.Utilities.IoC.ICoreModule[]
+            //var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+            services.AddDependencyResolvers(new ICoreModule[]
             {
                 new CoreModule()
             });

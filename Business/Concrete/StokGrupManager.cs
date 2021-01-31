@@ -16,18 +16,6 @@ namespace Business.Concrete
             _stokGrupDal = stokGrupDal;
         }
 
-        public IResult Add(StokGrup stokGrup)
-        {
-            _stokGrupDal.Add(stokGrup);
-            return new SuccessResult(Messages.StokAddedToGrup);
-        }
-
-        public IResult Delete(StokGrup stokGrup)
-        {
-            _stokGrupDal.Delete(stokGrup);
-            return new SuccessResult(Messages.StokDeletedFromGrup);
-        }
-
         public IDataResult<List<StokGrup>> GetByStokGrupKodId(int stokGrupKodId)
         {
             return new SuccessDataResult<List<StokGrup>>(_stokGrupDal.GetAll(p =>
@@ -40,10 +28,22 @@ namespace Business.Concrete
             p.StokId == stokId));
         }
 
+        public IResult Add(StokGrup stokGrup)
+        {
+            _stokGrupDal.Add(stokGrup);
+            return new SuccessResult(Messages.SuccessMessages.StokAddedToGrup);
+        }
+
+        public IResult Delete(StokGrup stokGrup)
+        {
+            _stokGrupDal.Delete(stokGrup);
+            return new SuccessResult(Messages.SuccessMessages.StokDeletedFromGrup);
+        }
+
         public IResult Update(StokGrup stokGrup)
         {
             _stokGrupDal.Update(stokGrup);
-            return new SuccessResult(Messages.StokTransferredGrup);
+            return new SuccessResult(Messages.SuccessMessages.StokTransferredToGrup);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Business.Abstract
         IDataResult<List<StokHareket>> GetByFaturaId(int faturaId);
         IDataResult<List<StokHareket>> GetByStokId(int stokId);
         IDataResult<List<StokHareket>> GetByDepoId(int depoId);
+        IDataResult<decimal> GetStokMiktar(int stokId);
         IResult Add(StokHareket stokHareket);
         IResult Delete(StokHareket stokHareket);
         IResult Update(StokHareket stokHareket);
