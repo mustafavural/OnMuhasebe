@@ -8,6 +8,5 @@ namespace DataAccess.Abstract
 {
     public interface ISirketCariDal : IEntityRepository<SirketCari>
     {
-        List<SirketCari> GetBy(Expression<Func<SirketCari, bool>> filter = null);
     }
 }

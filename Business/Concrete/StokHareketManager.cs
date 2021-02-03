@@ -43,7 +43,7 @@ namespace Business.Concrete
             var error = _stokService.GetById(stokId) == null;
             if (error)
             {
-                return new ErrorResult(Messages.ErrorMessages.StokIdNotExists);
+                return new ErrorResult(Messages.ErrorMessages.StokNotExists);
             }
             return new SuccessResult();
         }
@@ -52,17 +52,27 @@ namespace Business.Concrete
             var error = _stokHareketDal.Get(p => p.Id == stokHareketId) == null;
             if (error)
             {
-                return new ErrorResult(Messages.ErrorMessages.StokHareketIdNotExists);
+                return new ErrorResult(Messages.ErrorMessages.StokHareketNotExists);
             }
             return new SuccessResult();
         }
         private IResult CheckIfValidDepoId(int depoId)
         {
-            throw new NotImplementedException();
+            var error = _stokHareketDal.Get(p => p.DepoId == depoId) == null;
+            if (error)
+            {
+                return new ErrorResult(Messages.ErrorMessages.DepoNotExists);
+            }
+            return new SuccessResult();
         }
         private IResult CheckIfValidFaturaId(int faturaId)
         {
-            throw new NotImplementedException();
+            var error = _stokHareketDal.Get(p => p.FaturaId == faturaId) == null;
+            if (error)
+            {
+                return new ErrorResult(Messages.ErrorMessages.FaturaNotExists);
+            }
+            return new SuccessResult();
         }
         #endregion
 
@@ -118,7 +128,17 @@ namespace Business.Concrete
             return new SuccessDataResult<List<StokHareket>>(_stokHareketDal.GetAll(p => p.StokId == stokId));
         }
 
-        [PerformanceAspect(1), CacheAspect(), LogAspect()]
+        [PerformanceAspect(1)]
+        [LogAspect()]
+        [CacheAspect()]
+        public IDataResult<List<StokHareket>> GetList()
+        {
+            return new SuccessDataResult<List<StokHareket>>(_stokHareketDal.GetAll());
+        }
+
+        [PerformanceAspect(1)]
+        [LogAspect()]
+        [CacheAspect()]
         public IDataResult<decimal> GetStokMiktar(int stokId)
         {
             IResult result = BusinessRules.Run(

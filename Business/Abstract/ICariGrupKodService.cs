@@ -1,18 +1,14 @@
-﻿using Core.Utilities.Result;
+﻿using Core.Business.Abstract;
+using Core.Utilities.Result;
 using Entities.Concrete;
 using System.Collections.Generic;
 
 namespace Business.Abstract
 {
-    public interface ICariGrupKodService
+    public interface ICariGrupKodService : ICRUD<CariGrupKod>
     {
-        IResult Add(CariGrupKod cariGrupKod);
-        IResult Update(CariGrupKod cariGrupKod);
-        IResult Delete(CariGrupKod cariGrupKod);
-        IDataResult<CariGrupKod> GetById(int cariGrupKodId);
         IDataResult<CariGrupKod> GetByTur(string cariGrupKodTur);
         IDataResult<CariGrupKod> GetByAd(string cariGrupKodAd);
-        IDataResult<List<CariGrupKod>> GetList();
         IDataResult<List<CariGrupKod>> GetListByCari(int cariId);
     }
 }

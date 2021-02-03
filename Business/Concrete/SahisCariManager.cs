@@ -18,21 +18,19 @@ namespace Business.Concrete
     public class SahisCariManager : ISahisCariService
     {
         ISahisCariDal _sahisCariDal;
-        ICariDal _cariDal;
         ICariGrupService _cariGrupService;
         ICariGrupKodService _cariGrupKodService;
-        public SahisCariManager(ISahisCariDal sahisCariDal, ICariGrupService cariGrupService, ICariGrupKodService cariGrupKodService, ICariDal cariDal)
+        public SahisCariManager(ISahisCariDal sahisCariDal, ICariGrupService cariGrupService, ICariGrupKodService cariGrupKodService)
         {
             _sahisCariDal = sahisCariDal;
             _cariGrupService = cariGrupService;
             _cariGrupKodService = cariGrupKodService;
-            _cariDal = cariDal;
         }
 
         #region BusinessRules
         private IResult CheckIfValidAdding(SahisCari cari)
         {
-            var result = _cariDal.Get(p => p.Kod == cari.Kod) != null;
+            var result = _sahisCariDal.Get(p => p.Kod == cari.Kod) != null;
             if (result)
             {
                 return new ErrorResult(Messages.ErrorMessages.CariAlreadyExists);
@@ -41,16 +39,16 @@ namespace Business.Concrete
         }
         private IResult CheckIfValidId(int cariId)
         {
-            var result = _sahisCariDal.Get(p => p.CariId == cariId) == null;
+            var result = _sahisCariDal.Get(p => p.Id == cariId) == null;
             if (result)
             {
-                return new ErrorResult(Messages.ErrorMessages.CariIdNotExists);
+                return new ErrorResult(Messages.ErrorMessages.CariNotExists);
             }
             return new SuccessResult();
         }
         private IResult CheckIfValidKod(string cariKod)
         {
-            var result = _cariDal.Get(p => p.Kod == cariKod) == null;
+            var result = _sahisCariDal.Get(p => p.Kod == cariKod) == null;
             if (result)
             {
                 return new ErrorResult(Messages.ErrorMessages.CariKodNotExists);
@@ -68,7 +66,7 @@ namespace Business.Concrete
         }
         private IResult CheckIfValidUnvan(string cariUnvan)
         {
-            var result = _cariDal.Get(p => p.Unvan == cariUnvan) == null;
+            var result = _sahisCariDal.Get(p => p.Unvan == cariUnvan) == null;
             if (result)
             {
                 return new ErrorResult(Messages.ErrorMessages.CariUnvanNotExists);
@@ -86,7 +84,7 @@ namespace Business.Concrete
         }
         private IResult CheckIfListValidVergiDairesi(string vergiDairesi)
         {
-            var result = _cariDal.GetAll(p => p.VergiDairesi == vergiDairesi) == null;
+            var result = _sahisCariDal.GetAll(p => p.VergiDairesi == vergiDairesi) == null;
             if (result)
             {
                 return new ErrorResult(Messages.ErrorMessages.CariVergiDairesiNotExists);
@@ -103,7 +101,7 @@ namespace Business.Concrete
             if (result != null)
                 return (IDataResult<SahisCari>)result;
 
-            return new SuccessDataResult<SahisCari>(_sahisCariDal.GetBy(p => p.CariId == cariId).SingleOrDefault());
+            return new SuccessDataResult<SahisCari>(_sahisCariDal.Get(p => p.Id == cariId));
         }
 
         [PerformanceAspect(1), CacheAspect(), LogAspect()]
@@ -114,7 +112,7 @@ namespace Business.Concrete
             if (result != null)
                 return (IDataResult<SahisCari>)result;
 
-            return new SuccessDataResult<SahisCari>(_sahisCariDal.GetBy(p => p.Kod == cariKod).SingleOrDefault());
+            return new SuccessDataResult<SahisCari>(_sahisCariDal.Get(p => p.Kod == cariKod));
         }
 
         [PerformanceAspect(1), CacheAspect(), LogAspect()]
@@ -125,7 +123,7 @@ namespace Business.Concrete
             if (result != null)
                 return (IDataResult<SahisCari>)result;
 
-            return new SuccessDataResult<SahisCari>(_sahisCariDal.GetBy(p => p.TCNo == TCNo).SingleOrDefault());
+            return new SuccessDataResult<SahisCari>(_sahisCariDal.Get(p => p.TCNo == TCNo));
         }
 
         [PerformanceAspect(1), CacheAspect(), LogAspect()]
@@ -136,13 +134,13 @@ namespace Business.Concrete
             if (result != null)
                 return (IDataResult<SahisCari>)result;
 
-            return new SuccessDataResult<SahisCari>(_sahisCariDal.GetBy(p => p.Unvan == cariUnvan).SingleOrDefault());
+            return new SuccessDataResult<SahisCari>(_sahisCariDal.Get(p => p.Unvan == cariUnvan));
         }
 
         [PerformanceAspect(1), CacheAspect(), LogAspect()]
         public IDataResult<List<SahisCari>> GetList()
         {
-            return new SuccessDataResult<List<SahisCari>>(_sahisCariDal.GetBy());
+            return new SuccessDataResult<List<SahisCari>>(_sahisCariDal.GetAll());
         }
 
         [PerformanceAspect(1), CacheAspect(), LogAspect()]
@@ -153,7 +151,7 @@ namespace Business.Concrete
             if (result != null)
                 return (IDataResult<List<SahisCari>>)result;
 
-            return new SuccessDataResult<List<SahisCari>>(_sahisCariDal.GetBy().Where(p =>
+            return new SuccessDataResult<List<SahisCari>>(_sahisCariDal.GetAll(p =>
             _cariGrupService.GetListByCariGrupKodId(
                 _cariGrupKodService.GetByAd(grupKodAd).Data.Id).Data.Select(s => s.Id).Contains(p.Id)).ToList());
         }
@@ -166,7 +164,7 @@ namespace Business.Concrete
             if (result != null)
                 return (IDataResult<List<SahisCari>>)result;
 
-            return new SuccessDataResult<List<SahisCari>>(_sahisCariDal.GetBy(p => p.VergiDairesi == vergiDairesi));
+            return new SuccessDataResult<List<SahisCari>>(_sahisCariDal.GetAll(p => p.VergiDairesi == vergiDairesi));
         }
 
         [PerformanceAspect(1)]
@@ -193,7 +191,7 @@ namespace Business.Concrete
         public IResult Delete(SahisCari cari)
         {
             IResult result = BusinessRules.Run(
-                CheckIfValidId(cari.CariId));
+                CheckIfValidId(cari.Id));
             if (result != null)
                 return result;
 
@@ -209,7 +207,7 @@ namespace Business.Concrete
         public IResult Update(SahisCari cari)
         {
             IResult result = BusinessRules.Run(
-                CheckIfValidId(cari.CariId));
+                CheckIfValidId(cari.Id));
             if (result != null)
                 return result;
 

@@ -8,6 +8,5 @@ namespace DataAccess.Abstract
 {
     public interface ISahisCariDal : IEntityRepository<SahisCari>
     {
-        List<SahisCari> GetBy(Expression<Func<SahisCari, bool>> filter = null);
     }
 }

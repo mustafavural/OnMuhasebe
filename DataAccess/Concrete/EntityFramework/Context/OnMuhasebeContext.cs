@@ -13,13 +13,13 @@ namespace DataAccess.Concrete.EntityFramework.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SirketCari>().Ignore(p => p.Kod);
-            modelBuilder.Entity<SirketCari>().Ignore(p => p.Unvan);
-            modelBuilder.Entity<SirketCari>().Ignore(p => p.VergiDairesi);
+            modelBuilder.Entity<Cari>().ToTable("Cariler");
+            modelBuilder.Entity<SahisCari>().ToTable("SahisCariler").HasBaseType<Cari>();
+            modelBuilder.Entity<SirketCari>().ToTable("SirketCariler").HasBaseType<Cari>();
 
-            modelBuilder.Entity<SahisCari>().Ignore(p => p.Kod);
-            modelBuilder.Entity<SahisCari>().Ignore(p => p.Unvan);
-            modelBuilder.Entity<SahisCari>().Ignore(p => p.VergiDairesi);
+            modelBuilder.Entity<Evrak>().ToTable("Evraklar");
+            modelBuilder.Entity<Fatura>().ToTable("Faturalar").HasBaseType<Evrak>();
+            modelBuilder.Entity<Irsaliye>().ToTable("Irsaliyeler").HasBaseType<Evrak>();
         }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<User> Users { get; set; }

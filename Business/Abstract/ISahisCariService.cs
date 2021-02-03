@@ -1,20 +1,16 @@
-﻿using Core.Utilities.Result;
+﻿using Core.Business.Abstract;
+using Core.Utilities.Result;
 using Entities.Concrete;
 using System.Collections.Generic;
 
 namespace Business.Abstract
 {
-    public interface ISahisCariService
+    public interface ISahisCariService : ICRUD<SahisCari>
     {
-        IDataResult<SahisCari> GetById(int cariId);
         IDataResult<SahisCari> GetByKod(string cariKod);
         IDataResult<SahisCari> GetByUnvan(string cariUnvan);
         IDataResult<SahisCari> GetByTCNo(string TCNo);
-        IDataResult<List<SahisCari>> GetList();
         IDataResult<List<SahisCari>> GetListByVergiDairesi(string vergiDairesi);
         IDataResult<List<SahisCari>> GetListByGrupAd(string grupKodAd);
-        IResult Add(SahisCari cari);
-        IResult Delete(SahisCari cari);
-        IResult Update(SahisCari cari);
     }
 }

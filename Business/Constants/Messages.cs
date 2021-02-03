@@ -44,39 +44,73 @@
             public static string CariActivityDeleted { get { return "Stok Hareket başarıyla silindi."; } }
             public static string CariActivityUpdated { get { return "Stok Hareket başarıyla güncellendi."; } }
 
+            public static string FaturaInserted { get; internal set; }
+            public static string FaturaDeleted { get; internal set; }
+            public static string FaturaUpdated { get; internal set; }
+            public static string IrsaliyeUpdated { get; internal set; }
+            public static string IrsaliyeDeleted { get; internal set; }
+            public static string IrsaliyeInserted { get; internal set; }
         }
         public static class ErrorMessages
         {
             #region StokBusinessRules
             public static string StokAlreadyExists { get { return "Stok kartı zaten mevcut."; } }
-            public static string StokIdNotExists { get { return "Stok Id bulunamadı."; } }
+            public static string StokNotExists { get { return "Stok kartı bulunamadı."; } }
             public static string StokKodNotExists { get { return "Stok Kod bulunamadı."; } }
             public static string StokBarkodNotExists { get { return "Stok Barkod bulunamadı."; } }
             public static string StokAdNotExists { get { return "Stok Ad bulunamadı."; } }
             public static string StokKdvNotExists { get { return "Stok KDV bulunamadı."; } }
-            public static string StokGrupKodIdNotExists { get { return "Stok GrupKodId bulunamadı."; } }
-            public static string StokGrupKodAdNotExists { get { return "Stok GrupKodAd bulunamadı."; } }
             #endregion
 
             #region CariBusinessRules
             public static string CariAlreadyExists { get { return "Cari Kartı Zaten Mevcut."; } }
-            public static string CariIdNotExists { get { return "Cari Id Bulunamadı."; } }
+            public static string CariNotExists { get { return "Cari Kartı Bulunamadı."; } }
             public static string CariKodNotExists { get { return "Cari Kod Bulunamadı."; } }
             public static string CariUnvanNotExists { get { return "Cari Unvan Bulunamadı."; } }
             public static string SahisCariTCNoNotExists { get { return "Şahıs Cari TC No Bulunamadı."; } }
             public static string SirketCariVergiNoNotExists { get { return "Şirket Cari Vergi No Bulunamadı."; } }
-            public static string CariGrupKodAdNotExists { get { return "CariGrupKod Adı Bulunamadı."; } }
             public static string CariVergiDairesiNotExists { get { return "Cari Vergi Dairesi Bulunamadı."; } }
             #endregion
 
             #region StokHareketBusinessRules
+            public static string StokHareketNotExists { get { return "StokHareket bulunamadı."; } }
             public static string StokAmountNotEnough { get { return "Stok Bakiye yetersiz."; } }
-            public static string StokHareketIdNotExists { get { return "Stok Hareket Id nulunamadı."; } }
+            #endregion
+
+            #region StokGrupBusinessRules
+            public static string StokGrupAssignmentNotExists { get { return "Stok-Grup ilişiklendirmesi bulunamadı."; } }
+            public static string StokGrupAssignmentAlreadyExists { get { return "Stok-Grup ilişiklendirmesi zaten var."; } }
+            #endregion
+
+            #region StokGrupKodBusinessRules
+            public static string StokGrupKodAlreadyExists { get { return "StokGrupKod zaten mevcut."; } }
+            public static string StokGrupKodNotExists { get { return "StokGrupKod bulunamadı."; } }
+            public static string StokGrupKodAdNotExists { get { return "StokGrupKod adı bulunamadı."; } }
+            public static string StokGrupKodTurNotExists { get { return "StokGrupKod türü bulunamadı."; } }
+            #endregion
+
+            #region CariHareketBusinessRules
+            public static string CariActivityNotExists { get { return "StokHareket bulunamadı."; } }
+            public static string CariActivityAlreadyExists { get { return "StokHareket zaten mevcut."; } }
+            #endregion
+
+            #region CariGrupBusinessRules
+            public static string CariGrupAssignmentNotExists { get { return "Cari-Grup ilişiklendirmesi bulunamadı."; } }
+            public static string CariGrupAssignmentAlreadyExists { get { return "Cari-Grup ilişiklendirmesi zaten mevcut."; } }
+            #endregion
+
+            #region CariGrupKodBusinessRules
+            public static string CariGrupKodAlreadyExists { get { return "CariGrupKod zaten mevcut."; } }
+            public static string CariGrupKodNotExists { get { return "CariGrupKod bulunamadı."; } }
+            public static string CariGrupKodAdNotExists { get { return "CariGrupKod Adı Bulunamadı."; } }
+            public static string CariGrupKodTurNotExists { get { return "CariGrupKod türü bulunamadı."; } }
+
+            public static string FaturaNotExists { get; internal set; }
+            public static string DepoNotExists { get; internal set; }
             #endregion
         }
         public static class SecurityMessages
         {
-            #region Secure
             public static string UserNotFound { get { return "Kullanıcı bulunamadı."; } }
             public static string PasswordError { get { return "Şifre yanlış."; } }
             public static string SuccessfulLogin { get { return "Sisteme giriş başarılı."; } }
@@ -84,7 +118,6 @@
             public static string UserRegistered { get { return "Kullanıcı başarıyla kaydedildi."; } }
             public static string AccessTokenCreated { get { return "AccessToken başarıyla oluşturuldu."; } }
             public static string AuthorizationDenied { get { return "Yetkiniz yok."; } }
-            #endregion
         }
     }
 }

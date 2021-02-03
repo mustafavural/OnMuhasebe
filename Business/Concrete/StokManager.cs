@@ -43,7 +43,7 @@ namespace Business.Concrete
             var result = _stokDal.Get(p => p.Id == id) == null;
             if (result)
             {
-                return new ErrorDataResult<Stok>(Messages.ErrorMessages.StokIdNotExists);
+                return new ErrorDataResult<Stok>(Messages.ErrorMessages.StokNotExists);
             }
             return new SuccessDataResult<Stok>();
         }
@@ -97,7 +97,7 @@ namespace Business.Concrete
             var result = _stokGrupKodService.GetById(grupKodId) == null;
             if (result)
             {
-                return new ErrorDataResult<List<Stok>>(Messages.ErrorMessages.StokGrupKodIdNotExists);
+                return new ErrorDataResult<List<Stok>>(Messages.ErrorMessages.StokGrupKodNotExists);
             }
             return new SuccessDataResult<List<Stok>>();
         }

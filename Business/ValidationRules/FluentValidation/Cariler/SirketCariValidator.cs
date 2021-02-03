@@ -9,7 +9,6 @@ namespace Business.ValidationRules.FluentValidation.Cariler
         {
             RuleFor(p => p.VergiNo).NotEmpty();
             RuleFor(p => p.VergiNo).Length(10);
-            RuleFor(p => p.CariId).NotEmpty().When(w => w.Id > 0);
         }
     }
 }

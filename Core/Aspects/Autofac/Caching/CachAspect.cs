@@ -17,9 +17,6 @@ namespace Core.Aspects.Autofac.Caching
             _duration = duration;
             _cacheManager = ServiceTool.ServiceProvider.GetService<ICacheManager>();
         }
-
-
-        //ProductManager.GetByCategory(1,klaskd);
         public override void Intercept(IInvocation invocation)
         {
             var methodName = string.Format($"{invocation.Method.ReflectedType.FullName}.{invocation.Method.Name}");

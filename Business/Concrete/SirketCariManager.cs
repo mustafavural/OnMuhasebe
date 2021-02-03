@@ -18,21 +18,19 @@ namespace Business.Concrete
     public class SirketCariManager : ISirketCariService
     {
         private ISirketCariDal _sirketCariDal;
-        private ICariDal _cariDal;
         private ICariGrupService _cariGrupService;
         private ICariGrupKodService _cariGrupKodService;
-        public SirketCariManager(ISirketCariDal sirketCariDal, ICariGrupKodService cariGrupKodService, ICariGrupService cariGrupService, ICariDal cariDal)
+        public SirketCariManager(ISirketCariDal sirketCariDal, ICariGrupKodService cariGrupKodService, ICariGrupService cariGrupService)
         {
             _sirketCariDal = sirketCariDal;
             _cariGrupService = cariGrupService;
             _cariGrupKodService = cariGrupKodService;
-            _cariDal = cariDal;
         }
 
         #region BusinessRules
         private IResult CheckIfValidAdding(SirketCari cari)
         {
-            var result = _cariDal.Get(p => p.Kod == cari.Kod) != null;
+            var result = _sirketCariDal.Get(p => p.Kod == cari.Kod) != null;
             if (result)
             {
                 return new ErrorResult(Messages.ErrorMessages.CariAlreadyExists);
@@ -41,16 +39,16 @@ namespace Business.Concrete
         }
         private IResult CheckIfValidId(int cariId)
         {
-            var result = _sirketCariDal.Get(p => p.CariId == cariId) == null;
+            var result = _sirketCariDal.Get(p => p.Id == cariId) == null;
             if (result)
             {
-                return new ErrorResult(Messages.ErrorMessages.CariIdNotExists);
+                return new ErrorResult(Messages.ErrorMessages.CariNotExists);
             }
             return new SuccessResult();
         }
         private IResult CheckIfValidKod(string cariKod)
         {
-            var result = _cariDal.Get(p => p.Kod == cariKod) == null;
+            var result = _sirketCariDal.Get(p => p.Kod == cariKod) == null;
             if (result)
             {
                 return new ErrorResult(Messages.ErrorMessages.CariKodNotExists);
@@ -68,7 +66,7 @@ namespace Business.Concrete
         }
         private IResult CheckIfValidUnvan(string cariUnvan)
         {
-            var result = _cariDal.Get(p => p.Unvan == cariUnvan) == null;
+            var result = _sirketCariDal.Get(p => p.Unvan == cariUnvan) == null;
             if (result)
             {
                 return new ErrorResult(Messages.ErrorMessages.CariUnvanNotExists);
@@ -86,7 +84,7 @@ namespace Business.Concrete
         }
         private IResult CheckIfListValidVergiDairesi(string vergiDairesi)
         {
-            var result = _cariDal.GetAll(p => p.VergiDairesi == vergiDairesi) == null;
+            var result = _sirketCariDal.GetAll(p => p.VergiDairesi == vergiDairesi) == null;
             if (result)
             {
                 return new ErrorResult(Messages.ErrorMessages.CariVergiDairesiNotExists);
@@ -103,7 +101,7 @@ namespace Business.Concrete
             if (result != null)
                 return (IDataResult<SirketCari>)result;
 
-            return new SuccessDataResult<SirketCari>(_sirketCariDal.GetBy(p => p.CariId == cariId).SingleOrDefault());
+            return new SuccessDataResult<SirketCari>(_sirketCariDal.Get(p => p.Id == cariId));
         }
 
         [PerformanceAspect(1), CacheAspect(), LogAspect()]
@@ -114,7 +112,7 @@ namespace Business.Concrete
             if (result != null)
                 return (IDataResult<SirketCari>)result;
 
-            return new SuccessDataResult<SirketCari>(_sirketCariDal.GetBy(p => p.Kod == cariKod).SingleOrDefault());
+            return new SuccessDataResult<SirketCari>(_sirketCariDal.Get(p => p.Kod == cariKod));
         }
 
         [PerformanceAspect(1), CacheAspect(), LogAspect()]
@@ -125,7 +123,7 @@ namespace Business.Concrete
             if (result != null)
                 return (IDataResult<SirketCari>)result;
 
-            return new SuccessDataResult<SirketCari>(_sirketCariDal.GetBy(p => p.Unvan == cariUnvan).SingleOrDefault());
+            return new SuccessDataResult<SirketCari>(_sirketCariDal.Get(p => p.Unvan == cariUnvan));
         }
 
         [PerformanceAspect(1), CacheAspect(), LogAspect()]
@@ -136,13 +134,13 @@ namespace Business.Concrete
             if (result != null)
                 return (IDataResult<SirketCari>)result;
 
-            return new SuccessDataResult<SirketCari>(_sirketCariDal.GetBy(p => p.VergiNo == VergiNo).SingleOrDefault());
+            return new SuccessDataResult<SirketCari>(_sirketCariDal.Get(p => p.VergiNo == VergiNo));
         }
 
         [PerformanceAspect(1), CacheAspect(), LogAspect()]
         public IDataResult<List<SirketCari>> GetList()
         {
-            return new SuccessDataResult<List<SirketCari>>(_sirketCariDal.GetBy());
+            return new SuccessDataResult<List<SirketCari>>(_sirketCariDal.GetAll());
         }
 
         [PerformanceAspect(1), CacheAspect(), LogAspect()]
@@ -153,7 +151,7 @@ namespace Business.Concrete
             if (result != null)
                 return (IDataResult<List<SirketCari>>)result;
 
-            return new SuccessDataResult<List<SirketCari>>(_sirketCariDal.GetBy(p => p.VergiDairesi == vergiDairesi));
+            return new SuccessDataResult<List<SirketCari>>(_sirketCariDal.GetAll(p => p.VergiDairesi == vergiDairesi));
         }
 
         [PerformanceAspect(1), CacheAspect(), LogAspect()]
@@ -164,7 +162,7 @@ namespace Business.Concrete
             if (result != null)
                 return (IDataResult<List<SirketCari>>)result;
 
-            return new SuccessDataResult<List<SirketCari>>(_sirketCariDal.GetBy().Where(p =>
+            return new SuccessDataResult<List<SirketCari>>(_sirketCariDal.GetAll(p =>
             _cariGrupService.GetListByCariGrupKodId(
                 _cariGrupKodService.GetByAd(grupKodAd).Data.Id).Data.Select(s => s.Id).Contains(p.Id)).ToList());
         }
@@ -193,7 +191,7 @@ namespace Business.Concrete
         public IResult Delete(SirketCari cari)
         {
             IResult result = BusinessRules.Run(
-                CheckIfValidId(cari.CariId));
+                CheckIfValidId(cari.Id));
             if (result != null)
                 return result;
 
@@ -209,7 +207,7 @@ namespace Business.Concrete
         public IResult Update(SirketCari cari)
         {
             IResult result = BusinessRules.Run(
-                CheckIfValidId(cari.CariId));
+                CheckIfValidId(cari.Id));
             if (result != null)
                 return result;
 

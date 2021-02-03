@@ -24,7 +24,7 @@ namespace ConsoleUI.EntityTest
             var updateIcin = _sirketCariService.GetByKod("06-001").Data;
             updateIcin.Unvan = "Değiştirildi";
             Console.WriteLine(_sirketCariService.Update(updateIcin).Message);
-            base.EkranaYaz(_sirketCariService.GetById(updateIcin.CariId).Data);
+            base.EkranaYaz(_sirketCariService.GetById(updateIcin.Id).Data);
             Console.WriteLine(_sirketCariService.Delete(updateIcin).Message);
             #endregion
 
@@ -50,7 +50,7 @@ namespace ConsoleUI.EntityTest
             var updateIcin = _sahisCariService.GetByKod("35-001").Data;
             updateIcin.Unvan = "Değiştirildi";
             Console.WriteLine(_sahisCariService.Update(updateIcin).Message);
-            base.EkranaYaz(_sahisCariService.GetById(updateIcin.CariId).Data);
+            base.EkranaYaz(_sahisCariService.GetById(updateIcin.Id).Data);
             Console.WriteLine(_sahisCariService.Delete(updateIcin).Message);
             #endregion
 

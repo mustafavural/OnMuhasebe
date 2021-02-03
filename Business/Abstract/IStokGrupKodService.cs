@@ -1,18 +1,14 @@
-﻿using Core.Utilities.Result;
+﻿using Core.Business.Abstract;
+using Core.Utilities.Result;
 using Entities.Concrete;
 using System.Collections.Generic;
 
 namespace Business.Abstract
 {
-    public interface IStokGrupKodService
+    public interface IStokGrupKodService : ICRUD<StokGrupKod>
     {
-        IDataResult<StokGrupKod> GetById(int stokGrupKodId);
-        IDataResult<StokGrupKod> GetByTur(string stokGrupKodTur);
         IDataResult<StokGrupKod> GetByAd(string stokGrupKodAd);
-        IDataResult<List<StokGrupKod>> GetList();
+        IDataResult<List<StokGrupKod>> GetListByTur(string stokGrupKodTur);
         IDataResult<List<StokGrupKod>> GetListByStok(int stokId);
-        IResult Add(StokGrupKod stokGrupKod);
-        IResult Update(StokGrupKod stokGrupKod);
-        IResult Delete(StokGrupKod stokGrupKod);
     }
 }
