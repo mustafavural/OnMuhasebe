@@ -20,6 +20,14 @@ namespace DataAccess.Concrete.EntityFramework.Context
             modelBuilder.Entity<Evrak>().ToTable("Evraklar");
             modelBuilder.Entity<Fatura>().ToTable("Faturalar").HasBaseType<Evrak>();
             modelBuilder.Entity<Irsaliye>().ToTable("Irsaliyeler").HasBaseType<Evrak>();
+
+            modelBuilder.Entity<DegerliKagit>().ToTable("DegerliKagitlar");
+            modelBuilder.Entity<Cek>().ToTable("Cekler").HasBaseType<DegerliKagit>();
+            modelBuilder.Entity<Senet>().ToTable("Senetler").HasBaseType<DegerliKagit>();
+            modelBuilder.Entity<MusteriCek>().ToTable("MusteriCekler").HasBaseType<Cek>();
+            modelBuilder.Entity<BorcCek>().ToTable("BorcCekler").HasBaseType<Cek>();
+            modelBuilder.Entity<MusteriSenet>().ToTable("MusteriSenetler").HasBaseType<Senet>();
+            modelBuilder.Entity<BorcSenet>().ToTable("BorcSenetler").HasBaseType<Senet>();
         }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<User> Users { get; set; }
@@ -34,5 +42,15 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<CariGrup> CariGruplar { get; set; }
         public DbSet<CariGrupKod> CariGrupKodlar { get; set; }
         public DbSet<CariHareket> CariHareketler { get; set; }
+        public DbSet<Evrak> Evraklar { get; set; }
+        public DbSet<Fatura> Faturalar { get; set; }
+        public DbSet<Irsaliye> Irsaliyeler { get; set; }
+        public DbSet<DegerliKagit> DegerliKagitlar { get; set; }
+        public DbSet<Cek> Cekler { get; set; }
+        public DbSet<Senet> Senetler { get; set; }
+        public DbSet<BorcCek> BorcCekler { get; set; }
+        public DbSet<BorcSenet> BorcSenetler { get; set; }
+        public DbSet<MusteriCek> MusteriCekler { get; set; }
+        public DbSet<MusteriSenet> MusteriSenetler { get; set; }
     }
 }

@@ -7,6 +7,10 @@ namespace Business.ValidationRules.FluentValidation.Cariler
     {
         public SirketCariValidator()
         {
+            RuleFor(p => p.Kod).NotEmpty();
+            RuleFor(p => p.Unvan).NotEmpty();
+            RuleFor(p => p.Unvan).Length(3, 150);
+            RuleFor(p => p.VergiDairesi).NotEmpty();
             RuleFor(p => p.VergiNo).NotEmpty();
             RuleFor(p => p.VergiNo).Length(10);
         }
