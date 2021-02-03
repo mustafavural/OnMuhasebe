@@ -14,8 +14,20 @@ namespace ConsoleUI.EntityTest
         {
             this._sirketCariService = sirketCariService;
             this._sahisCariService = sahisCariService;
-            this._sirketCari = new SirketCari { Kod = "06-001", Unvan = "Symantec", VergiDairesi = "Sincan", VergiNo = "1234567890" };
-            this._sahisCari = new SahisCari { Kod = "35-001", Unvan = "Seyhan VURAL", VergiDairesi = "Alsancak", TCNo = "22178323378" };
+            this._sirketCari = new SirketCari
+            {
+                Kod = "06-001",
+                Unvan = "Symantec",
+                VergiDairesi = "Sincan",
+                VergiNo = "1234567890"
+            };
+            this._sahisCari = new SahisCari
+            {
+                Kod = "35-001",
+                Unvan = "Seyhan VURAL",
+                VergiDairesi = "Alsancak",
+                TCNo = "22178323378"
+            };
         }
         public void SirketTestYap()
         {
