@@ -3,7 +3,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Abstract
 {
-    public interface IFaturaDal : IEntityRepository<Fatura>
+    public interface IBankaHesapDal : IEntityRepository<BankaHesap>
     {
 
     }

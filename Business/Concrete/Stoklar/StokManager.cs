@@ -79,7 +79,7 @@ namespace Business.Concrete
             var result = _stokGrupKodService.GetByAd(grupKodAd) == null;
             if (result)
             {
-                return new ErrorDataResult<List<Stok>>(Messages.ErrorMessages.StokGrupKodAdNotExists);
+                return new ErrorDataResult<List<Stok>>(Messages.ErrorMessages.StokGrupAdNotExists);
             }
             return new SuccessDataResult<List<Stok>>();
         }
@@ -92,12 +92,12 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<List<Stok>>();
         }
-        private IDataResult<List<Stok>> CheckIfListValidGrupKodId(int grupKodId)
+        private IDataResult<List<Stok>> CheckIfListValidGrupId(int grupId)
         {
-            var result = _stokGrupKodService.GetById(grupKodId) == null;
+            var result = _stokGrupKodService.GetById(grupId) == null;
             if (result)
             {
-                return new ErrorDataResult<List<Stok>>(Messages.ErrorMessages.StokGrupKodNotExists);
+                return new ErrorDataResult<List<Stok>>(Messages.ErrorMessages.StokGrupNotExists);
             }
             return new SuccessDataResult<List<Stok>>();
         }
@@ -181,7 +181,7 @@ namespace Business.Concrete
         public IDataResult<List<Stok>> GetListByGrupKod(int grupKodId)
         {
             IResult result = BusinessRules.Run(
-                CheckIfListValidGrupKodId(grupKodId));
+                CheckIfListValidGrupId(grupKodId));
             if (result != null)
                 return (IDataResult<List<Stok>>)result;
 

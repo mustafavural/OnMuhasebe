@@ -9,23 +9,16 @@ using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Business.Concrete
 {
     public class SahisCariManager : CariManager<SahisCari>, ISahisCariService
     {
         ICariDal<SahisCari> _sahisCariDal;
-        ICariGrupService _cariGrupService;
-        ICariGrupKodService _cariGrupKodService;
         public SahisCariManager(ICariDal<SahisCari> sahisCariDal, ICariGrupService cariGrupService, ICariGrupKodService cariGrupKodService)
-                : base(sahisCariDal)
+                : base(sahisCariDal, cariGrupKodService, cariGrupService)
         {
             _sahisCariDal = sahisCariDal;
-            _cariGrupService = cariGrupService;
-            _cariGrupKodService = cariGrupKodService;
         }
 
         #region BusinessRules
@@ -56,15 +49,6 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
-        private IResult CheckIfListValidGrupAd(string grupKodAd)
-        {
-            var result = _cariGrupKodService.GetByAd(grupKodAd) == null;
-            if (result)
-            {
-                return new ErrorResult(Messages.ErrorMessages.CariGrupKodAdNotExists);
-            }
-            return new SuccessResult();
-        }
         #endregion
 
         [PerformanceAspect(1)]
@@ -81,21 +65,6 @@ namespace Business.Concrete
         }
 
         [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
-        public IDataResult<List<SahisCari>> GetListByGrupAd(string grupKodAd)
-        {
-            IResult result = BusinessRules.Run(
-                CheckIfListValidGrupAd(grupKodAd));
-            if (result != null)
-                return (IDataResult<List<SahisCari>>)result;
-
-            return new SuccessDataResult<List<SahisCari>>(_sahisCariDal.GetAll(p =>
-            _cariGrupService.GetListByCariGrupKodId(
-                _cariGrupKodService.GetByAd(grupKodAd).Data.Id).Data.Select(s => s.Id).Contains(p.Id)).ToList());
-        }
-
-        [PerformanceAspect(1)]
         [LogAspect()]
         [ValidationAspect(typeof(SahisCariValidator))]
         [CacheRemoveAspect("ISahisCariService.Get")]
@@ -107,7 +76,7 @@ namespace Business.Concrete
                 return result;
 
             _sahisCariDal.Add(cari);
-            return new SuccessResult(Messages.SuccessMessages.SahisCariInserted);
+            return new SuccessResult(Messages.SuccessMessages.CariInserted);
         }
 
         [PerformanceAspect(1)]
@@ -122,7 +91,7 @@ namespace Business.Concrete
                 return result;
 
             _sahisCariDal.Delete(cari);
-            return new SuccessResult(Messages.SuccessMessages.SahisCariDeleted);
+            return new SuccessResult(Messages.SuccessMessages.CariDeleted);
         }
 
         [PerformanceAspect(1)]
@@ -137,7 +106,7 @@ namespace Business.Concrete
                 return result;
 
             _sahisCariDal.Update(cari);
-            return new SuccessResult(Messages.SuccessMessages.SahisCariUpdated);
+            return new SuccessResult(Messages.SuccessMessages.CariUpdated);
         }
     }
 }

@@ -13,8 +13,7 @@ namespace Core.Aspects.Autofac.Logging
     {
         private LoggerServiceBase _loggerServiceBase;
         public LogAspect()
-        {
-            //TODO:koda config dosyası ile dışardan ayarlat...
+        {//TODO:koda config dosyası ile dışardan ayarlat...
             Type loggerService = typeof(DatabaseLogger);
             if (loggerService.BaseType != typeof(LoggerServiceBase))
             {

@@ -15,7 +15,8 @@ namespace Business.Concrete
     {
         IDegerliKagitDal<TEntity> _senetDal;
 
-        public SenetManager(IDegerliKagitDal<TEntity> senetDal) : base(senetDal)
+        public SenetManager(IDegerliKagitDal<TEntity> senetDal)
+            : base(senetDal)
         {
             _senetDal = senetDal;
         }

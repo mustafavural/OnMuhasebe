@@ -26,12 +26,22 @@ namespace Business.Concrete
         }
 
         #region BusinessRules
+        private IResult CheckIfValidAdding(StokGrupKod stokGrupKod)
+        {
+            var result = _stokGrupKodDal.Get(p => p.Ad == stokGrupKod.Ad &&
+                                               p.Tur == stokGrupKod.Tur) != null;
+            if (result)
+            {
+                return new ErrorResult(Messages.ErrorMessages.StokGrupAlreadyExists);
+            }
+            return new SuccessResult();
+        }
         private IResult CheckIfValidId(int stokGrupKodId)
         {
             var result = _stokGrupKodDal.Get(p => p.Id == stokGrupKodId) == null;
             if (result)
             {
-                return new ErrorResult(Messages.ErrorMessages.StokGrupKodNotExists);
+                return new ErrorResult(Messages.ErrorMessages.StokGrupNotExists);
             }
             return new SuccessResult();
         }
@@ -41,7 +51,7 @@ namespace Business.Concrete
             var result = _stokGrupKodDal.Get(p => p.Ad == stokGrupKodAd) == null;
             if (result)
             {
-                return new ErrorResult(Messages.ErrorMessages.StokGrupKodAdNotExists);
+                return new ErrorResult(Messages.ErrorMessages.StokGrupAdNotExists);
             }
             return new SuccessResult();
         }
@@ -51,7 +61,7 @@ namespace Business.Concrete
             var result = _stokGrupKodDal.GetAll(p => p.Tur == stokGrupKodTur) == null;
             if (result)
             {
-                return new ErrorResult(Messages.ErrorMessages.StokGrupKodTurNotExists);
+                return new ErrorResult(Messages.ErrorMessages.StokGrupTurNotExists);
             }
             return new SuccessResult();
         }
@@ -62,17 +72,6 @@ namespace Business.Concrete
             if (result)
             {
                 return new ErrorResult(Messages.ErrorMessages.StokGrupAssignmentNotExists);
-            }
-            return new SuccessResult();
-        }
-
-        private IResult CheckIfValidAdding(StokGrupKod stokGrupKod)
-        {
-            var result = _stokGrupKodDal.Get(p => p.Ad == stokGrupKod.Ad &&
-                                               p.Tur == stokGrupKod.Tur) != null;
-            if (result)
-            {
-                return new ErrorResult(Messages.ErrorMessages.StokGrupKodAlreadyExists);
             }
             return new SuccessResult();
         }
@@ -151,7 +150,7 @@ namespace Business.Concrete
                 return result;
 
             _stokGrupKodDal.Add(stokGrupKod);
-            return new SuccessResult(Messages.SuccessMessages.StokGrupKodAdded);
+            return new SuccessResult(Messages.SuccessMessages.StokGrupInserted);
         }
 
         [PerformanceAspect(1)]
@@ -166,7 +165,7 @@ namespace Business.Concrete
                 return result;
 
             _stokGrupKodDal.Delete(stokGrupKod);
-            return new SuccessResult(Messages.SuccessMessages.StokGrupKodDeleted);
+            return new SuccessResult(Messages.SuccessMessages.StokGrupDeleted);
         }
 
         [PerformanceAspect(1)]
@@ -181,7 +180,7 @@ namespace Business.Concrete
                 return result;
 
             _stokGrupKodDal.Update(stokGrupKod);
-            return new SuccessResult(Messages.SuccessMessages.StokGrupKodUpdated);
+            return new SuccessResult(Messages.SuccessMessages.StokGrupUpdated);
         }
     }
 }

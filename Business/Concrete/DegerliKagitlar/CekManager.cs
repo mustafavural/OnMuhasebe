@@ -16,7 +16,8 @@ namespace Business.Concrete
     {
         IDegerliKagitDal<TEntity> _cekDal;
 
-        public CekManager(IDegerliKagitDal<TEntity> cekDal) : base(cekDal)
+        public CekManager(IDegerliKagitDal<TEntity> cekDal)
+            : base(cekDal)
         {
             _cekDal = cekDal;
         }
@@ -58,7 +59,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [CacheAspect()]
         [LogAspect()]
-        public IDataResult<List<TEntity>> GetByBankaId(int bankaId)
+        public IDataResult<List<TEntity>> GetListByBankaId(int bankaId)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidBanka(bankaId));

@@ -5,7 +5,8 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EFEvrakDal : EFEntityRepositoryBase<Evrak, OnMuhasebeContext>, IEvrakDal
+    public class EFEvrakDal<TEntity> : EFEntityRepositoryBase<TEntity, OnMuhasebeContext>, IEvrakDal<TEntity>
+        where TEntity : Evrak, new()
     {
 
     }

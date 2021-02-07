@@ -8,17 +8,22 @@ using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Business.Concrete
 {
     public class CariManager<TEntity> : ICariService<TEntity>
         where TEntity : Cari, new()
     {
-        ICariDal<TEntity> _cariDal;
+        private ICariDal<TEntity> _cariDal;
+        private ICariGrupService _cariGrupService;
+        private ICariGrupKodService _cariGrupKodService;
 
-        public CariManager(ICariDal<TEntity> cariDal)
+        public CariManager(ICariDal<TEntity> cariDal, ICariGrupKodService cariGrupKodService, ICariGrupService cariGrupService)
         {
             _cariDal = cariDal;
+            _cariGrupService = cariGrupService;
+            _cariGrupKodService = cariGrupKodService;
         }
 
         #region BusinessRules
@@ -55,6 +60,15 @@ namespace Business.Concrete
             if (result)
             {
                 return new ErrorResult(Messages.ErrorMessages.CariVergiDairesiNotExists);
+            }
+            return new SuccessResult();
+        }
+        private IResult CheckIfListValidGrupAd(string grupKodAd)
+        {
+            var result = _cariGrupKodService.GetByAd(grupKodAd) == null;
+            if (result)
+            {
+                return new ErrorResult(Messages.ErrorMessages.CariGrupAdNotExists);
             }
             return new SuccessResult();
         }
@@ -110,6 +124,21 @@ namespace Business.Concrete
                 return (IDataResult<List<TEntity>>)result;
 
             return new SuccessDataResult<List<TEntity>>(_cariDal.GetAll(p => p.VergiDairesi == vergiDairesi));
+        }
+
+        [PerformanceAspect(1)]
+        [CacheAspect()]
+        [LogAspect()]
+        public IDataResult<List<TEntity>> GetListByGrupAd(string grupKodAd)
+        {
+            IResult result = BusinessRules.Run(
+                CheckIfListValidGrupAd(grupKodAd));
+            if (result != null)
+                return (IDataResult<List<TEntity>>)result;
+
+            return new SuccessDataResult<List<TEntity>>(_cariDal.GetAll(p =>
+            _cariGrupService.GetListByCariGrupKodId(
+                _cariGrupKodService.GetByAd(grupKodAd).Data.Id).Data.Select(s => s.Id).Contains(p.Id)).ToList());
         }
 
         [PerformanceAspect(1)]

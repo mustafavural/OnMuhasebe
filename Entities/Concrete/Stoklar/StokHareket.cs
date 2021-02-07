@@ -7,7 +7,7 @@ namespace Entities.Concrete
     {
         public int Id { get; set; }
         public int StokId { get; set; }
-        public int FaturaId { get; set; }
+        public int EvrakId { get; set; }
         public int DepoId { get; set; }
         public decimal GirenMiktar { get; set; }
         public decimal CikanMiktar { get; set; }

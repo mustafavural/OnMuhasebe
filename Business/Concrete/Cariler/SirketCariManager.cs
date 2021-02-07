@@ -9,23 +9,16 @@ using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Business.Concrete
 {
     public class SirketCariManager : CariManager<SirketCari>, ISirketCariService
     {
         private ICariDal<SirketCari> _sirketCariDal;
-        private ICariGrupService _cariGrupService;
-        private ICariGrupKodService _cariGrupKodService;
         public SirketCariManager(ICariDal<SirketCari> sirketCariDal, ICariGrupKodService cariGrupKodService, ICariGrupService cariGrupService)
-                : base(sirketCariDal)
+                : base(sirketCariDal, cariGrupKodService, cariGrupService)
         {
             _sirketCariDal = sirketCariDal;
-            _cariGrupService = cariGrupService;
-            _cariGrupKodService = cariGrupKodService;
         }
 
         #region BusinessRules
@@ -56,15 +49,6 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
-        private IResult CheckIfListValidGrupAd(string grupKodAd)
-        {
-            var result = _cariGrupKodService.GetByAd(grupKodAd) == null;
-            if (result)
-            {
-                return new ErrorResult(Messages.ErrorMessages.CariGrupKodAdNotExists);
-            }
-            return new SuccessResult();
-        }
         #endregion
 
         [PerformanceAspect(1), CacheAspect(), LogAspect()]
@@ -76,19 +60,6 @@ namespace Business.Concrete
                 return (IDataResult<SirketCari>)result;
 
             return new SuccessDataResult<SirketCari>(_sirketCariDal.Get(p => p.VergiNo == VergiNo));
-        }
-
-        [PerformanceAspect(1), CacheAspect(), LogAspect()]
-        public IDataResult<List<SirketCari>> GetListByGrupAd(string grupKodAd)
-        {
-            IResult result = BusinessRules.Run(
-                CheckIfListValidGrupAd(grupKodAd));
-            if (result != null)
-                return (IDataResult<List<SirketCari>>)result;
-
-            return new SuccessDataResult<List<SirketCari>>(_sirketCariDal.GetAll(p =>
-            _cariGrupService.GetListByCariGrupKodId(
-                _cariGrupKodService.GetByAd(grupKodAd).Data.Id).Data.Select(s => s.Id).Contains(p.Id)).ToList());
         }
 
         [PerformanceAspect(1)]
@@ -103,7 +74,7 @@ namespace Business.Concrete
                 return result;
 
             _sirketCariDal.Add(cari);
-            return new SuccessResult(Messages.SuccessMessages.SirketCariInserted);
+            return new SuccessResult(Messages.SuccessMessages.CariInserted);
         }
 
         [PerformanceAspect(1)]
@@ -118,7 +89,7 @@ namespace Business.Concrete
                 return result;
 
             _sirketCariDal.Delete(cari);
-            return new SuccessResult(Messages.SuccessMessages.SirketCariDeleted);
+            return new SuccessResult(Messages.SuccessMessages.CariDeleted);
         }
 
         [PerformanceAspect(1)]
@@ -133,7 +104,7 @@ namespace Business.Concrete
                 return result;
 
             _sirketCariDal.Update(cari);
-            return new SuccessResult(Messages.SuccessMessages.SirketCariUpdated);
+            return new SuccessResult(Messages.SuccessMessages.CariUpdated);
         }
     }
 }

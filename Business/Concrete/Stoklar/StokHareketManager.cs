@@ -64,12 +64,12 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
-        private IResult CheckIfValidFaturaId(int faturaId)
+        private IResult CheckIfValidEvrakId(int evrakId)
         {
-            var error = _stokHareketDal.Get(p => p.FaturaId == faturaId) == null;
+            var error = _stokHareketDal.Get(p => p.EvrakId == evrakId) == null;
             if (error)
             {
-                return new ErrorResult(Messages.ErrorMessages.FaturaNotExists);
+                return new ErrorResult(Messages.ErrorMessages.EvrakNotExists);
             }
             return new SuccessResult();
         }
@@ -104,14 +104,14 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [LogAspect()]
         [CacheAspect()]
-        public IDataResult<List<StokHareket>> GetByFaturaId(int faturaId)
+        public IDataResult<List<StokHareket>> GetByEvrakId(int evrakId)
         {
             IResult result = BusinessRules.Run(
-                CheckIfValidFaturaId(faturaId));
+                CheckIfValidEvrakId(evrakId));
             if (result != null)
                 return (IDataResult<List<StokHareket>>)result;
 
-            return new SuccessDataResult<List<StokHareket>>(_stokHareketDal.GetAll(p => p.FaturaId == faturaId));
+            return new SuccessDataResult<List<StokHareket>>(_stokHareketDal.GetAll(p => p.EvrakId == evrakId));
         }
 
         [PerformanceAspect(1)]
@@ -162,7 +162,7 @@ namespace Business.Concrete
                 return result;
 
             _stokHareketDal.Add(stokHareket);
-            return new SuccessResult(Messages.SuccessMessages.StockActivityAdded);
+            return new SuccessResult(Messages.SuccessMessages.StockActivityInserted);
         }
 
         [PerformanceAspect(1)]

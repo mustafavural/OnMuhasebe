@@ -13,9 +13,17 @@ namespace DataAccess.Concrete.EntityFramework.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Stok>().ToTable("Stoklar");
+            modelBuilder.Entity<StokGrup>().ToTable("StokGruplar");
+            modelBuilder.Entity<StokGrupKod>().ToTable("StokGrupKodlar");
+            modelBuilder.Entity<StokHareket>().ToTable("StokHareketler");
+
             modelBuilder.Entity<Cari>().ToTable("Cariler");
             modelBuilder.Entity<SahisCari>().ToTable("SahisCariler").HasBaseType<Cari>();
             modelBuilder.Entity<SirketCari>().ToTable("SirketCariler").HasBaseType<Cari>();
+            modelBuilder.Entity<CariGrup>().ToTable("CariGruplar");
+            modelBuilder.Entity<CariGrupKod>().ToTable("CariGrupKodlar");
+            modelBuilder.Entity<CariHareket>().ToTable("CariHareketler");
 
             modelBuilder.Entity<Evrak>().ToTable("Evraklar");
             modelBuilder.Entity<Fatura>().ToTable("Faturalar").HasBaseType<Evrak>();
@@ -28,6 +36,14 @@ namespace DataAccess.Concrete.EntityFramework.Context
             modelBuilder.Entity<BorcCek>().ToTable("BorcCekler").HasBaseType<Cek>();
             modelBuilder.Entity<MusteriSenet>().ToTable("MusteriSenetler").HasBaseType<Senet>();
             modelBuilder.Entity<BorcSenet>().ToTable("BorcSenetler").HasBaseType<Senet>();
+
+            modelBuilder.Entity<Personel>().ToTable("Personeller");
+            modelBuilder.Entity<PersonelHareket>().ToTable("PersonelHareketler");
+
+            modelBuilder.Entity<Banka>().ToTable("Bankalar");
+            modelBuilder.Entity<BankaSube>().ToTable("BankaSubeler");
+            modelBuilder.Entity<BankaHesap>().ToTable("BankaHesaplar");
+            modelBuilder.Entity<BankaHesapHareket>().ToTable("BankaHesapHareketler");
         }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<User> Users { get; set; }

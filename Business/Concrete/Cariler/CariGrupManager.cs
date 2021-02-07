@@ -36,7 +36,7 @@ namespace Business.Concrete
             var result = _cariGrupDal.GetAll(p => p.CariGrupKodId == cariGrupKodId) == null;
             if (result)
             {
-                return new ErrorResult(Messages.ErrorMessages.CariGrupKodNotExists);
+                return new ErrorResult(Messages.ErrorMessages.CariGrupNotExists);
             }
             return new SuccessResult();
         }
@@ -121,7 +121,7 @@ namespace Business.Concrete
                 return result;
 
             _cariGrupDal.Add(cariGrup);
-            return new SuccessResult(Messages.SuccessMessages.CariAddedToGrup);
+            return new SuccessResult(Messages.SuccessMessages.CariInsertedToGrup);
         }
 
         [PerformanceAspect(1)]

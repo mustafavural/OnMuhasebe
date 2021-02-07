@@ -31,7 +31,7 @@ namespace Business.Concrete
             var result = _cariGrupKodDal.Get(p => p.Id == cariGrupKodId) == null;
             if (result)
             {
-                return new ErrorResult(Messages.ErrorMessages.CariGrupKodNotExists);
+                return new ErrorResult(Messages.ErrorMessages.CariGrupNotExists);
             }
             return new SuccessResult();
         }
@@ -41,7 +41,7 @@ namespace Business.Concrete
             var result = _cariGrupKodDal.Get(p => p.Ad == cariGrupKodAd) == null;
             if (result)
             {
-                return new ErrorResult(Messages.ErrorMessages.CariGrupKodAdNotExists);
+                return new ErrorResult(Messages.ErrorMessages.CariGrupAdNotExists);
             }
             return new SuccessResult();
         }
@@ -51,7 +51,7 @@ namespace Business.Concrete
             var result = _cariGrupKodDal.GetAll(p => p.Tur == cariGrupKodTur) == null;
             if (result)
             {
-                return new ErrorResult(Messages.ErrorMessages.CariGrupKodTurNotExists);
+                return new ErrorResult(Messages.ErrorMessages.CariGrupTurNotExists);
             }
             return new SuccessResult();
         }
@@ -72,7 +72,7 @@ namespace Business.Concrete
                                                p.Tur == cariGrupKod.Tur) != null;
             if (result)
             {
-                return new ErrorResult(Messages.ErrorMessages.CariGrupKodAlreadyExists);
+                return new ErrorResult(Messages.ErrorMessages.CariGrupAlreadyExists);
             }
             return new SuccessResult();
         }
@@ -151,7 +151,7 @@ namespace Business.Concrete
                 return result;
 
             _cariGrupKodDal.Add(cariGrupKod);
-            return new SuccessResult(Messages.SuccessMessages.CariGrupKodAdded);
+            return new SuccessResult(Messages.SuccessMessages.CariGrupInserted);
         }
 
         [PerformanceAspect(1)]
@@ -166,7 +166,7 @@ namespace Business.Concrete
                 return result;
 
             _cariGrupKodDal.Delete(cariGrupKod);
-            return new SuccessResult(Messages.SuccessMessages.CariGrupKodUpdated);
+            return new SuccessResult(Messages.SuccessMessages.CariGrupUpdated);
         }
 
         [PerformanceAspect(1)]
@@ -181,7 +181,7 @@ namespace Business.Concrete
                 return result;
 
             _cariGrupKodDal.Update(cariGrupKod);
-            return new SuccessResult(Messages.SuccessMessages.CariGrupKodDeleted);
+            return new SuccessResult(Messages.SuccessMessages.CariGrupDeleted);
         }
     }
 }

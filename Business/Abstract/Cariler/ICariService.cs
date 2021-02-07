@@ -5,10 +5,12 @@ using System.Collections.Generic;
 
 namespace Business.Abstract
 {
-    public interface ICariService<TEntity> : IGet<TEntity> where TEntity : Cari, new()
+    public interface ICariService<TEntity> : IGet<TEntity>
+        where TEntity : Cari, new()
     {
         IDataResult<TEntity> GetByKod(string cariKod);
         IDataResult<TEntity> GetByUnvan(string cariUnvan);
         IDataResult<List<TEntity>> GetListByVergiDairesi(string vergiDairesi);
+        IDataResult<List<TEntity>> GetListByGrupAd(string grupKodAd);
     }
 }

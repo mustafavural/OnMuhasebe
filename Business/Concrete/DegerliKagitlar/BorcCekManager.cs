@@ -1,4 +1,10 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Logging;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -6,44 +12,141 @@ using System;
 using System.Collections.Generic;
 
 namespace Business.Concrete
-{//TODO:implementasyon eksik
+{
     public class BorcCekManager : CekManager<BorcCek>, IBorcCekService
     {
         IDegerliKagitDal<BorcCek> _borcCekDal;
 
-        public BorcCekManager(IDegerliKagitDal<BorcCek> borcCekDal) : base(borcCekDal)
+        public BorcCekManager(IDegerliKagitDal<BorcCek> borcCekDal)
+            : base(borcCekDal)
         {
             _borcCekDal = borcCekDal;
         }
 
-        public IDataResult<List<BorcCek>> GetByCariIdVerilen(int cariIdVerilen)
+        #region BusinessRules
+        private IResult CheckIfValidAdding(string kod)
         {
-            throw new NotImplementedException();
+            var result = _borcCekDal.Get(p => p.Kod == kod) != null;
+            if (result)
+            {
+                return new ErrorResult(Messages.ErrorMessages.DegerliKagitAlreadyExists);
+            }
+            return new SuccessResult();
         }
 
-        public IDataResult<List<BorcCek>> GetByCikisTarihi(DateTime tarih)
+        private IResult CheckIfValidId(int Id)
         {
-            throw new NotImplementedException();
+            var result = _borcCekDal.Get(p => p.Id == Id) == null;
+            if (result)
+            {
+                return new ErrorResult(Messages.ErrorMessages.DegerliKagitNotExists);
+            }
+            return new SuccessResult();
         }
 
-        public IDataResult<List<BorcCek>> GetByHesapId(int hesapId)
+        private IResult CheckIfValidCariId(int cariIdVerilen)
         {
-            throw new NotImplementedException();
+            var result = _borcCekDal.Get(p => p.CariIdVerilen == cariIdVerilen) == null;
+            if (result)
+            {
+                return new ErrorResult(Messages.ErrorMessages.CariNotExists);
+            }
+            return new SuccessResult();
         }
 
+        private IResult CheckIfValidTarih(DateTime tarih)
+        {
+            var result = _borcCekDal.Get(p => p.CikisTarihi == tarih) == null;
+            if (result)
+            {
+                return new ErrorResult(Messages.ErrorMessages.DegerliKagitDateNotExists);
+            }
+            return new SuccessResult();
+        }
+        #endregion
+
+        [PerformanceAspect(1)]
+        [CacheAspect()]
+        [LogAspect()]
+        public IDataResult<List<BorcCek>> GetListByCariIdVerilen(int cariIdVerilen)
+        {
+            IResult result = BusinessRules.Run(
+                CheckIfValidCariId(cariIdVerilen));
+            if (result != null)
+                return (IDataResult<List<BorcCek>>)result;
+
+            return new SuccessDataResult<List<BorcCek>>(_borcCekDal.GetAll(p => p.CariIdVerilen == cariIdVerilen));
+        }
+
+        [PerformanceAspect(1)]
+        [CacheAspect()]
+        [LogAspect()]
+        public IDataResult<List<BorcCek>> GetListByCikisTarihi(DateTime tarih)
+        {
+            IResult result = BusinessRules.Run(
+                CheckIfValidTarih(tarih));
+            if (result != null)
+                return (IDataResult<List<BorcCek>>)result;
+
+            return new SuccessDataResult<List<BorcCek>>(_borcCekDal.GetAll(p => p.CikisTarihi == tarih));
+        }
+
+        [PerformanceAspect(1)]
+        [CacheAspect()]
+        [LogAspect()]
+        public IDataResult<List<BorcCek>> GetListByHesapId(int hesapId)
+        {
+            IResult result = BusinessRules.Run(
+                CheckIfValidId(hesapId));
+            if (result != null)
+                return (IDataResult<List<BorcCek>>)result;
+
+            return new SuccessDataResult<List<BorcCek>>(_borcCekDal.GetAll(p => p.HesapId == hesapId));
+        }
+
+        [PerformanceAspect(1)]
+        [LogAspect()]
+        [ValidationAspect(typeof(BorcCekValidator))]
+        [CacheRemoveAspect("IBorcCekService.Get")]
         public IResult Add(BorcCek entity)
         {
-            throw new NotImplementedException();
+            IResult result = BusinessRules.Run(
+                CheckIfValidAdding(entity.Kod));
+            if (result != null)
+                return result;
+
+            _borcCekDal.Add(entity);
+            return new SuccessResult(Messages.SuccessMessages.DegerliKagitInserted);
         }
 
+        [PerformanceAspect(1)]
+        [LogAspect()]
+        [ValidationAspect(typeof(BorcCekValidator))]
+        [CacheRemoveAspect("IBorcCekService.Get")]
         public IResult Delete(BorcCek entity)
         {
-            throw new NotImplementedException();
+            IResult result = BusinessRules.Run(
+                CheckIfValidId(entity.Id));
+            if (result != null)
+                return result;
+
+            _borcCekDal.Delete(entity);
+            return new SuccessResult(Messages.SuccessMessages.DegerliKagitDeleted);
         }
 
+        [PerformanceAspect(1)]
+        [LogAspect()]
+        [ValidationAspect(typeof(BorcCekValidator))]
+        [CacheRemoveAspect("IBorcCekService.Get")]
         public IResult Update(BorcCek entity)
         {
-            throw new NotImplementedException();
+            IResult result = BusinessRules.Run(
+                CheckIfValidId(entity.Id));
+            if (result != null)
+                return result;
+
+            _borcCekDal.Update(entity);
+            return new SuccessResult(Messages.SuccessMessages.DegerliKagitUpdated);
         }
     }
 }

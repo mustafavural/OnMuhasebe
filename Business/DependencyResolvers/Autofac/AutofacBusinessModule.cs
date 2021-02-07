@@ -19,6 +19,7 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<StokGrupKodManager>().As<IStokGrupKodService>();
             builder.RegisterType<StokHareketManager>().As<IStokHareketService>();
 
+            builder.RegisterType<CariManager<Cari>>().As<ICariService<Cari>>();
             builder.RegisterType<SahisCariManager>().As<ISahisCariService>();
             builder.RegisterType<SirketCariManager>().As<ISirketCariService>();
             builder.RegisterType<CariGrupManager>().As<ICariGrupService>();
@@ -54,8 +55,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EFCariGrupKodDal>().As<ICariGrupKodDal>();
             builder.RegisterType<EFCariHareketDal>().As<ICariHareketDal>();
 
-            builder.RegisterType<EFFaturaDal>().As<IFaturaDal>();
-            builder.RegisterType<EFIrsaliyeDal>().As<IIrsaliyeDal>();
+            builder.RegisterType<EFEvrakDal<Evrak>>().As<IEvrakDal<Evrak>>();
+            builder.RegisterType<EFEvrakDal<Fatura>>().As<IEvrakDal<Fatura>>();
+            builder.RegisterType<EFEvrakDal<Irsaliye>>().As<IEvrakDal<Irsaliye>>();
 
             builder.RegisterType<EFDegerliKagitDal<DegerliKagit>>().As<IDegerliKagitDal<DegerliKagit>>();
             builder.RegisterType<EFDegerliKagitDal<Cek>>().As<IDegerliKagitDal<Cek>>();

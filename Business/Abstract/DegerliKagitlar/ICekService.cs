@@ -4,9 +4,10 @@ using System.Collections.Generic;
 
 namespace Business.Abstract
 {
-    public interface ICekService<TEntity> : IDegerliKagitService<TEntity> where TEntity : Cek, new()
+    public interface ICekService<TEntity> : IDegerliKagitService<TEntity>
+        where TEntity : Cek, new()
     {
-        IDataResult<List<TEntity>> GetByBankaId(int bankaId);
+        IDataResult<List<TEntity>> GetListByBankaId(int bankaId);
         IDataResult<TEntity> GetByKod(string kod);
     }
 }

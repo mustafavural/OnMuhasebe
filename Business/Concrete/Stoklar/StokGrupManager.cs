@@ -22,6 +22,16 @@ namespace Business.Concrete
         }
 
         #region BusinessRules
+        private IResult CheckIfValidAdding(StokGrup stokGrup)
+        {
+            var result = _stokGrupDal.Get(p => p.StokGrupKodId == stokGrup.StokGrupKodId &&
+                                               p.StokId == stokGrup.StokId) != null;
+            if (result)
+            {
+                return new ErrorResult(Messages.ErrorMessages.StokGrupAssignmentAlreadyExists);
+            }
+            return new SuccessResult();
+        }
         private IResult CheckIfValidId(int stokGrupId)
         {
             var result = _stokGrupDal.Get(p => p.Id == stokGrupId) == null;
@@ -37,7 +47,7 @@ namespace Business.Concrete
             var result = _stokGrupDal.GetAll(p => p.StokGrupKodId == stokGrupKodId) == null;
             if (result)
             {
-                return new ErrorResult(Messages.ErrorMessages.StokGrupKodNotExists);
+                return new ErrorResult(Messages.ErrorMessages.StokGrupNotExists);
             }
             return new SuccessResult();
         }
@@ -48,17 +58,6 @@ namespace Business.Concrete
             if (result)
             {
                 return new ErrorResult(Messages.ErrorMessages.StokNotExists);
-            }
-            return new SuccessResult();
-        }
-
-        private IResult CheckIfValidAdding(StokGrup stokGrup)
-        {
-            var result = _stokGrupDal.Get(p => p.StokGrupKodId == stokGrup.StokGrupKodId &&
-                                               p.StokId == stokGrup.StokId) != null;
-            if (result)
-            {
-                return new ErrorResult(Messages.ErrorMessages.StokGrupAssignmentAlreadyExists);
             }
             return new SuccessResult();
         }
@@ -125,7 +124,7 @@ namespace Business.Concrete
                 return result;
 
             _stokGrupDal.Add(stokGrup);
-            return new SuccessResult(Messages.SuccessMessages.StokAddedToGrup);
+            return new SuccessResult(Messages.SuccessMessages.StokInsertedToGrup);
         }
 
         [PerformanceAspect(1)]

@@ -8,8 +8,8 @@ namespace Business.Abstract
 {
     public interface IBorcCekService : ICekService<BorcCek>, IADU<BorcCek>
     {
-        IDataResult<List<BorcCek>> GetByCariIdVerilen(int cariIdVerilen);
-        IDataResult<List<BorcCek>> GetByHesapId(int hesapId);
-        IDataResult<List<BorcCek>> GetByCikisTarihi(DateTime tarih);
+        IDataResult<List<BorcCek>> GetListByCariIdVerilen(int cariIdVerilen);
+        IDataResult<List<BorcCek>> GetListByHesapId(int hesapId);
+        IDataResult<List<BorcCek>> GetListByCikisTarihi(DateTime tarih);
     }
 }

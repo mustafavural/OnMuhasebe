@@ -38,7 +38,7 @@ namespace Business.Concrete
             var result = _degerliKagitDal.Get(p => p.Tutar == tutar) == null;
             if (result)
             {
-                return new ErrorResult(Messages.ErrorMessages.TutarIsInvalid);
+                return new ErrorResult(Messages.ErrorMessages.DegerliKagitTutarNotExists);
             }
             return new SuccessResult();
         }
@@ -48,7 +48,7 @@ namespace Business.Concrete
             var result = _degerliKagitDal.Get(p => p.Vade == vade) == null;
             if (result)
             {
-                return new ErrorResult(Messages.ErrorMessages.VadeIsInvalid);
+                return new ErrorResult(Messages.ErrorMessages.DegerliKagitVadeNotExists);
             }
             return new SuccessResult();
         }
