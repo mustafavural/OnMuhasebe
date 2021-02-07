@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Business.Abstract
 {
-    public interface ICariGrupKodService : ICRUD<CariGrupKod>
+    public interface ICariGrupKodService : IADU<CariGrupKod>, IGet<CariGrupKod>
     {
         IDataResult<CariGrupKod> GetByTur(string cariGrupKodTur);
         IDataResult<CariGrupKod> GetByAd(string cariGrupKodAd);

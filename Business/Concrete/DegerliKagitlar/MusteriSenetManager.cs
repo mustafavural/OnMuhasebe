@@ -1,20 +1,47 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Result;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Business.Concrete
-{
-    public class MusteriSenetManager : IMusteriSenetService
+{//TODO:implementasyon eksik
+    public class MusteriSenetManager : SenetManager<MusteriSenet>, IMusteriSenetService
     {
-        public IDataResult<MusteriSenet> GetById(int Id)
+        IDegerliKagitDal<MusteriSenet> _musteriSenetDal;
+
+        public MusteriSenetManager(IDegerliKagitDal<MusteriSenet> musteriSenetDal) : base(musteriSenetDal)
+        {
+            _musteriSenetDal = musteriSenetDal;
+        }
+
+        public IDataResult<List<MusteriSenet>> GetByAlisTarihi(DateTime tarih)
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<List<MusteriSenet>> GetList()
+        public IDataResult<List<MusteriSenet>> GetByAsilBorclu(string asilBorclu)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<List<MusteriSenet>> GetByCariIdCiroEden(int cariIdCiroEden)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<List<MusteriSenet>> GetByCariIdCiroEdilen(int cariIdCiroEdilen)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<List<MusteriSenet>> GetByCikisTarihi(DateTime tarih)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<List<MusteriSenet>> GetByHesapIdTahsileVerilen(int hesapIdTahsileVerilen)
         {
             throw new NotImplementedException();
         }

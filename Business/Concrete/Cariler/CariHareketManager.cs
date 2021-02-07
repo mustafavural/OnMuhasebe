@@ -18,9 +18,9 @@ namespace Business.Concrete
     public class CariHareketManager : ICariHareketService
     {
         ICariHareketDal _cariHareketDal;
-        ICariDal _cariDal;
+        ICariDal<Cari> _cariDal;
 
-        public CariHareketManager(ICariHareketDal cariHareketDal, ICariDal cariDal)
+        public CariHareketManager(ICariHareketDal cariHareketDal, ICariDal<Cari> cariDal)
         {
             _cariHareketDal = cariHareketDal;
             _cariDal = cariDal;

@@ -1,5 +1,6 @@
 using Business.Abstract;
 using Business.Concrete;
+using Business.Constants;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -51,7 +52,7 @@ namespace Business.UnitTest
                 },
                 new Stok
                 {
-                    Id=1,
+                    Id=3,
                     Kod = "767",
                     Barkod = "454423017890",
                     Ad = "TestStok3",
@@ -64,7 +65,7 @@ namespace Business.UnitTest
                 },
                 new Stok
                 {
-                    Id=1,
+                    Id=4,
                     Kod = "350",
                     Barkod = "78742131354556",
                     Ad = "TestStok4",
@@ -77,7 +78,7 @@ namespace Business.UnitTest
                 },
                 new Stok
                 {
-                    Id=1,
+                    Id=5,
                     Kod = "349",
                     Barkod = "12111223231333",
                     Ad = "TestStok5",
@@ -90,7 +91,10 @@ namespace Business.UnitTest
                 }
             };
             _moqStokDal.Setup(m => m.GetAll(null)).Returns(_dbStoklar);
-            _moqStokDal.Setup(m => m.Get(p=>p.Id==1)).Returns(_dbStoklar[0]);
+            _moqStokDal.Setup(m => m.Get(p => p.Id == 2)).Returns(_dbStoklar[1]);
+            _moqStokDal.Setup(m => m.Get(p => p.Kod == "183")).Returns(_dbStoklar[0]);
+            _moqStokDal.Setup(m => m.Get(p => p.Barkod == "12111223231333")).Returns(_dbStoklar[4]);
+            _moqStokDal.Setup(m => m.Get(p => p.Ad == "TestStok3")).Returns(_dbStoklar[2]);
         }
 
         [Test]
@@ -98,10 +102,11 @@ namespace Business.UnitTest
         {
             IStokService _stokService = new StokManager(_moqStokDal.Object, _moqStokGrupService.Object, _moqStokGrupKodService.Object);
 
-            IDataResult<List<Stok>> stoklar = _stokService.GetList();
+            var stoklar = _stokService.GetList();
 
             Assert.AreEqual(5, stoklar.Data.Count);
-            Assert.IsInstanceOf<List<Stok>>(stoklar);
+            Assert.IsInstanceOf<IDataResult<List<Stok>>>(stoklar);
+            Assert.IsInstanceOf<List<Stok>>(stoklar.Data);
             Assert.IsInstanceOf<Stok>(stoklar.Data[0]);
         }
 
@@ -110,12 +115,46 @@ namespace Business.UnitTest
         {
             IStokService _stokService = new StokManager(_moqStokDal.Object, _moqStokGrupService.Object, _moqStokGrupKodService.Object);
 
-            IDataResult<List<Stok>> stoklar = _stokService.GetList();
+            var stok = _stokService.GetById(2);
 
-            Assert.AreEqual(5, stoklar.Data.Count);
-            Assert.IsInstanceOf<IDataResult<List<Stok>>>(stoklar);
-            Assert.IsInstanceOf<List<Stok>>(stoklar.Data);
-            Assert.IsInstanceOf<Stok>(stoklar.Data[0]);
+            Assert.AreEqual(_dbStoklar[1], stok.Data);
+        }
+
+        [Test]
+        public void Dogru_Kod_ile_verilen_stogu_getir()
+        {
+            IStokService _stokService = new StokManager(_moqStokDal.Object, _moqStokGrupService.Object, _moqStokGrupKodService.Object);
+
+            var stok = _stokService.GetByKod("183");
+
+            Assert.AreEqual(_dbStoklar[0], stok.Data);
+        }
+        [Test]
+        public void Yanlýþ_Kod_ile_verilen_hatayý_getir()
+        {
+            IStokService _stokService = new StokManager(_moqStokDal.Object, _moqStokGrupService.Object, _moqStokGrupKodService.Object);
+
+            var stok = _stokService.GetByKod("2048");
+
+            Assert.AreEqual(Messages.ErrorMessages.StokKodNotExists, stok.Message);
+        }
+        [Test]
+        public void Barkod_ile_verilen_stogu_getir()
+        {
+            IStokService _stokService = new StokManager(_moqStokDal.Object, _moqStokGrupService.Object, _moqStokGrupKodService.Object);
+
+            var stok = _stokService.GetByBarkod("12111223231333");
+
+            Assert.AreEqual(_dbStoklar[4], stok.Data);
+        }
+        [Test]
+        public void Ad_ile_verilen_stogu_getir()
+        {
+            IStokService _stokService = new StokManager(_moqStokDal.Object, _moqStokGrupService.Object, _moqStokGrupKodService.Object);
+
+            var stok = _stokService.GetByAd("TestStok3");
+
+            Assert.AreEqual(_dbStoklar[2], stok.Data);
         }
     }
 }

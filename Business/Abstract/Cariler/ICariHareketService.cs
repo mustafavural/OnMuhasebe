@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Business.Abstract
 {
-    public interface ICariHareketService : ICRUD<CariHareket>
+    public interface ICariHareketService : IADU<CariHareket>, IGet<CariHareket>
     {
         IDataResult<decimal> GetTotalBorcOnCari(int cariId);
         IDataResult<decimal> GetTotalAlacakOnCari(int cariId);

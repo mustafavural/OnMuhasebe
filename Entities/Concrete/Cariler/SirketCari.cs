@@ -1,6 +1,4 @@
-﻿using Core.Entities;
-
-namespace Entities.Concrete
+﻿namespace Entities.Concrete
 {
     public class SirketCari : Cari
     {

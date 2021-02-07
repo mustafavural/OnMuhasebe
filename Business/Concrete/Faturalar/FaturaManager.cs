@@ -17,12 +17,12 @@ namespace Business.Concrete
     public class FaturaManager : IFaturaService
     {
         IFaturaDal _faturaDal;
+        ICariDal<Cari> _cariDal;
         ICariHareketService _cariHareketService;
-        IPersonelHareketService _personelHareketService;
-        ICariDal _cariDal;
         IPersonelService _personelService;
+        IPersonelHareketService _personelHareketService;
 
-        public FaturaManager(IFaturaDal faturaDal, ICariHareketService cariHareketService, IPersonelHareketService personelHareketService, ICariDal cariDal, IPersonelService personelService)
+        public FaturaManager(IFaturaDal faturaDal, ICariHareketService cariHareketService, IPersonelHareketService personelHareketService, ICariDal<Cari> cariDal, IPersonelService personelService)
         {
             _faturaDal = faturaDal;
             _cariHareketService = cariHareketService;

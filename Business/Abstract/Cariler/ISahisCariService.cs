@@ -5,12 +5,9 @@ using System.Collections.Generic;
 
 namespace Business.Abstract
 {
-    public interface ISahisCariService : ICRUD<SahisCari>
+    public interface ISahisCariService : ICariService<SahisCari>, IADU<SahisCari>
     {
-        IDataResult<SahisCari> GetByKod(string cariKod);
-        IDataResult<SahisCari> GetByUnvan(string cariUnvan);
         IDataResult<SahisCari> GetByTCNo(string TCNo);
-        IDataResult<List<SahisCari>> GetListByVergiDairesi(string vergiDairesi);
         IDataResult<List<SahisCari>> GetListByGrupAd(string grupKodAd);
     }
 }

@@ -2,7 +2,6 @@
 using Core.DependencyResolvers;
 using Core.Extensions;
 using Core.Utilities.IoC;
-using Core.Utilities.Security.JWT;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,12 +11,14 @@ namespace ConsoleUI
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        CarilerTest cariTest;
-        StoklarTest stokTest;
-        public Startup(CarilerTest cariTest, StoklarTest stokTest, IConfiguration configuration)
+        CarilerTest _cariTest;
+        StoklarTest _stokTest;
+        EvraklarTest _evraklarTest;
+        public Startup(CarilerTest cariTest, StoklarTest stokTest, EvraklarTest evraklarTest, IConfiguration configuration)
         {
-            this.cariTest = cariTest;
-            this.stokTest = stokTest;
+            this._cariTest = cariTest;
+            this._stokTest = stokTest;
+            this._evraklarTest = evraklarTest;
             this.Configuration = configuration;
         }
         public void ConfigureServices(IServiceCollection services)
@@ -44,16 +45,20 @@ namespace ConsoleUI
 
         public void Run()
         {
-            cariTest.SirketTestYap();
+            _cariTest.SirketTestYap();
             Console.WriteLine("Şirket Testi Bitti");
             Console.ReadLine();
 
-            cariTest.SahisTestYap();
+            _cariTest.SahisTestYap();
             Console.WriteLine("Şahıs Testi Bitti");
             Console.ReadLine();
 
-            stokTest.StokTestYap();
+            _stokTest.StokTestYap();
             Console.WriteLine("Stok Testi Bitti");
+            Console.ReadLine();
+
+            _evraklarTest.FaturaTestYap();
+            Console.WriteLine("Fatura Testi Bitti");
             Console.ReadLine();
         }
     }

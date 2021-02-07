@@ -24,6 +24,7 @@ namespace ConsoleUI
             builder.RegisterType<ConfigurationRoot>().As<IConfiguration>();
             builder.RegisterType<CarilerTest>().AsSelf();
             builder.RegisterType<StoklarTest>().AsSelf();
+            builder.RegisterType<EvraklarTest>().AsSelf();
 
             return builder.Build();
         }

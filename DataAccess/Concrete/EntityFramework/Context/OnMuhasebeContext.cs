@@ -48,9 +48,9 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<DegerliKagit> DegerliKagitlar { get; set; }
         public DbSet<Cek> Cekler { get; set; }
         public DbSet<Senet> Senetler { get; set; }
-        public DbSet<BorcCek> BorcCekler { get; set; }
+        public DbSet<BorcSenet> BorcCekler { get; set; }
         public DbSet<BorcSenet> BorcSenetler { get; set; }
-        public DbSet<MusteriCek> MusteriCekler { get; set; }
+        public DbSet<BorcSenet> MusteriCekler { get; set; }
         public DbSet<MusteriSenet> MusteriSenetler { get; set; }
     }
 }

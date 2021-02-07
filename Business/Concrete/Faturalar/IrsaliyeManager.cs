@@ -19,9 +19,9 @@ namespace Business.Concrete
         IIrsaliyeDal _irsaliyeDal;
         ICariHareketService _cariHareketService;
         IPersonelHareketService _personelHareketService;
-        ICariDal _cariDal;
+        ICariDal<Cari> _cariDal;
         IPersonelService _personelService;
-        public IrsaliyeManager(IIrsaliyeDal irsaliyeDal, ICariHareketService cariHareketService, IPersonelHareketService personelHareketService, ICariDal cariDal, IPersonelService personelService)
+        public IrsaliyeManager(IIrsaliyeDal irsaliyeDal, ICariHareketService cariHareketService, IPersonelHareketService personelHareketService, ICariDal<Cari> cariDal, IPersonelService personelService)
         {
             _irsaliyeDal = irsaliyeDal;
             _cariHareketService = cariHareketService;
@@ -40,7 +40,7 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
-        
+
         private IResult CheckIfValidNo(string irsaliyeNo)
         {
             var result = _irsaliyeDal.Get(p => p.IrsaliyeNo == irsaliyeNo) == null;
@@ -70,7 +70,7 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
-        
+
         private IResult CheckIfValidCariId(int cariId)
         {
             var result = _cariDal.Get(p => p.Id == cariId) == null;

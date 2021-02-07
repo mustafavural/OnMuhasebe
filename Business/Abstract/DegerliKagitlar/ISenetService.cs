@@ -1,10 +1,10 @@
-﻿using Core.Business.Abstract;
+﻿using Core.Utilities.Result;
 using Entities.Concrete;
 
 namespace Business.Abstract
 {
-    public interface ISenetService : ICRUD<Senet>
+    public interface ISenetService<TEntity> : IDegerliKagitService<TEntity> where TEntity : Senet, new()
     {
-
+        IDataResult<TEntity> GetByKod(string kod);
     }
 }

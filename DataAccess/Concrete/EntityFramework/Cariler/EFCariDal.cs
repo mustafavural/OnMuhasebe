@@ -5,8 +5,9 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EFCariDal : EFEntityRepositoryBase<Cari, OnMuhasebeContext>, ICariDal
+    public class EFCariDal<TEntity> : EFEntityRepositoryBase<TEntity, OnMuhasebeContext>, ICariDal<TEntity>
+        where TEntity : Cari, new()
     {
-        
+
     }
 }

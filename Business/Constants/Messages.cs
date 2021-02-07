@@ -116,7 +116,7 @@
             public static string CariActivityNotExists { get { return "StokHareket bulunamadı."; } }
             public static string CariActivityAlreadyExists { get { return "StokHareket zaten mevcut."; } }
             #endregion
-            
+
             #region EvrakBusinessRules
             public static string FaturaNotExists { get { return "Fatura bulunamadı."; } }
             public static string FaturaNoNotExists { get { return "FaturaNo bulunamadı."; } }
@@ -131,6 +131,11 @@
             public static string PersonelActivityNotExists { get { return "Personel Hareket bulunamadı."; } }
             public static string PersonelNotExists { get { return "Personel bulunamadı."; } }
             public static string DepoNotExists { get { return "Depo bulunamadı."; } }
+
+            public static string DegerliKagitNotExists { get; internal set; }
+            public static string TutarIsInvalid { get; internal set; }
+            public static string VadeIsInvalid { get; internal set; }
+            public static string BankaNotExists { get; internal set; }
             #endregion
         }
     }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Business.Abstract
 {
-    public interface IFaturaService : ICRUD<Fatura>
+    public interface IFaturaService : IADU<Fatura>, IGet<Fatura>
     {
         IDataResult<Fatura> GetByCariHareketId(int cariHareketeId);
         IDataResult<Fatura> GetByNo(string faturaNo);

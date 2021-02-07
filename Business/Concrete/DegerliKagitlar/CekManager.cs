@@ -1,35 +1,71 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Logging;
+using Core.Aspects.Autofac.Performance;
+using Core.Utilities.Business;
 using Core.Utilities.Result;
+using DataAccess.Abstract;
 using Entities.Concrete;
-using System;
 using System.Collections.Generic;
 
 namespace Business.Concrete
 {
-    public class CekManager : ICekService
+    public class CekManager<TEntity> : DegerliKagitManager<TEntity>, ICekService<TEntity>
+        where TEntity : Cek, new()
     {
-        public IDataResult<Cek> GetById(int Id)
+        IDegerliKagitDal<TEntity> _cekDal;
+
+        public CekManager(IDegerliKagitDal<TEntity> cekDal) : base(cekDal)
         {
-            throw new NotImplementedException();
+            _cekDal = cekDal;
         }
 
-        public IDataResult<List<Cek>> GetList()
+        #region BusinessRules
+        private IResult CheckIfValidKod(string kod)
         {
-            throw new NotImplementedException();
+            var result = _cekDal.Get(p => p.Kod == kod) == null;
+            if (result)
+            {
+                return new ErrorResult(Messages.ErrorMessages.DegerliKagitNotExists);
+            }
+            return new SuccessResult();
         }
-        public IResult Add(Cek entity)
+        private IResult CheckIfValidBanka(int bankaId)
         {
-            throw new NotImplementedException();
+            var result = _cekDal.Get(p => p.BankaId == bankaId) == null;
+            if (result)
+            {
+                return new ErrorResult(Messages.ErrorMessages.BankaNotExists);
+            }
+            return new SuccessResult();
+        }
+        #endregion
+
+        [PerformanceAspect(1)]
+        [CacheAspect()]
+        [LogAspect()]
+        public IDataResult<TEntity> GetByKod(string kod)
+        {
+            IResult result = BusinessRules.Run(
+                CheckIfValidKod(kod));
+            if (result != null)
+                return (IDataResult<TEntity>)result;
+
+            return new SuccessDataResult<TEntity>(_cekDal.Get(p => p.Kod == kod));
         }
 
-        public IResult Delete(Cek entity)
+        [PerformanceAspect(1)]
+        [CacheAspect()]
+        [LogAspect()]
+        public IDataResult<List<TEntity>> GetByBankaId(int bankaId)
         {
-            throw new NotImplementedException();
-        }
+            IResult result = BusinessRules.Run(
+                CheckIfValidBanka(bankaId));
+            if (result != null)
+                return (IDataResult<List<TEntity>>)result;
 
-        public IResult Update(Cek entity)
-        {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<TEntity>>(_cekDal.GetAll(p => p.BankaId == bankaId));
         }
     }
 }

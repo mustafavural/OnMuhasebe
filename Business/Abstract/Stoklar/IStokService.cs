@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Business.Abstract
 {
-    public interface IStokService : ICRUD<Stok>
+    public interface IStokService : IADU<Stok>, IGet<Stok>
     {
         IDataResult<Stok> GetByKod(string stokKod);
         IDataResult<Stok> GetByBarkod(string stokBarkod);

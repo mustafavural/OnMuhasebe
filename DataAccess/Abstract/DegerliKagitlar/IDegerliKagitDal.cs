@@ -1,12 +1,10 @@
 ﻿using Core.DataAccess;
 using Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DataAccess.Abstract
 {
-    public interface IDegerliKagitDal : IEntityRepository<DegerliKagit>
+    public interface IDegerliKagitDal<TDegerliKagitEntity> : IEntityRepository<TDegerliKagitEntity>
+        where TDegerliKagitEntity : DegerliKagit, new()
     {
 
     }

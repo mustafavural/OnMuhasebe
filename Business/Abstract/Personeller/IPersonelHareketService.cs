@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Business
 {
-    public interface IPersonelHareketService : ICRUD<PersonelHareket>
+    public interface IPersonelHareketService : IADU<PersonelHareket>, IGet<PersonelHareket>
     {
         IDataResult<List<PersonelHareket>> GetListByPersonelId(int personelId);
     }

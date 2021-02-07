@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Business.Abstract
 {
-    public interface IIrsaliyeService : ICRUD<Irsaliye>
+    public interface IIrsaliyeService : IADU<Irsaliye>
     {
         IDataResult<Irsaliye> GetByCariHareketId(int cariHareketId);
         IDataResult<Irsaliye> GetByNo(string irsaliyeNo);

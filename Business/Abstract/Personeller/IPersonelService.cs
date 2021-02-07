@@ -3,7 +3,7 @@ using Entities;
 
 namespace Business
 {
-    public interface IPersonelService : ICRUD<Personel>
+    public interface IPersonelService : IADU<Personel>, IGet<Personel>
     {
 
     }

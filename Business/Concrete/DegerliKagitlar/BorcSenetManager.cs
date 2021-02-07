@@ -1,19 +1,27 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Result;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 
 namespace Business.Concrete
-{
-    public class BorcSenetManager : IBorcSenetService
+{//TODO:implementasyon eksik
+    public class BorcSenetManager : SenetManager<BorcSenet>, IBorcSenetService
     {
-        public IDataResult<BorcSenet> GetById(int Id)
+        IDegerliKagitDal<BorcSenet> _borcSenetDal;
+
+        public BorcSenetManager(IDegerliKagitDal<BorcSenet> borcSenetDal) : base(borcSenetDal)
+        {
+            _borcSenetDal = borcSenetDal;
+        }
+
+        public IDataResult<List<BorcSenet>> GetByCariIdVerilen(int cariIdVerilen)
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<List<BorcSenet>> GetList()
+        public IDataResult<List<BorcSenet>> GetByCikisTarihi(DateTime tarih)
         {
             throw new NotImplementedException();
         }

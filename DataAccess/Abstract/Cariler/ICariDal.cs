@@ -3,8 +3,9 @@ using Entities.Concrete;
 
 namespace DataAccess.Abstract
 {
-    public interface ICariDal : IEntityRepository<Cari>
+    public interface ICariDal<TEntity> : IEntityRepository<TEntity>
+        where TEntity : Cari, new()
     {
-        
+
     }
 }

@@ -5,7 +5,8 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EFDegerliKagitDal : EFEntityRepositoryBase<DegerliKagit, OnMuhasebeContext>, IDegerliKagitDal
+    public class EFDegerliKagitDal<TDegerliKagitEntity> : EFEntityRepositoryBase<TDegerliKagitEntity, OnMuhasebeContext>, IDegerliKagitDal<TDegerliKagitEntity>
+        where TDegerliKagitEntity : DegerliKagit, new()
     {
 
     }
