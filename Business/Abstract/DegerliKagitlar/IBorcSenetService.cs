@@ -8,7 +8,7 @@ namespace Business.Abstract
 {
     public interface IBorcSenetService : ISenetService<BorcSenet>, IADU<BorcSenet>
     {
-        IDataResult<List<BorcSenet>> GetByCariIdVerilen(int cariIdVerilen);
-        IDataResult<List<BorcSenet>> GetByCikisTarihi(DateTime tarih);
+        IDataResult<List<BorcSenet>> GetListByCariIdVerilen(int cariIdVerilen);
+        IDataResult<List<BorcSenet>> GetListByCikisTarihi(DateTime tarih);
     }
 }

@@ -125,7 +125,7 @@
             public static string DegerliKagitDateNotExists { get { return "Evrak tarihi bulunamadı."; } }
             public static string DegerliKagitAsilBorcluNotExists { get { return "Asıl borçlu bulunamadı."; } }
             #endregion
-            
+
             #region
             public static string PersonelActivityNotExists { get { return "Personel Hareket bulunamadı."; } }
             public static string PersonelNotExists { get { return "Personel bulunamadı."; } }

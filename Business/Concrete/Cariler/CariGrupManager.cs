@@ -90,7 +90,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [LogAspect()]
         [CacheAspect()]
-        public IDataResult<List<CariGrup>> GetByCariId(int cariId)
+        public IDataResult<List<CariGrup>> GetListByCariId(int cariId)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidCariId(cariId));

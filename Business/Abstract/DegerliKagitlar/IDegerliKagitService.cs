@@ -9,7 +9,7 @@ namespace Business.Abstract
     public interface IDegerliKagitService<TEntity> : IGet<TEntity>
         where TEntity : DegerliKagit, new()
     {
-        IDataResult<List<TEntity>> GetByVade(DateTime vade);
-        IDataResult<List<TEntity>> GetByTutar(decimal tutar);
+        IDataResult<List<TEntity>> GetListByVade(DateTime vade);
+        IDataResult<List<TEntity>> GetListByTutar(decimal tutar);
     }
 }

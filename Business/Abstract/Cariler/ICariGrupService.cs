@@ -7,7 +7,7 @@ namespace Business.Abstract
 {
     public interface ICariGrupService : IADU<CariGrup>, IGet<CariGrup>
     {
-        IDataResult<List<CariGrup>> GetByCariId(int cariId);
+        IDataResult<List<CariGrup>> GetListByCariId(int cariId);
         IDataResult<List<CariGrup>> GetListByCariGrupKodId(int cariGrupKodId);
     }
 }

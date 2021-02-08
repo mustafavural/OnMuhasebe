@@ -58,7 +58,7 @@ namespace Business.Concrete
 
         private IResult CheckIfValidCariId(int cariId)
         {
-            var result = _cariGrupService.GetByCariId(cariId) == null;
+            var result = _cariGrupService.GetListByCariId(cariId) == null;
             if (result)
             {
                 return new ErrorResult(Messages.ErrorMessages.CariGrupAssignmentNotExists);
@@ -136,7 +136,7 @@ namespace Business.Concrete
                 return (IDataResult<List<CariGrupKod>>)result;
 
             return new SuccessDataResult<List<CariGrupKod>>(_cariGrupKodDal.GetAll(p =>
-            _cariGrupService.GetByCariId(cariId).Data.Select(s => s.CariId).Contains(cariId)));
+            _cariGrupService.GetListByCariId(cariId).Data.Select(s => s.CariId).Contains(cariId)));
         }
 
         [PerformanceAspect(1)]

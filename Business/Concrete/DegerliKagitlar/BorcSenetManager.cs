@@ -68,7 +68,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [CacheAspect()]
         [LogAspect()]
-        public IDataResult<List<BorcSenet>> GetByCariIdVerilen(int cariIdVerilen)
+        public IDataResult<List<BorcSenet>> GetListByCariIdVerilen(int cariIdVerilen)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidCariId(cariIdVerilen));
@@ -81,7 +81,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [CacheAspect()]
         [LogAspect()]
-        public IDataResult<List<BorcSenet>> GetByCikisTarihi(DateTime tarih)
+        public IDataResult<List<BorcSenet>> GetListByCikisTarihi(DateTime tarih)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidTarih(tarih));

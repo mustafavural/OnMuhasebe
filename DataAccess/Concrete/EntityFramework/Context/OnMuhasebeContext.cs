@@ -8,8 +8,7 @@ namespace DataAccess.Concrete.EntityFramework.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(
-                connectionString: @"Server=.\SQLEXPRESS;Database=OnMuhasebe;user id=sa;password=sapass");
+            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=OnMuhasebe;user id=sa;password=sapass");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -61,6 +60,8 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<Evrak> Evraklar { get; set; }
         public DbSet<Fatura> Faturalar { get; set; }
         public DbSet<Irsaliye> Irsaliyeler { get; set; }
+        public DbSet<Personel> Personeller { get; set; }
+        public DbSet<PersonelHareket> PersonelHareketler { get; set; }
         public DbSet<DegerliKagit> DegerliKagitlar { get; set; }
         public DbSet<Cek> Cekler { get; set; }
         public DbSet<Senet> Senetler { get; set; }

@@ -37,8 +37,13 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<BorcSenetManager>().As<IBorcSenetService>();
             builder.RegisterType<MusteriSenetManager>().As<IMusteriSenetService>();
 
-            builder.RegisterType<PersonelHareketManager>().As<IPersonelHareketService>();
             builder.RegisterType<PersonelManager>().As<IPersonelService>();
+            builder.RegisterType<PersonelHareketManager>().As<IPersonelHareketService>();
+
+            builder.RegisterType<BankaManager>().As<IBankaService>();
+            builder.RegisterType<BankaSubeManager>().As<IBankaSubeService>();
+            builder.RegisterType<BankaHesapManager>().As<IBankaHesapService>();
+            builder.RegisterType<BankaHesapHareketManager>().As<IBankaHesapHareketService>();
 
             //----------------------------------------------------------------------------------------------
             //----------------------------------------------------------------------------------------------
@@ -66,13 +71,14 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EFDegerliKagitDal<Senet>>().As<IDegerliKagitDal<Senet>>();
             builder.RegisterType<EFDegerliKagitDal<MusteriSenet>>().As<IDegerliKagitDal<MusteriSenet>>();
             builder.RegisterType<EFDegerliKagitDal<BorcSenet>>().As<IDegerliKagitDal<BorcSenet>>();
-            //builder.RegisterType<EFDegerliKagitDal>().As<IDegerliKagitDal>();
-            //builder.RegisterType<EFCekDal>().As<ICekDal>();
-            //builder.RegisterType<EFSenetDal>().As<ISenetDal>();
-            //builder.RegisterType<EFBorcCekDal>().As<IBorcCekDal>();
-            //builder.RegisterType<EFMusteriCekDal>().As<IMusteriCekDal>();
-            //builder.RegisterType<EFBorcSenetDal>().As<IBorcSenetDal>();
-            //builder.RegisterType<EFMusteriSenetDal>().As<IMusteriSenetDal>();
+
+            builder.RegisterType<EFPersonelDal>().As<IPersonelDal>();
+            builder.RegisterType<EFPersonelHareketDal>().As<IPersonelHareketDal>();
+
+            builder.RegisterType<EFBankaDal>().As<IBankaDal>();
+            builder.RegisterType<EFBankaSubeDal>().As<IBankaSubeDal>();
+            builder.RegisterType<EFBankaHesapDal>().As<IBankaHesapDal>();
+            builder.RegisterType<EFBankaHesapHareketDal>().As<IBankaHesapHareketDal>();
 
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();

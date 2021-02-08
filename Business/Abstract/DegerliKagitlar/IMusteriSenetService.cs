@@ -8,11 +8,11 @@ namespace Business.Abstract
 {
     public interface IMusteriSenetService : ISenetService<MusteriSenet>, IADU<MusteriSenet>
     {
-        IDataResult<List<MusteriSenet>> GetByCariIdCiroEden(int cariIdCiroEden);
-        IDataResult<List<MusteriSenet>> GetByCariIdCiroEdilen(int cariIdCiroEdilen);
-        IDataResult<List<MusteriSenet>> GetByHesapIdTahsileVerilen(int hesapIdTahsileVerilen);
-        IDataResult<List<MusteriSenet>> GetByAsilBorclu(string asilBorclu);
-        IDataResult<List<MusteriSenet>> GetByAlisTarihi(DateTime tarih);
-        IDataResult<List<MusteriSenet>> GetByCikisTarihi(DateTime tarih);
+        IDataResult<List<MusteriSenet>> GetListByCariIdCiroEden(int cariIdCiroEden);
+        IDataResult<List<MusteriSenet>> GetListByCariIdCiroEdilen(int cariIdCiroEdilen);
+        IDataResult<List<MusteriSenet>> GetListByHesapIdTahsileVerilen(int hesapIdTahsileVerilen);
+        IDataResult<List<MusteriSenet>> GetListByAsilBorclu(string asilBorclu);
+        IDataResult<List<MusteriSenet>> GetListByAlisTarihi(DateTime tarih);
+        IDataResult<List<MusteriSenet>> GetListByCikisTarihi(DateTime tarih);
     }
 }

@@ -70,7 +70,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [CacheAspect()]
         [LogAspect()]
-        public IDataResult<List<TEntity>> GetByTutar(decimal tutar)
+        public IDataResult<List<TEntity>> GetListByTutar(decimal tutar)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidTutar(tutar));
@@ -83,7 +83,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [CacheAspect()]
         [LogAspect()]
-        public IDataResult<List<TEntity>> GetByVade(DateTime vade)
+        public IDataResult<List<TEntity>> GetListByVade(DateTime vade)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidVade(vade));

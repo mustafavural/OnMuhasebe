@@ -3,8 +3,6 @@ using Business.Constants;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Logging;
 using Core.Aspects.Autofac.Performance;
-using Core.Aspects.Autofac.Validation;
-using Core.Business.Abstract;
 using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;

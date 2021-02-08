@@ -108,7 +108,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [CacheAspect()]
         [LogAspect()]
-        public IDataResult<List<MusteriSenet>> GetByAlisTarihi(DateTime tarih)
+        public IDataResult<List<MusteriSenet>> GetListByAlisTarihi(DateTime tarih)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidAlisTarih(tarih));
@@ -121,7 +121,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [CacheAspect()]
         [LogAspect()]
-        public IDataResult<List<MusteriSenet>> GetByAsilBorclu(string asilBorclu)
+        public IDataResult<List<MusteriSenet>> GetListByAsilBorclu(string asilBorclu)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidAsilBorclu(asilBorclu));
@@ -134,7 +134,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [CacheAspect()]
         [LogAspect()]
-        public IDataResult<List<MusteriSenet>> GetByCariIdCiroEden(int cariIdCiroEden)
+        public IDataResult<List<MusteriSenet>> GetListByCariIdCiroEden(int cariIdCiroEden)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidCariIdCiroEden(cariIdCiroEden));
@@ -147,7 +147,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [CacheAspect()]
         [LogAspect()]
-        public IDataResult<List<MusteriSenet>> GetByCariIdCiroEdilen(int cariIdCiroEdilen)
+        public IDataResult<List<MusteriSenet>> GetListByCariIdCiroEdilen(int cariIdCiroEdilen)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidCariIdCiroEdilen(cariIdCiroEdilen));
@@ -160,7 +160,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [CacheAspect()]
         [LogAspect()]
-        public IDataResult<List<MusteriSenet>> GetByCikisTarihi(DateTime tarih)
+        public IDataResult<List<MusteriSenet>> GetListByCikisTarihi(DateTime tarih)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidCikisTarih(tarih));
@@ -173,7 +173,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [CacheAspect()]
         [LogAspect()]
-        public IDataResult<List<MusteriSenet>> GetByHesapIdTahsileVerilen(int hesapIdTahsileVerilen)
+        public IDataResult<List<MusteriSenet>> GetListByHesapIdTahsileVerilen(int hesapIdTahsileVerilen)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidHesapId(hesapIdTahsileVerilen));
