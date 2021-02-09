@@ -9,7 +9,7 @@ namespace Entities.Concrete
         public string Ad { get; set; }
         public string No { get; set; }
         public string IBAN { get; set; }
-        public string MusteriYetkilisi { get; set; }
+        public string MusteriYetkili { get; set; }
         public string Aciklama { get; set; }
     }
 }

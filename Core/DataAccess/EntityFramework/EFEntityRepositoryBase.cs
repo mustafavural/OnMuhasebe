@@ -36,21 +36,21 @@ namespace Core.DataAccess.EntityFramework
                 context.SaveChanges();
             }
         }
-        public void Update(TEntity entity)
-        {
-            using (var context = new TContext())
-            {
-                var entityUpdated = context.Entry(entity);
-                entityUpdated.State = EntityState.Modified;
-                context.SaveChanges();
-            }
-        }
         public void Delete(TEntity entity)
         {
             using (var context = new TContext())
             {
                 var entityDeleted = context.Entry(entity);
                 entityDeleted.State = EntityState.Deleted;
+                context.SaveChanges();
+            }
+        }
+        public void Update(TEntity entity)
+        {
+            using (var context = new TContext())
+            {
+                var entityUpdated = context.Entry(entity);
+                entityUpdated.State = EntityState.Modified;
                 context.SaveChanges();
             }
         }

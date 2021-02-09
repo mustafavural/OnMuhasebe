@@ -1,6 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
-using Business.ValidationRules.FluentValidation.Cariler;
+using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Logging;
 using Core.Aspects.Autofac.Performance;
@@ -150,7 +150,7 @@ namespace Business.Concrete
                 return result;
 
             _cariHareketDal.Add(cariHareket);
-            return new SuccessResult(Messages.SuccessMessages.CariActivityAdded);
+            return new SuccessResult(Messages.SuccessMessages.CariActivityInserted);
         }
 
         [PerformanceAspect(1)]

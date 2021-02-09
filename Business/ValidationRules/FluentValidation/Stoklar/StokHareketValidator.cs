@@ -2,7 +2,7 @@
 using FluentValidation;
 using System;
 
-namespace Business.ValidationRules.FluentValidation.Stoklar
+namespace Business.ValidationRules.FluentValidation
 {
     public class StokHareketValidator : AbstractValidator<StokHareket>
     {

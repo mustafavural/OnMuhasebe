@@ -1,7 +1,7 @@
 ﻿using Entities.Concrete;
 using FluentValidation;
 
-namespace Business
+namespace Business.ValidationRules.FluentValidation
 {
     public class IrsaliyeValidator : AbstractValidator<Irsaliye>
     {

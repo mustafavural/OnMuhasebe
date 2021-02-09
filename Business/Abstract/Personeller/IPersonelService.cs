@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Business.Abstract
 {
-    public interface IPersonelService : IADU<PersonelHareket>, IGet<PersonelHareket>
+    public interface IPersonelService : IADU<Personel>, IGet<Personel>
     {
         IDataResult<List<Personel>> GetListByAd(string ad);
         IDataResult<List<Personel>> GetListByIkinciAd(string ikinciAd);

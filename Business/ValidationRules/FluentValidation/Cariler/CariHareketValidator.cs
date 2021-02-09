@@ -2,7 +2,7 @@
 using FluentValidation;
 using System;
 
-namespace Business.ValidationRules.FluentValidation.Cariler
+namespace Business.ValidationRules.FluentValidation
 {
     public class CariHareketValidator : AbstractValidator<CariHareket>
     {
