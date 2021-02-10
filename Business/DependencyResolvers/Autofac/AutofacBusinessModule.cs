@@ -18,6 +18,7 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<StokGrupManager>().As<IStokGrupService>();
             builder.RegisterType<StokGrupKodManager>().As<IStokGrupKodService>();
             builder.RegisterType<StokHareketManager>().As<IStokHareketService>();
+            builder.RegisterType<DepoManager>().As<IDepoService>();
 
             builder.RegisterType<CariManager<Cari>>().As<ICariService<Cari>>();
             builder.RegisterType<SahisCariManager>().As<ISahisCariService>();
@@ -40,6 +41,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<PersonelManager>().As<IPersonelService>();
             builder.RegisterType<PersonelHareketManager>().As<IPersonelHareketService>();
 
+            builder.RegisterType<KasaManager>().As<IKasaService>();
+            builder.RegisterType<KasaHareketManager>().As<IKasaHareketService>();
+
             builder.RegisterType<BankaManager>().As<IBankaService>();
             builder.RegisterType<BankaSubeManager>().As<IBankaSubeService>();
             builder.RegisterType<BankaHesapManager>().As<IBankaHesapService>();
@@ -52,6 +56,7 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EFStokGrupDal>().As<IStokGrupDal>();
             builder.RegisterType<EFStokGrupKodDal>().As<IStokGrupKodDal>();
             builder.RegisterType<EFStokHareketDal>().As<IStokHareketDal>();
+            builder.RegisterType<EFDepoDal>().As<IDepoDal>();
 
             builder.RegisterType<EFCariDal<Cari>>().As<ICariDal<Cari>>();
             builder.RegisterType<EFCariDal<SahisCari>>().As<ICariDal<SahisCari>>();
@@ -74,6 +79,9 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<EFPersonelDal>().As<IPersonelDal>();
             builder.RegisterType<EFPersonelHareketDal>().As<IPersonelHareketDal>();
+
+            builder.RegisterType<EFKasaDal>().As<IKasaDal>();
+            builder.RegisterType<EFKasaHareketDal>().As<IKasaHareketDal>();
 
             builder.RegisterType<EFBankaDal>().As<IBankaDal>();
             builder.RegisterType<EFBankaSubeDal>().As<IBankaSubeDal>();

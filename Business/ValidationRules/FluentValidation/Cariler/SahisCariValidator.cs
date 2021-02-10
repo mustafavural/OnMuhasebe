@@ -3,14 +3,10 @@ using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class SahisCariValidator : AbstractValidator<SahisCari>
+    public class SahisCariValidator : CariValidator<SahisCari>
     {
-        public SahisCariValidator()
+        public SahisCariValidator() : base()
         {
-            RuleFor(p => p.Kod).NotEmpty();
-            RuleFor(p => p.Unvan).NotEmpty();
-            RuleFor(p => p.Unvan).Length(3, 150);
-            RuleFor(p => p.VergiDairesi).NotEmpty();
             RuleFor(p => p.TCNo).NotEmpty();
             RuleFor(p => p.TCNo).Length(11);
         }

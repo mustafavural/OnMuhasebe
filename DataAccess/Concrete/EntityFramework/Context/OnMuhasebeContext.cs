@@ -16,6 +16,7 @@ namespace DataAccess.Concrete.EntityFramework.Context
             modelBuilder.Entity<StokGrup>().ToTable("StokGruplar");
             modelBuilder.Entity<StokGrupKod>().ToTable("StokGrupKodlar");
             modelBuilder.Entity<StokHareket>().ToTable("StokHareketler");
+            modelBuilder.Entity<Depo>().ToTable("Depolar");
 
             modelBuilder.Entity<Cari>().ToTable("Cariler");
             modelBuilder.Entity<SahisCari>().ToTable("SahisCariler").HasBaseType<Cari>();
@@ -39,6 +40,9 @@ namespace DataAccess.Concrete.EntityFramework.Context
             modelBuilder.Entity<Personel>().ToTable("Personeller");
             modelBuilder.Entity<PersonelHareket>().ToTable("PersonelHareketler");
 
+            modelBuilder.Entity<Kasa>().ToTable("Kasalar");
+            modelBuilder.Entity<KasaHareket>().ToTable("KasaHareketler");
+
             modelBuilder.Entity<Banka>().ToTable("Bankalar");
             modelBuilder.Entity<BankaSube>().ToTable("BankaSubeler");
             modelBuilder.Entity<BankaHesap>().ToTable("BankaHesaplar");
@@ -51,6 +55,7 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<StokGrup> StokGruplar { get; set; }
         public DbSet<StokGrupKod> StokGrupKodlar { get; set; }
         public DbSet<StokHareket> StokHareketler { get; set; }
+        public DbSet<Depo> Depolar { get; set; }
         public DbSet<Cari> Cariler { get; set; }
         public DbSet<SahisCari> SahisCariler { get; set; }
         public DbSet<SirketCari> SirketCariler { get; set; }
@@ -69,5 +74,8 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<BorcSenet> BorcSenetler { get; set; }
         public DbSet<BorcSenet> MusteriCekler { get; set; }
         public DbSet<MusteriSenet> MusteriSenetler { get; set; }
+        public DbSet<Kasa> Kasalar { get; set; }
+        public DbSet<KasaHareket> KasaHareketler { get; set; }
+
     }
 }

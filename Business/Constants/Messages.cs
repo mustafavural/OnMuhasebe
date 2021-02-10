@@ -1,4 +1,6 @@
-﻿namespace Business.Constants
+﻿using Entities.Concrete;
+
+namespace Business.Constants
 {
     public static class Messages
     {
@@ -74,6 +76,22 @@
             public static string PersonelInserted { get { return "Personel başarıyla eklendi."; } }
             public static string PersonelDeleted { get { return "Personel başarıyla silindi."; } }
             public static string PersonelUpdated { get { return "Personel başarıyla güncellendi."; } }
+
+            public static string PersonelActivityInserted { get { return "Personel hareket başarıyla eklendi."; } }
+            public static string PersonelActivityDeleted { get { return "Personel hareket başarıyla silindi."; } }
+            public static string PersonelActivityUpdated { get { return "Personel hareket başarıyla güncellendi."; } }
+
+            public static string KasaInserted { get { return "Kasa başarıyla eklendi."; } }
+            public static string KasaDeleted { get { return "Kasa başarıyla silindi."; } }
+            public static string KasaUpdated { get { return "Kasa başarıyla güncellendi."; } }
+
+            public static string KasaActivityInserted { get { return "Kasa hareket başarıyla eklendi."; } }
+            public static string KasaActivityDeleted { get { return "Kasa hareket başarıyla silindi."; } }
+            public static string KasaActivityUpdated { get { return "Kasa hareket başarıyla güncellendi."; } }
+
+            public static string DepoInserted { get; internal set; }
+            public static string DepoDeleted { get; internal set; }
+            public static string DepoUpdated { get; internal set; }
         }
         public static class ErrorMessages
         {
@@ -181,8 +199,31 @@
             public static string PersonelActivityNotExists { get { return "Personel Hareket bulunamadı."; } }
             #endregion
 
-            public static string DepoNotExists { get { return "Depo bulunamadı."; } }
+            #region PersonelHareketBusinessRules
+            public static string PersonelActivityAlreadyExists { get { return "Personel hareket zaten mevcut."; } }
+            public static string PersonelActivityDateNotExists { get { return "Personel hareket tarihi bulunamadı."; } }
+            public static string PersonelActivityTurNotExists { get { return "Personel hareket türü bulunamadı."; } }
+            #endregion
 
+            #region KasaBusinessRules
+            public static string KasaAlreadyExists { get { return "Kasa zaten mevcut."; } }
+            public static string KasaNotExists { get { return "Kasa bulunamadı."; } }
+            #endregion
+
+            #region KasaHareketBusinessRules
+            public static string KasaActivityAlreadyExists { get { return "Kasa hareket zaten mevcut."; } }
+            public static string KasaActivityNotExists { get { return "Kasa hareket bulunamadı."; } }
+            public static string KasaActivityBelgeNoNotExists { get { return "Kasa hareket belge no bulunamadı."; } }
+            public static string KasaActivityDateNotExists { get { return "Kasa hareket tarihi bulunamadı."; } }
+            #endregion
+
+            #region DepoBusinessRules
+            public static string DepoAlreadyExists { get { return "Depo zaten mevcut."; } }
+            public static string DepoNotExists { get { return "Depo bulunamadı."; } }
+            public static string DepoAdNotExists { get { return "Depo ad bulunamadı."; } }
+
+            public static string AdresNotExists { get; internal set; }
+            #endregion
         }
     }
 }
