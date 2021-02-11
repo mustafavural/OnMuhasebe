@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Entities.Concrete.BorcCek" Collapsed="true">
+    <Position X="7.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAQAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Concrete\DegerliKagitlar\BorcCek.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.Concrete.BorcSenet" Collapsed="true">
+    <Position X="3" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Concrete\DegerliKagitlar\BorcSenet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.Concrete.Cek" Collapsed="true">
+    <Position X="8.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Concrete\DegerliKagitlar\Cek.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.Concrete.DegerliKagit" Collapsed="true">
+    <Position X="6.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAEAABAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Concrete\DegerliKagitlar\DegerliKagit.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Entities.Concrete.MusteriCek" Collapsed="true">
+    <Position X="9.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAwAAAAAAAAAAACQAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Concrete\DegerliKagitlar\MusteriCek.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.Concrete.MusteriSenet" Collapsed="true">
+    <Position X="5.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAwAAAAAAAAAAACQAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Concrete\DegerliKagitlar\MusteriSenet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.Concrete.Senet" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Concrete\DegerliKagitlar\Senet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.Concrete.Cari" Collapsed="true">
+    <Position X="14.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAAAAAAAAAAAAABAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Concrete\Cariler\Cari.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Entities.Concrete.CariGrup" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Concrete\Cariler\CariGrup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Entities.Concrete.CariGrupKod" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Concrete\Cariler\CariGrupKod.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Entities.Concrete.CariHareket" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAQAAAAAEAAAAAAAAAAAAAAgAAAAAAAAIAAAQA=</HashCode>
+      <FileName>Concrete\Cariler\CariHareket.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Entities.Concrete.SahisCari" Collapsed="true">
+    <Position X="13" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Concrete\Cariler\SahisCari.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.Concrete.SirketCari" Collapsed="true">
+    <Position X="15.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Concrete\Cariler\SirketCari.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

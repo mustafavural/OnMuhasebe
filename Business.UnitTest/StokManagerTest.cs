@@ -24,10 +24,10 @@ namespace Business.UnitTest
         [SetUp]
         public void Setup()
         {
+            _moqStokService = new Mock<IStokService>();
             _moqStokDal = new Mock<IStokDal>();
             _moqStokGrupService = new Mock<IStokGrupService>();
             _moqStokGrupKodService = new Mock<IStokGrupKodService>();
-            _moqStokService = new Mock<IStokService>();
             _stokService = new StokManager(_moqStokDal.Object, _moqStokGrupService.Object, _moqStokGrupKodService.Object);
 
             _dbStoklar = new List<Stok>
@@ -114,13 +114,13 @@ namespace Business.UnitTest
 
             _moqStokService.Setup(m => m.GetList()).Returns(new SuccessDataResult<List<Stok>>(_dbStoklar));
             _moqStokService.Setup(m => m.GetById(2)).Returns(new SuccessDataResult<Stok>(_dbStoklar[1]));
-            _moqStokService.Setup(m => m.GetByAd("TestStok3").Data).Returns(_dbStoklar[2]);
-            _moqStokService.Setup(m => m.GetByBarkod("78742131354556").Data).Returns(_dbStoklar[3]);
-            _moqStokService.Setup(m => m.GetByKod("183").Data).Returns(_dbStoklar[0]);
-            _moqStokService.Setup(m => m.GetListByKDV(18).Data).Returns(_dbStoklar.Where(p => p.KDV == 18).ToList());
-            _moqStokService.Setup(m => m.Add(s1).Message).Returns(Messages.SuccessMessages.StokInserted);
-            _moqStokService.Setup(m => m.Update(s1).Message).Returns(Messages.SuccessMessages.StokUpdated);
-            _moqStokService.Setup(m => m.Delete(s1).Message).Returns(Messages.SuccessMessages.StokDeleted);
+            _moqStokService.Setup(m => m.GetByAd("TestStok3")).Returns(new SuccessDataResult<Stok>(_dbStoklar[2]));
+            _moqStokService.Setup(m => m.GetByBarkod("78742131354556")).Returns(new SuccessDataResult<Stok>(_dbStoklar[3]));
+            _moqStokService.Setup(m => m.GetByKod("183")).Returns(new SuccessDataResult<Stok>(_dbStoklar[0]));
+            _moqStokService.Setup(m => m.GetListByKDV(18)).Returns(new SuccessDataResult<List<Stok>>(_dbStoklar.Where(P => P.KDV == 18).ToList()));
+            _moqStokService.Setup(m => m.Add(s1)).Returns(new SuccessResult(Messages.SuccessMessages.StokInserted));
+            _moqStokService.Setup(m => m.Update(s1)).Returns(new SuccessResult(Messages.SuccessMessages.StokUpdated));
+            _moqStokService.Setup(m => m.Delete(s1)).Returns(new SuccessResult(Messages.SuccessMessages.StokDeleted));
         }
 
         [Test]
