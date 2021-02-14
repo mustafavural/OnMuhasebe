@@ -1,9 +1,23 @@
 ﻿using Business.Abstract;
+using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 
 namespace ConsoleUI.EntityTest
 {
+    public class StoklarDepended : TestBase
+    {
+        IStokService _stokService;
+        public StoklarDepended()
+        {
+            _stokService = new StokManager(
+                new EFStokDal(),
+                new StokGrupManager(new EFStokGrupDal()),
+                new StokGrupKodManager(new EFStokGrupKodDal(),
+                              new StokGrupManager(new EFStokGrupDal())));
+        }
+    }
     public class StoklarTest : TestBase
     {
         private IStokService _stokService;

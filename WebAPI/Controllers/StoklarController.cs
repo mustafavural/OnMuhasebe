@@ -13,6 +13,7 @@ namespace WebAPI.Controllers
         {
             _stokService = stokService;
         }
+
         [HttpGet("getlist")]
         public IActionResult GetList()
         {
@@ -23,6 +24,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result.Message);
         }
+
         [HttpGet("getbyid")]
         public IActionResult GetById(int stokId)
         {
@@ -33,6 +35,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result.Message);
         }
+
         [HttpGet("getbygrup")]
         public IActionResult GetByGrup(string grupAd)
         {
@@ -43,6 +46,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result.Message);
         }
+
         [HttpPost("add")]
         public IActionResult Add(Stok stok)
         {
@@ -53,6 +57,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result.Message);
         }
+
         [HttpPost("delete")]
         public IActionResult Delete(Stok stok)
         {
@@ -63,6 +68,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result.Message);
         }
+
         [HttpPost("update")]
         public IActionResult Update(Stok stok)
         {

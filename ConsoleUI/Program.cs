@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using Business.DependencyResolvers.Autofac;
 using ConsoleUI.EntityTest;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ConsoleUI
@@ -21,7 +20,6 @@ namespace ConsoleUI
 
             builder.RegisterModule(new AutofacBusinessModule());
             builder.RegisterType<Startup>().AsSelf();
-            builder.RegisterType<ConfigurationRoot>().As<IConfiguration>();
             builder.RegisterType<CarilerTest>().AsSelf();
             builder.RegisterType<StoklarTest>().AsSelf();
             builder.RegisterType<EvraklarTest>().AsSelf();

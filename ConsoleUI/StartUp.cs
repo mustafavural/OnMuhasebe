@@ -2,7 +2,6 @@
 using Core.DependencyResolvers;
 using Core.Extensions;
 using Core.Utilities.IoC;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -10,39 +9,19 @@ namespace ConsoleUI
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
         CarilerTest _cariTest;
         StoklarTest _stokTest;
         EvraklarTest _evraklarTest;
-        public Startup(CarilerTest cariTest, StoklarTest stokTest, EvraklarTest evraklarTest, IConfiguration configuration)
+        public Startup(CarilerTest cariTest, StoklarTest stokTest, EvraklarTest evraklarTest)
         {
             this._cariTest = cariTest;
             this._stokTest = stokTest;
             this._evraklarTest = evraklarTest;
-            this.Configuration = configuration;
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            //var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
-            services.AddDependencyResolvers(new ICoreModule[]
-            {
-                new CoreModule()
-            });
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //    .AddJwtBearer(options =>
-            //    {
-            //        options.TokenValidationParameters = new TokenValidationParameters()
-            //        {
-            //            ValidateIssuer = true,
-            //            ValidateAudience = true,
-            //            ValidateLifetime = true,
-            //            ValidIssuer = tokenOptions.Issuer,
-            //            ValidAudience = tokenOptions.Audience,
-            //            IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
-            //        };
-            //    });
+            services.AddDependencyResolvers(new ICoreModule[] { new CoreModule() });
         }
-
         public void Run()
         {
             _cariTest.SirketTestYap();
