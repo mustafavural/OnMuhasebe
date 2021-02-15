@@ -10,7 +10,7 @@ namespace ConsoleUI
         public static void Main()
         {
             var container = ConfigureContainer();
-            var program = container.Resolve<Startup>();
+            var program = container.Resolve<StartUp>();
             program.ConfigureServices(new ServiceCollection());
             program.Run();
         }
@@ -19,7 +19,7 @@ namespace ConsoleUI
             var builder = new ContainerBuilder();
 
             builder.RegisterModule(new AutofacBusinessModule());
-            builder.RegisterType<Startup>().AsSelf();
+            builder.RegisterType<StartUp>().AsSelf();
             builder.RegisterType<CarilerTest>().AsSelf();
             builder.RegisterType<StoklarTest>().AsSelf();
             builder.RegisterType<EvraklarTest>().AsSelf();

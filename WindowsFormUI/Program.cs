@@ -1,8 +1,12 @@
+using Autofac;
+using Business.DependencyResolvers.Autofac;
+using Core.DependencyResolvers;
+using Core.Extensions;
+using Core.Utilities.IoC;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormUI.View.Moduls.Stok;
 
 namespace WindowsFormUI
 {
@@ -12,12 +16,27 @@ namespace WindowsFormUI
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new View.Moduls.Stok.FrmStokGrup());
+            var container = ConfigureContainer();
+            ConfigureServices(new ServiceCollection());
+            Application.Run(container.Resolve<FrmStokGrup>());
+        }
+        private static IContainer ConfigureContainer()
+        {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterModule(new AutofacBusinessModule());
+            builder.RegisterType<FrmStokGrup>().AsSelf();
+
+            return builder.Build();
+        }
+        private static void ConfigureServices(ServiceCollection services)
+        {
+            services.AddDependencyResolvers(new ICoreModule[] { new CoreModule() });
         }
     }
 }

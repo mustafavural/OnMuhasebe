@@ -11,8 +11,9 @@ namespace WindowsFormUI.View.UserControls
 
         public bool BtnClear_Visible { get => BtnClear.Visible; set => BtnClear.Visible = value; }
         public bool BtnDelete_Enable { get => BtnDelete.Enabled; set => BtnDelete.Enabled = value; }
-        public bool BtnSave_Enable { get => BtnSave.Enabled; set => BtnSave.Enabled = value; }
         public string BtnDelete_Text { get => BtnDelete.Text; set => BtnDelete.Text = value; }
+        public bool BtnSave_Enable { get => BtnSave.Enabled; set => BtnSave.Enabled = value; }
+        public string BtnSave_Text { get => BtnSave.Text; set => BtnSave.Text = value; }
 
         public UscFormButtons()
         {

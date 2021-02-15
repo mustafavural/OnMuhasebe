@@ -37,9 +37,9 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
         }
         public void RemoveByPatterns(string pattern)
         {
-            var cacheEntriesCollectionDefinition = typeof(MemoryCache).GetProperty("EntriesCollection", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var cacheEntriesCollectionPropInfo = typeof(MemoryCache).GetProperty("EntriesCollection", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
-            var cacheEntriesCollection = cacheEntriesCollectionDefinition.GetValue(_cache) as dynamic;
+            var cacheEntriesCollection = cacheEntriesCollectionPropInfo.GetValue(_cache) as dynamic;
 
 
             List<ICacheEntry> cacheCollectionValues = new List<ICacheEntry>();
@@ -53,12 +53,12 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
                 cacheCollectionValues.Add(cacheItemValue);
             }
 
-            var regex = new Regex(pattern, RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            var keysToRemove = cacheCollectionValues.Where(d => regex.IsMatch(d.Key.ToString())).Select(d => d.Key).ToList();
+            //var regex = new Regex(pattern, RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            var keysToRemove = cacheCollectionValues/*.Where(d => regex.IsMatch(d.Key.ToString()))*/.Select(d => d.Key.ToString()).ToList();
 
             foreach (var key in keysToRemove)
             {
-                _cache.Remove(key);
+                _cache.Remove(key.ToString());
             }
         }
     }

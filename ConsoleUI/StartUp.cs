@@ -7,12 +7,12 @@ using System;
 
 namespace ConsoleUI
 {
-    public class Startup
+    public class StartUp
     {
         CarilerTest _cariTest;
         StoklarTest _stokTest;
         EvraklarTest _evraklarTest;
-        public Startup(CarilerTest cariTest, StoklarTest stokTest, EvraklarTest evraklarTest)
+        public StartUp(CarilerTest cariTest, StoklarTest stokTest, EvraklarTest evraklarTest)
         {
             this._cariTest = cariTest;
             this._stokTest = stokTest;

@@ -30,160 +30,147 @@ namespace WindowsFormUI.View.Moduls.Stok
         private void InitializeComponent()
         {
             this.GrpEkleGuncelle = new System.Windows.Forms.GroupBox();
-            this.UscGruplar = new WindowsFormUI.View.UserControls.UscFormButtons();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.TxtGrupAciklama = new System.Windows.Forms.TextBox();
-            this.TxtGrupAd = new System.Windows.Forms.TextBox();
-            this.TxtGrupKod = new System.Windows.Forms.TextBox();
-            this.LsbGruplar = new System.Windows.Forms.ListBox();
-            this.DgvGruplar = new System.Windows.Forms.DataGridView();
-            this.ColKodu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColAd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColAciklama = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uscGruplar = new WindowsFormUI.View.UserControls.UscFormButtons();
+            this.lblGrupAd = new System.Windows.Forms.Label();
+            this.lblGrupKod = new System.Windows.Forms.Label();
+            this.txtGrupKodAd = new System.Windows.Forms.TextBox();
+            this.txtGrupKodTur = new System.Windows.Forms.TextBox();
+            this.dgvGruplar = new System.Windows.Forms.DataGridView();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTur = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GrpEkleGuncelle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvGruplar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGruplar)).BeginInit();
             this.SuspendLayout();
             // 
             // GrpEkleGuncelle
             // 
-            this.GrpEkleGuncelle.Controls.Add(this.UscGruplar);
-            this.GrpEkleGuncelle.Controls.Add(this.label3);
-            this.GrpEkleGuncelle.Controls.Add(this.label2);
-            this.GrpEkleGuncelle.Controls.Add(this.label1);
-            this.GrpEkleGuncelle.Controls.Add(this.TxtGrupAciklama);
-            this.GrpEkleGuncelle.Controls.Add(this.TxtGrupAd);
-            this.GrpEkleGuncelle.Controls.Add(this.TxtGrupKod);
+            this.GrpEkleGuncelle.Controls.Add(this.uscGruplar);
+            this.GrpEkleGuncelle.Controls.Add(this.lblGrupAd);
+            this.GrpEkleGuncelle.Controls.Add(this.lblGrupKod);
+            this.GrpEkleGuncelle.Controls.Add(this.txtGrupKodAd);
+            this.GrpEkleGuncelle.Controls.Add(this.txtGrupKodTur);
             this.GrpEkleGuncelle.Dock = System.Windows.Forms.DockStyle.Top;
             this.GrpEkleGuncelle.Location = new System.Drawing.Point(0, 0);
             this.GrpEkleGuncelle.Name = "GrpEkleGuncelle";
-            this.GrpEkleGuncelle.Size = new System.Drawing.Size(697, 127);
+            this.GrpEkleGuncelle.Size = new System.Drawing.Size(489, 127);
             this.GrpEkleGuncelle.TabIndex = 0;
             this.GrpEkleGuncelle.TabStop = false;
             this.GrpEkleGuncelle.Text = "Grup Ekle Güncelle";
             // 
-            // UscGruplar
+            // uscGruplar
             // 
-            this.UscGruplar.BtnClear_Visible = true;
-            this.UscGruplar.BtnDelete_Enable = true;
-            this.UscGruplar.BtnDelete_Text = "Sil     ";
-            this.UscGruplar.BtnSave_Enable = true;
-            this.UscGruplar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.UscGruplar.Location = new System.Drawing.Point(3, 72);
-            this.UscGruplar.Name = "UscGruplar";
-            this.UscGruplar.Size = new System.Drawing.Size(691, 52);
-            this.UscGruplar.TabIndex = 4;
+            this.uscGruplar.BtnClear_Visible = true;
+            this.uscGruplar.BtnDelete_Enable = true;
+            this.uscGruplar.BtnDelete_Text = "Sil     ";
+            this.uscGruplar.BtnSave_Enable = true;
+            this.uscGruplar.BtnSave_Text = "Kaydet";
+            this.uscGruplar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.uscGruplar.Location = new System.Drawing.Point(3, 71);
+            this.uscGruplar.Name = "uscGruplar";
+            this.uscGruplar.Size = new System.Drawing.Size(483, 53);
+            this.uscGruplar.TabIndex = 4;
+            this.uscGruplar.ClickClear += new System.EventHandler(this.UscGruplar_ClickClear);
+            this.uscGruplar.ClickSave += new System.EventHandler(this.UscGruplar_GrupEkleGuncelle);
+            this.uscGruplar.ClickCancel += new System.EventHandler(this.UscGruplar_GrupSil);
             // 
-            // label3
+            // lblGrupAd
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(224, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 15);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Açıklama";
+            this.lblGrupAd.AutoSize = true;
+            this.lblGrupAd.Location = new System.Drawing.Point(202, 24);
+            this.lblGrupAd.Name = "lblGrupAd";
+            this.lblGrupAd.Size = new System.Drawing.Size(54, 15);
+            this.lblGrupAd.TabIndex = 3;
+            this.lblGrupAd.Text = "Grup Adı";
             // 
-            // label2
+            // lblGrupKod
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(132, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Grup Adı";
+            this.lblGrupKod.AutoSize = true;
+            this.lblGrupKod.Location = new System.Drawing.Point(12, 24);
+            this.lblGrupKod.Name = "lblGrupKod";
+            this.lblGrupKod.Size = new System.Drawing.Size(60, 15);
+            this.lblGrupKod.TabIndex = 3;
+            this.lblGrupKod.Text = "Grup Türü";
             // 
-            // label1
+            // txtGrupKodAd
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Grup Kodu";
-            // 
-            // TxtGrupAciklama
-            // 
-            this.TxtGrupAciklama.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtGrupKodAd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtGrupAciklama.Location = new System.Drawing.Point(224, 42);
-            this.TxtGrupAciklama.Name = "TxtGrupAciklama";
-            this.TxtGrupAciklama.Size = new System.Drawing.Size(461, 23);
-            this.TxtGrupAciklama.TabIndex = 2;
+            this.txtGrupKodAd.Location = new System.Drawing.Point(202, 42);
+            this.txtGrupKodAd.Name = "txtGrupKodAd";
+            this.txtGrupKodAd.Size = new System.Drawing.Size(275, 23);
+            this.txtGrupKodAd.TabIndex = 1;
             // 
-            // TxtGrupAd
+            // txtGrupKodTur
             // 
-            this.TxtGrupAd.Location = new System.Drawing.Point(118, 42);
-            this.TxtGrupAd.Name = "TxtGrupAd";
-            this.TxtGrupAd.Size = new System.Drawing.Size(100, 23);
-            this.TxtGrupAd.TabIndex = 1;
+            this.txtGrupKodTur.Location = new System.Drawing.Point(12, 42);
+            this.txtGrupKodTur.Name = "txtGrupKodTur";
+            this.txtGrupKodTur.Size = new System.Drawing.Size(184, 23);
+            this.txtGrupKodTur.TabIndex = 0;
             // 
-            // TxtGrupKod
+            // dgvGruplar
             // 
-            this.TxtGrupKod.Location = new System.Drawing.Point(12, 42);
-            this.TxtGrupKod.Name = "TxtGrupKod";
-            this.TxtGrupKod.Size = new System.Drawing.Size(100, 23);
-            this.TxtGrupKod.TabIndex = 0;
+            this.dgvGruplar.AllowUserToAddRows = false;
+            this.dgvGruplar.AllowUserToDeleteRows = false;
+            this.dgvGruplar.BackgroundColor = System.Drawing.Color.White;
+            this.dgvGruplar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvGruplar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGruplar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colId,
+            this.colTur,
+            this.colAd});
+            this.dgvGruplar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvGruplar.Location = new System.Drawing.Point(0, 127);
+            this.dgvGruplar.MultiSelect = false;
+            this.dgvGruplar.Name = "dgvGruplar";
+            this.dgvGruplar.ReadOnly = true;
+            this.dgvGruplar.RowHeadersVisible = false;
+            this.dgvGruplar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvGruplar.Size = new System.Drawing.Size(489, 192);
+            this.dgvGruplar.TabIndex = 2;
+            this.dgvGruplar.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvGruplar_CellDoubleClick);
             // 
-            // LsbGruplar
+            // colId
             // 
-            this.LsbGruplar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LsbGruplar.FormattingEnabled = true;
-            this.LsbGruplar.ItemHeight = 15;
-            this.LsbGruplar.Location = new System.Drawing.Point(0, 127);
-            this.LsbGruplar.Name = "LsbGruplar";
-            this.LsbGruplar.Size = new System.Drawing.Size(120, 196);
-            this.LsbGruplar.TabIndex = 1;
+            this.colId.DataPropertyName = "Id";
+            this.colId.Frozen = true;
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
             // 
-            // DgvGruplar
+            // colTur
             // 
-            this.DgvGruplar.AllowUserToAddRows = false;
-            this.DgvGruplar.AllowUserToDeleteRows = false;
-            this.DgvGruplar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvGruplar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColKodu,
-            this.ColAd,
-            this.ColAciklama});
-            this.DgvGruplar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DgvGruplar.Location = new System.Drawing.Point(120, 127);
-            this.DgvGruplar.Name = "DgvGruplar";
-            this.DgvGruplar.ReadOnly = true;
-            this.DgvGruplar.Size = new System.Drawing.Size(577, 196);
-            this.DgvGruplar.TabIndex = 2;
+            this.colTur.DataPropertyName = "Tur";
+            this.colTur.Frozen = true;
+            this.colTur.HeaderText = "Grup Türü";
+            this.colTur.Name = "colTur";
+            this.colTur.ReadOnly = true;
+            this.colTur.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colTur.Width = 150;
             // 
-            // ColKodu
+            // colAd
             // 
-            this.ColKodu.HeaderText = "Kodu";
-            this.ColKodu.Name = "ColKodu";
-            this.ColKodu.ReadOnly = true;
-            // 
-            // ColAd
-            // 
-            this.ColAd.HeaderText = "Adı";
-            this.ColAd.Name = "ColAd";
-            this.ColAd.ReadOnly = true;
-            this.ColAd.Width = 150;
-            // 
-            // ColAciklama
-            // 
-            this.ColAciklama.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColAciklama.HeaderText = "Açıklama";
-            this.ColAciklama.Name = "ColAciklama";
-            this.ColAciklama.ReadOnly = true;
+            this.colAd.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAd.DataPropertyName = "Ad";
+            this.colAd.HeaderText = "Grup Adı";
+            this.colAd.Name = "colAd";
+            this.colAd.ReadOnly = true;
+            this.colAd.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // FrmStokGrup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(697, 323);
-            this.Controls.Add(this.DgvGruplar);
-            this.Controls.Add(this.LsbGruplar);
+            this.ClientSize = new System.Drawing.Size(489, 319);
+            this.Controls.Add(this.dgvGruplar);
             this.Controls.Add(this.GrpEkleGuncelle);
             this.Name = "FrmStokGrup";
             this.Text = "Stok Grupları";
+            this.Load += new System.EventHandler(this.FrmStokGrup_Load);
             this.GrpEkleGuncelle.ResumeLayout(false);
             this.GrpEkleGuncelle.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvGruplar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGruplar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -191,17 +178,14 @@ namespace WindowsFormUI.View.Moduls.Stok
         #endregion
 
         private System.Windows.Forms.GroupBox GrpEkleGuncelle;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox TxtGrupAciklama;
-        private System.Windows.Forms.TextBox TxtGrupAd;
-        private System.Windows.Forms.TextBox TxtGrupKod;
-        private UserControls.UscFormButtons UscGruplar;
-        private System.Windows.Forms.ListBox LsbGruplar;
-        private System.Windows.Forms.DataGridView DgvGruplar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColKodu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColAd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColAciklama;
+        private System.Windows.Forms.Label lblGrupAd;
+        private System.Windows.Forms.Label lblGrupKod;
+        private System.Windows.Forms.TextBox txtGrupKodAd;
+        private System.Windows.Forms.TextBox txtGrupKodTur;
+        private UserControls.UscFormButtons uscGruplar;
+        private System.Windows.Forms.DataGridView dgvGruplar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTur;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAd;
     }
 }
