@@ -11,18 +11,28 @@ namespace WindowsFormUI.View.Moduls.Stok
     {
         IStokGrupKodService _stokGrupKodService;
         StokGrupKod _secilenKod;
-        public FrmStokGrup(IStokGrupKodService stokGrupKodService)
+        bool _secimIcin;
+        public FrmStokGrup(IStokGrupKodService stokGrupKodService, bool secimIcin = true)
         {
             InitializeComponent();
             _stokGrupKodService = stokGrupKodService;
+            _secimIcin = secimIcin;
         }
 
         private void FrmStokGrup_Load(object sender, EventArgs e)
         {
-            Yenile(sender, e);
+            #region Seçim İçin
+            if(_secimIcin)
+            {
+                this.GrpEkleGuncelle.Visible = false;
+
+            }
+            #endregion
+
+            UscGruplar_ClickClear(sender, e);
         }
 
-        private void Yenile(object sender, EventArgs e)
+        private void UscGruplar_ClickClear(object sender, EventArgs e)
         {
             IDataResult<List<StokGrupKod>> result = _stokGrupKodService.GetList();
             if (result.Success)
@@ -33,7 +43,13 @@ namespace WindowsFormUI.View.Moduls.Stok
             else
                 MessageBox.Show(result.Message);
 
-            UscGruplar_ClickClear(sender, e);
+            txtGrupKodAd.Clear();
+            txtGrupKodTur.Clear();
+
+            uscGruplar.BtnSave_Text = "Ekle";
+            uscGruplar.BtnDelete_Enable = false;
+
+            _secilenKod = null;
         }
 
         private StokGrupKod GetStokGrupKodFromControls() =>
@@ -53,7 +69,7 @@ namespace WindowsFormUI.View.Moduls.Stok
             }
 
             if (result.Success)
-                Yenile(sender, e);
+                UscGruplar_ClickClear(sender, e);
             MessageBox.Show(result.Message);
         }
 
@@ -61,19 +77,8 @@ namespace WindowsFormUI.View.Moduls.Stok
         {
             IResult result = _stokGrupKodService.Delete(_secilenKod);
             if (result.Success)
-                Yenile(sender, e);
+                UscGruplar_ClickClear(sender, e);
             MessageBox.Show(result.Message);
-        }
-
-        private void UscGruplar_ClickClear(object sender, EventArgs e)
-        {
-            txtGrupKodAd.Clear();
-            txtGrupKodTur.Clear();
-
-            uscGruplar.BtnSave_Text = "Ekle";
-            uscGruplar.BtnDelete_Enable = false;
-
-            _secilenKod = null;
         }
 
         private void DgvGruplar_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -86,11 +91,24 @@ namespace WindowsFormUI.View.Moduls.Stok
                 Ad = secilenSatir.Cells[2].Value.ToString()
             };
 
-            txtGrupKodTur.Text = secilenSatir.Cells[1].Value.ToString();
-            txtGrupKodAd.Text = secilenSatir.Cells[2].Value.ToString();
+            if (_secimIcin)
+            {
+                SecileniGonder();
+                this.Close();
+            }
+            else
+            {
+                txtGrupKodTur.Text = secilenSatir.Cells[1].Value.ToString();
+                txtGrupKodAd.Text = secilenSatir.Cells[2].Value.ToString();
 
-            uscGruplar.BtnSave_Text = "Güncelle";
-            uscGruplar.BtnDelete_Enable = true;
+                uscGruplar.BtnSave_Text = "Güncelle";
+                uscGruplar.BtnDelete_Enable = true;
+            }
+        }
+
+        private StokGrupKod SecileniGonder()
+        {
+            return _secilenKod;
         }
     }
 }
