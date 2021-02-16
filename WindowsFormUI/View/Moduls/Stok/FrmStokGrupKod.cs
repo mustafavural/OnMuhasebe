@@ -7,12 +7,12 @@ using System.Windows.Forms;
 
 namespace WindowsFormUI.View.Moduls.Stok
 {
-    public partial class FrmStokGrup : FrmBase
+    public partial class FrmStokGrupKod : FrmBase
     {
         IStokGrupKodService _stokGrupKodService;
         StokGrupKod _secilenKod;
         bool _secimIcin;
-        public FrmStokGrup(IStokGrupKodService stokGrupKodService, bool secimIcin = true)
+        public FrmStokGrupKod(IStokGrupKodService stokGrupKodService, bool secimIcin = true)
         {
             InitializeComponent();
             _stokGrupKodService = stokGrupKodService;

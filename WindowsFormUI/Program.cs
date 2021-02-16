@@ -23,14 +23,14 @@ namespace WindowsFormUI
             Application.SetCompatibleTextRenderingDefault(false);
             var container = ConfigureContainer();
             ConfigureServices(new ServiceCollection());
-            Application.Run(container.Resolve<FrmStokGrup>());
+            Application.Run(container.Resolve<FrmStokGrupKod>());
         }
         private static IContainer ConfigureContainer()
         {
             var builder = new ContainerBuilder();
 
             builder.RegisterModule(new AutofacBusinessModule());
-            builder.RegisterType<FrmStokGrup>().AsSelf();
+            builder.RegisterType<FrmStokGrupKod>().AsSelf();
 
             return builder.Build();
         }

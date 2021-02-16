@@ -1,7 +1,7 @@
 ﻿
 namespace WindowsFormUI.View.Moduls.Stok
 {
-    partial class FrmStokGrup
+    partial class FrmStokGrupKod
     {
         /// <summary>
         /// Required designer variable.
