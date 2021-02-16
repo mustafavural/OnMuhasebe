@@ -6,7 +6,7 @@ using Core.Utilities.IoC;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
-using WindowsFormUI.View.Moduls.Stok;
+using WindowsFormUI.View.Moduls.Stoklar;
 
 namespace WindowsFormUI
 {
@@ -23,7 +23,7 @@ namespace WindowsFormUI
             Application.SetCompatibleTextRenderingDefault(false);
             var container = ConfigureContainer();
             ConfigureServices(new ServiceCollection());
-            Application.Run(container.Resolve<FrmStokGrupKod>());
+            Application.Run(container.Resolve<FrmStokListe>());
         }
         private static IContainer ConfigureContainer()
         {
@@ -31,6 +31,7 @@ namespace WindowsFormUI
 
             builder.RegisterModule(new AutofacBusinessModule());
             builder.RegisterType<FrmStokGrupKod>().AsSelf();
+            builder.RegisterType<FrmStokListe>().AsSelf();
 
             return builder.Build();
         }
