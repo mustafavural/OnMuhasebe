@@ -30,7 +30,7 @@ namespace WindowsFormUI
             var builder = new ContainerBuilder();
 
             builder.RegisterModule(new AutofacBusinessModule());
-            builder.RegisterType<FrmStokGrupKod>().AsSelf();
+            builder.RegisterType<FrmStokGrup>().AsSelf();
             builder.RegisterType<FrmStokListe>().AsSelf();
 
             return builder.Build();

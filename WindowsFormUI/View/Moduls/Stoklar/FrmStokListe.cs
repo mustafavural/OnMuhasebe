@@ -1,9 +1,13 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Result;
-using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using Entities.Concrete;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
 using System.Linq;
 
 namespace WindowsFormUI.View.Moduls.Stoklar
