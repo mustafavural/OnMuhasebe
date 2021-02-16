@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace WindowsFormUI.View.Moduls.Stok
+namespace WindowsFormUI.View.Moduls.Stoklar
 {
     public partial class FrmStokGrup : FrmBase
     {

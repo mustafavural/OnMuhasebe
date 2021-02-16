@@ -1,5 +1,5 @@
 ﻿
-namespace WindowsFormUI.View.Moduls.Stok
+namespace WindowsFormUI.View.Moduls.Stoklar
 {
     partial class FrmStokGrup
     {
