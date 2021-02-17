@@ -80,6 +80,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.txtKDV.Name = "txtKDV";
             this.txtKDV.Size = new System.Drawing.Size(204, 23);
             this.txtKDV.TabIndex = 3;
+            this.txtKDV.TextChanged += new System.EventHandler(this.TxtStokBilgiler_TextChanged);
             // 
             // lblKDV
             // 
@@ -96,6 +97,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.txtStokAd.Name = "txtStokAd";
             this.txtStokAd.Size = new System.Drawing.Size(204, 23);
             this.txtStokAd.TabIndex = 2;
+            this.txtStokAd.TextChanged += new System.EventHandler(this.TxtStokBilgiler_TextChanged);
             // 
             // lblStokAd
             // 
@@ -112,6 +114,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.txtBarkod.Name = "txtBarkod";
             this.txtBarkod.Size = new System.Drawing.Size(204, 23);
             this.txtBarkod.TabIndex = 1;
+            this.txtBarkod.TextChanged += new System.EventHandler(this.TxtStokBilgiler_TextChanged);
             // 
             // lblBarkod
             // 
@@ -128,6 +131,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.txtStokKod.Name = "txtStokKod";
             this.txtStokKod.Size = new System.Drawing.Size(204, 23);
             this.txtStokKod.TabIndex = 0;
+            this.txtStokKod.TextChanged += new System.EventHandler(this.TxtStokBilgiler_TextChanged);
             // 
             // lblStokKod
             // 
@@ -147,6 +151,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.colGrupTur,
             this.colGrupAd});
             this.lstGrupView.FullRowSelect = true;
+            this.lstGrupView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lstGrupView.HideSelection = false;
             this.lstGrupView.Location = new System.Drawing.Point(6, 260);
             this.lstGrupView.Name = "lstGrupView";
@@ -162,8 +167,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             // 
             // colGrupAd
             // 
-            this.colGrupAd.Text = "Grup Türü";
-            this.colGrupAd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.colGrupAd.Text = "Grup Adı";
             this.colGrupAd.Width = 100;
             // 
             // btnStokGrupSil
@@ -174,6 +178,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.btnStokGrupSil.Size = new System.Drawing.Size(43, 40);
             this.btnStokGrupSil.TabIndex = 5;
             this.btnStokGrupSil.UseVisualStyleBackColor = true;
+            this.btnStokGrupSil.Click += new System.EventHandler(this.BtnStokGrupSil_Click);
             // 
             // btnStokGrupEkle
             // 
@@ -183,6 +188,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.btnStokGrupEkle.Size = new System.Drawing.Size(43, 40);
             this.btnStokGrupEkle.TabIndex = 4;
             this.btnStokGrupEkle.UseVisualStyleBackColor = true;
+            this.btnStokGrupEkle.Click += new System.EventHandler(this.BtnStokGrupEkle_Click);
             // 
             // dgvStokListe
             // 

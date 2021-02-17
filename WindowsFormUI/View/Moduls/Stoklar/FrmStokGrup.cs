@@ -12,7 +12,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         IStokGrupKodService _stokGrupKodService;
         StokGrupKod _secilenKod;
         bool _secimIcin;
-        public FrmStokGrup(IStokGrupKodService stokGrupKodService, bool secimIcin = true)
+        public FrmStokGrup(IStokGrupKodService stokGrupKodService, bool secimIcin = false)
         {
             InitializeComponent();
             _stokGrupKodService = stokGrupKodService;
@@ -91,11 +91,8 @@ namespace WindowsFormUI.View.Moduls.Stoklar
                 Ad = secilenSatir.Cells[2].Value.ToString()
             };
 
-            if (_secimIcin)
-            {
-                SecileniGonder();
+            if (_secimIcin) 
                 this.Close();
-            }
             else
             {
                 txtGrupKodTur.Text = secilenSatir.Cells[1].Value.ToString();
@@ -106,8 +103,10 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             }
         }
 
-        private StokGrupKod SecileniGonder()
+        public StokGrupKod SecimIcinAc()
         {
+            this._secimIcin = true;
+            this.ShowDialog();
             return _secilenKod;
         }
     }
