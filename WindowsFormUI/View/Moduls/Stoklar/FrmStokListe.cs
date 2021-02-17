@@ -1,14 +1,11 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Result;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
-using Entities.Concrete;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace WindowsFormUI.View.Moduls.Stoklar
 {
@@ -16,10 +13,13 @@ namespace WindowsFormUI.View.Moduls.Stoklar
     {
         IStokService _stokService;
         IStokGrupKodService _stokGrupKodService;
-        IDataResult<List<Stok>> _stokResult;
         FrmStokGrup _frmStokGrup;
+
+        IDataResult<List<Stok>> _stokResult;
         StokGrupKod _secilenGrup;
-        public FrmStokListe(IStokService stokService, FrmStokGrup frmStokGrup, IStokGrupKodService stokGrupService)
+        Stok _secilenStok;
+        bool _secimIcin = false;
+        public FrmStokListe(IStokService stokService, IStokGrupKodService stokGrupService, FrmStokGrup frmStokGrup)
         {
             InitializeComponent();
             _stokService = stokService;
@@ -30,25 +30,19 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         private void ListeyiYenile()
         {
             dgvStokListe.DataSource = _stokResult.Data
-                .Where(kod =>
+                .Where(p =>
                 {
-                    return kod.Kod.Contains(txtStokKod.Text.ToUpper());
-                }).Where(bar =>
-                {
-                    return bar.Barkod.Contains(txtBarkod.Text.ToUpper());
-                }).Where(ad =>
-                {
-                    return ad.Ad.Contains(txtStokAd.Text.ToUpper());
-                }).Where(kdv =>
-                {
-                    return kdv.KDV.ToString().Contains(txtKDV.Text.ToUpper());
+                    return p.Kod.Contains(txtStokKod.Text.ToUpper()) && 
+                    p.Barkod.Contains(txtBarkod.Text.ToUpper()) && 
+                    p.Ad.Contains(txtStokAd.Text.ToUpper()) &&
+                    p.KDV.ToString().Contains(txtKDV.Text.ToUpper());
                 }).Where(grup =>
                 {
                     if (lstGrupView.Items.Count == 0)
                         return true;
                     else
                     {
-                        var stokGruplar = _stokGrupKodService.GetListByStok(grup.Id).Data;
+                        var stokGruplar = _stokGrupKodService.GetListByStokId(grup.Id).Data;
                         foreach (var item in stokGruplar)
                         {
                             for (int i = 0; i < lstGrupView.Items.Count; i++)
@@ -66,7 +60,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         {
             _stokResult = _stokService.GetList();
             if (_stokResult.Success)
-                dgvStokListe.DataSource = _stokResult.Data.Select(s => new { s.Kod, s.Barkod, s.Ad }).ToList();
+                dgvStokListe.DataSource = _stokResult.Data.Select(s => new { s.Id, s.Kod, s.Barkod, s.Ad }).ToList();
             else
                 MessageBox.Show(_stokResult.Message);
         }
@@ -91,6 +85,23 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         private void TxtStokBilgiler_TextChanged(object sender, EventArgs e)
         {
             ListeyiYenile();
+        }
+
+        public Stok SecimIcinAc()
+        {
+            this._secimIcin = true;
+            this.ShowDialog();
+            return _secilenStok;
+        }
+
+        private void DgvStokListe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_secimIcin)
+            {
+                var secilenSatir = dgvStokListe.SelectedRows[0];
+                _secilenStok = _stokService.GetById((int)secilenSatir.Cells[0].Value).Data;
+                this.Close();
+            }
         }
     }
 }

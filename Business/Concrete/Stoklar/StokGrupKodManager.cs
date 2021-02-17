@@ -127,7 +127,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [LogAspect()]
         [CacheAspect()]
-        public IDataResult<List<StokGrupKod>> GetListByStok(int stokId)
+        public IDataResult<List<StokGrupKod>> GetListByStokId(int stokId)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidStokId(stokId));
@@ -135,7 +135,7 @@ namespace Business.Concrete
                 return (IDataResult<List<StokGrupKod>>)result;
 
             return new SuccessDataResult<List<StokGrupKod>>(_stokGrupKodDal.GetAll(p =>
-            p.Id == _stokGrupService.GetByStokId(stokId).Data.Select(s => s.StokGrupKodId).Single()));
+            _stokGrupService.GetByStokId(stokId).Data.Select(s => s.StokGrupKodId).Contains(p.Id)));
         }
 
         [PerformanceAspect(1)]

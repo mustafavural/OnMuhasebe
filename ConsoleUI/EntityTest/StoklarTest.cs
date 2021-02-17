@@ -68,7 +68,7 @@ namespace ConsoleUI.EntityTest
             base.EkranaYaz(getList.Data);
 
             Console.WriteLine("getbyGrupAd");
-            var getbyGrupAd = _stokService.GetListByGrupAd("KIRMIZI");
+            var getbyGrupAd = _stokService.GetListByGrupKodAd("KIRMIZI");
             Console.WriteLine(getbyGrupAd.Message);
             base.EkranaYaz(getbyGrupAd.Data);
 

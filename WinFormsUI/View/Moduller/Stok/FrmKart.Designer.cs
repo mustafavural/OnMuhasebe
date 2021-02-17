@@ -275,6 +275,7 @@ namespace WinFormsUI.View.Moduller.Stok
             // 
             this.gridButtons1.btnCancel_Text = "Stok Sil";
             this.gridButtons1.btnCancelEnable = true;
+            this.gridButtons1.btnSaveEnable = true;
             this.gridButtons1.btnTemizleVisible = true;
             this.gridButtons1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gridButtons1.Location = new System.Drawing.Point(2, 198);
@@ -584,7 +585,7 @@ namespace WinFormsUI.View.Moduller.Stok
             this.colbirim3oran.Visible = true;
             this.colbirim3oran.VisibleIndex = 8;
             // 
-            // frmKart
+            // FrmKart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -592,7 +593,8 @@ namespace WinFormsUI.View.Moduller.Stok
             this.Controls.Add(this.grdCtrlStokListe);
             this.Controls.Add(this.groupControl1);
             this.IconOptions.Image = global::WinFormsUI.Properties.Resources.Stok_Kartı16x16;
-            this.Name = "frmKart";
+            this.IconOptions.ShowIcon = false;
+            this.Name = "FrmKart";
             this.Text = "Stok Kartı";
             this.Controls.SetChildIndex(this.groupControl1, 0);
             this.Controls.SetChildIndex(this.grdCtrlStokListe, 0);

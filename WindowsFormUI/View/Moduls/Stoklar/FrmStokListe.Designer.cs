@@ -207,8 +207,10 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.dgvStokListe.ReadOnly = true;
             this.dgvStokListe.RowHeadersVisible = false;
             this.dgvStokListe.RowTemplate.Height = 25;
+            this.dgvStokListe.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStokListe.Size = new System.Drawing.Size(560, 437);
             this.dgvStokListe.TabIndex = 1;
+            this.dgvStokListe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvStokListe_CellDoubleClick);
             // 
             // colId
             // 

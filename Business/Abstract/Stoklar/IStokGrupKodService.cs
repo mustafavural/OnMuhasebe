@@ -9,6 +9,6 @@ namespace Business.Abstract
     {
         IDataResult<StokGrupKod> GetByAd(string stokGrupKodAd);
         IDataResult<List<StokGrupKod>> GetListByTur(string stokGrupKodTur);
-        IDataResult<List<StokGrupKod>> GetListByStok(int stokId);
+        IDataResult<List<StokGrupKod>> GetListByStokId(int stokId);
     }
 }

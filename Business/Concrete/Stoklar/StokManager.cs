@@ -179,7 +179,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [CacheAspect()]
         [LogAspect()]
-        public IDataResult<List<Stok>> GetListByGrupAd(string grupKodAd)
+        public IDataResult<List<Stok>> GetListByGrupKodAd(string grupKodAd)
         {
             IResult result = BusinessRules.Run(
                 CheckIfListValidGrupKodAd(grupKodAd));
@@ -194,7 +194,7 @@ namespace Business.Concrete
         [PerformanceAspect(1)]
         [CacheAspect()]
         [LogAspect()]
-        public IDataResult<List<Stok>> GetListByGrupKod(int grupKodId)
+        public IDataResult<List<Stok>> GetListByGrupKodId(int grupKodId)
         {
             IResult result = BusinessRules.Run(
                 CheckIfListValidGrupId(grupKodId));

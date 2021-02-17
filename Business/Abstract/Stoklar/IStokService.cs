@@ -10,8 +10,8 @@ namespace Business.Abstract
         IDataResult<Stok> GetByKod(string stokKod);
         IDataResult<Stok> GetByBarkod(string stokBarkod);
         IDataResult<Stok> GetByAd(string stokAd);
-        IDataResult<List<Stok>> GetListByGrupKod(int grupKodId);
-        IDataResult<List<Stok>> GetListByGrupAd(string grupKodAd);
+        IDataResult<List<Stok>> GetListByGrupKodId(int grupKodId);
+        IDataResult<List<Stok>> GetListByGrupKodAd(string grupKodAd);
         IDataResult<List<Stok>> GetListByKDV(int KDV);
     }
 }

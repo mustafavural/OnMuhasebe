@@ -23,7 +23,7 @@ namespace WindowsFormUI
             Application.SetCompatibleTextRenderingDefault(false);
             var container = ConfigureContainer();
             ConfigureServices(new ServiceCollection());
-            Application.Run(container.Resolve<FrmStokListe>());
+            Application.Run(container.Resolve<FrmStokKart>());
         }
         private static IContainer ConfigureContainer()
         {
@@ -32,6 +32,7 @@ namespace WindowsFormUI
             builder.RegisterModule(new AutofacBusinessModule());
             builder.RegisterType<FrmStokGrup>().AsSelf();
             builder.RegisterType<FrmStokListe>().AsSelf();
+            builder.RegisterType<FrmStokKart>().AsSelf();
 
             return builder.Build();
         }
