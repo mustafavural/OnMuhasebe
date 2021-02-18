@@ -73,9 +73,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<PersonelHareket> GetById(int Id)
         {
             var result = BusinessRules.Run(
@@ -86,17 +84,13 @@ namespace Business.Concrete
             return new SuccessDataResult<PersonelHareket>(_personelHareketDal.Get(p => p.Id == Id));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<PersonelHareket>> GetList()
         {
             return new SuccessDataResult<List<PersonelHareket>>(_personelHareketDal.GetAll());
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<PersonelHareket>> GetListByIslemTarihi(DateTime tarih)
         {
             var result = BusinessRules.Run(
@@ -107,9 +101,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<PersonelHareket>>(_personelHareketDal.GetAll(p => p.IslemTarihi == tarih));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<PersonelHareket>> GetListByPersonelId(int personelId)
         {
             var result = BusinessRules.Run(
@@ -120,9 +112,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<PersonelHareket>>(_personelHareketDal.GetAll(p => p.PersonelId == personelId));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<PersonelHareket>> GetListByTur(string tur)
         {
             var result = BusinessRules.Run(

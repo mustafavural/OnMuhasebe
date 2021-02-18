@@ -52,9 +52,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<Banka> GetById(int Id)
         {
             IResult result = BusinessRules.Run(
@@ -65,9 +63,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Banka>(_bankaDal.Get(p => p.Id == Id));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<Banka> GetByAd(string ad)
         {
             IResult result = BusinessRules.Run(
@@ -78,9 +74,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Banka>(_bankaDal.Get(p => p.Ad == ad));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<Banka>> GetList()
         {
             return new SuccessDataResult<List<Banka>>(_bankaDal.GetAll());

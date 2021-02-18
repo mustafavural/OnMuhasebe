@@ -66,9 +66,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<BorcSenet>> GetListByCariIdVerilen(int cariIdVerilen)
         {
             IResult result = BusinessRules.Run(
@@ -79,9 +77,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<BorcSenet>>(_borcSenetDal.GetAll(p => p.CariIdVerilen == cariIdVerilen));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<BorcSenet>> GetListByCikisTarihi(DateTime tarih)
         {
             IResult result = BusinessRules.Run(

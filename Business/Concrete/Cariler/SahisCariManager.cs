@@ -51,9 +51,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<SahisCari> GetByTCNo(string TCNo)
         {
             IResult result = BusinessRules.Run(

@@ -63,9 +63,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
         #endregion
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<CariGrup> GetById(int cariGrupId)
         {
             IResult result = BusinessRules.Run(
@@ -75,9 +73,7 @@ namespace Business.Concrete
 
             return new SuccessDataResult<CariGrup>(_cariGrupDal.Get(p => p.Id == cariGrupId));
         }
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<CariGrup>> GetListByCariGrupKodId(int cariGrupKodId)
         {
             IResult result = BusinessRules.Run(
@@ -88,9 +84,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CariGrup>>(_cariGrupDal.GetAll(p => p.CariGrupKodId == cariGrupKodId));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<CariGrup>> GetListByCariId(int cariId)
         {
             IResult result = BusinessRules.Run(
@@ -102,9 +96,7 @@ namespace Business.Concrete
         }
 
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<CariGrup>> GetList()
         {
             return new SuccessDataResult<List<CariGrup>>(_cariGrupDal.GetAll());

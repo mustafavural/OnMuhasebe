@@ -152,9 +152,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<Personel> GetById(int Id)
         {
             IResult result = BusinessRules.Run(
@@ -165,9 +163,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Personel>(_personelDal.Get(p => p.Id == Id));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<Personel>> GetListByAd(string ad)
         {
             IResult result = BusinessRules.Run(
@@ -178,9 +174,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Personel>>(_personelDal.GetAll(p => p.Ad == ad));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<Personel>> GetListByIkinciAd(string ikinciAd)
         {
             IResult result = BusinessRules.Run(
@@ -191,9 +185,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Personel>>(_personelDal.GetAll(p => p.IkinciAd == ikinciAd));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<Personel>> GetListBySoyad(string soyad)
         {
             IResult result = BusinessRules.Run(
@@ -204,9 +196,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Personel>>(_personelDal.GetAll(p => p.Soyad == soyad));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<Personel>> GetListByTCNo(string tcNo)
         {
             IResult result = BusinessRules.Run(
@@ -217,9 +207,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Personel>>(_personelDal.GetAll(p => p.TCNo == tcNo));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<Personel>> GetListByDogumTarihi(DateTime tarih)
         {
             IResult result = BusinessRules.Run(
@@ -230,9 +218,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Personel>>(_personelDal.GetAll(p => p.DogumTarihi == tarih));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<Personel>> GetListByCinsiyet(string cinsiyet)
         {
             IResult result = BusinessRules.Run(
@@ -243,9 +229,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Personel>>(_personelDal.GetAll(p => p.Cinsiyet == cinsiyet));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<Personel>> GetListByMedeniHal(string medeniHal)
         {
             IResult result = BusinessRules.Run(
@@ -256,9 +240,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Personel>>(_personelDal.GetAll(p => p.MedeniHal == medeniHal));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<Personel>> GetListByCocukSayisi(int cocukSayisi)
         {
             IResult result = BusinessRules.Run(
@@ -269,9 +251,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Personel>>(_personelDal.GetAll(p => p.CocukSayisi == cocukSayisi));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<Personel>> GetListByBirim(string birim)
         {
             IResult result = BusinessRules.Run(
@@ -282,9 +262,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Personel>>(_personelDal.GetAll(p => p.Birim == birim));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<Personel>> GetListByGorev(string gorev)
         {
             IResult result = BusinessRules.Run(
@@ -295,9 +273,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Personel>>(_personelDal.GetAll(p => p.Gorev == gorev));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<Personel>> GetListByIzin(int izin)
         {
             IResult result = BusinessRules.Run(
@@ -308,9 +284,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Personel>>(_personelDal.GetAll(p => p.Izin == izin));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<Personel>> GetListByKatSayi(int katSayi)
         {
             IResult result = BusinessRules.Run(
@@ -321,9 +295,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Personel>>(_personelDal.GetAll(p => p.KatSayi == katSayi));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<Personel>> GetList()
         {
             throw new NotImplementedException();

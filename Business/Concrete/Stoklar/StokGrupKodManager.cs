@@ -77,9 +77,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<StokGrupKod> GetById(int stokGrupKodId)
         {
             IResult result = BusinessRules.Run(
@@ -90,9 +88,7 @@ namespace Business.Concrete
             return new SuccessDataResult<StokGrupKod>(_stokGrupKodDal.Get(p => p.Id == stokGrupKodId));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<StokGrupKod> GetByAd(string stokGrupKodAd)
         {
             IResult result = BusinessRules.Run(
@@ -103,17 +99,13 @@ namespace Business.Concrete
             return new SuccessDataResult<StokGrupKod>(_stokGrupKodDal.Get(p => p.Ad == stokGrupKodAd));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<StokGrupKod>> GetList()
         {
             return new SuccessDataResult<List<StokGrupKod>>(_stokGrupKodDal.GetAll());
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<StokGrupKod>> GetListByTur(string stokGrupKodTur)
         {
             IResult result = BusinessRules.Run(
@@ -124,9 +116,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<StokGrupKod>>(_stokGrupKodDal.GetAll(p => p.Tur == stokGrupKodTur));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<StokGrupKod>> GetListByStokId(int stokId)
         {
             IResult result = BusinessRules.Run(

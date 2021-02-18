@@ -33,9 +33,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<TEntity> GetByKod(string kod)
         {
             IResult result = BusinessRules.Run(

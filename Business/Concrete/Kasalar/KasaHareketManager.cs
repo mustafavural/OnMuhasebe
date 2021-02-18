@@ -107,9 +107,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<KasaHareket> GetById(int Id)
         {
             var result = BusinessRules.Run(
@@ -120,9 +118,7 @@ namespace Business.Concrete
             return new SuccessDataResult<KasaHareket>(_kasaHareketDal.Get(p => p.Id == Id));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<KasaHareket> GetByBelgeNo(string belgeNo)
         {
             var result = BusinessRules.Run(
@@ -133,17 +129,13 @@ namespace Business.Concrete
             return new SuccessDataResult<KasaHareket>(_kasaHareketDal.Get(p => p.BelgeNo == belgeNo));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<KasaHareket>> GetList()
         {
             return new SuccessDataResult<List<KasaHareket>>(_kasaHareketDal.GetAll());
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<KasaHareket>> GetListByCariId(int cariId)
         {
             var result = BusinessRules.Run(
@@ -154,9 +146,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<KasaHareket>>(_kasaHareketDal.GetAll(p => p.CariHarId == cariId));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<KasaHareket>> GetListByCikanMiktar(decimal cikanMiktar)
         {
             var result = BusinessRules.Run(
@@ -167,9 +157,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<KasaHareket>>(_kasaHareketDal.GetAll(p => p.CikanMiktar == cikanMiktar));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<KasaHareket>> GetListByGirenMiktar(decimal girenMiktar)
         {
             var result = BusinessRules.Run(
@@ -180,9 +168,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<KasaHareket>>(_kasaHareketDal.GetAll(p => p.GirenMiktar == girenMiktar));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<KasaHareket>> GetListByKasaId(int kasaId)
         {
             var result = BusinessRules.Run(
@@ -193,9 +179,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<KasaHareket>>(_kasaHareketDal.GetAll(p => p.KasaId == kasaId));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<KasaHareket>> GetListByPersonelId(int personelId)
         {
             var result = BusinessRules.Run(
@@ -206,9 +190,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<KasaHareket>>(_kasaHareketDal.GetAll(p => p.PersonelHarId == personelId));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<KasaHareket>> GetListByTarih(DateTime tarih)
         {
             var result = BusinessRules.Run(

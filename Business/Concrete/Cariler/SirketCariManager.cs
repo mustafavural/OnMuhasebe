@@ -51,9 +51,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<SirketCari> GetByVergiNo(string VergiNo)
         {
             IResult result = BusinessRules.Run(

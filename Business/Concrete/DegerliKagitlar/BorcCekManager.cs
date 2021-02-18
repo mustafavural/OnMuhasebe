@@ -66,9 +66,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<BorcCek>> GetListByCariIdVerilen(int cariIdVerilen)
         {
             IResult result = BusinessRules.Run(
@@ -79,9 +77,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<BorcCek>>(_borcCekDal.GetAll(p => p.CariIdVerilen == cariIdVerilen));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<BorcCek>> GetListByCikisTarihi(DateTime tarih)
         {
             IResult result = BusinessRules.Run(
@@ -92,9 +88,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<BorcCek>>(_borcCekDal.GetAll(p => p.CikisTarihi == tarih));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<BorcCek>> GetListByHesapId(int hesapId)
         {
             IResult result = BusinessRules.Run(

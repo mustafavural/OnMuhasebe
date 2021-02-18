@@ -115,9 +115,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<BankaHesapHareket> GetById(int Id)
         {
             IResult result = BusinessRules.Run(
@@ -128,9 +126,7 @@ namespace Business.Concrete
             return new SuccessDataResult<BankaHesapHareket>(_bankaHesapHareketDal.Get(p => p.Id == Id));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<BankaHesapHareket> GetByBelgeNo(string belgeNo)
         {
             IResult result = BusinessRules.Run(
@@ -141,17 +137,13 @@ namespace Business.Concrete
             return new SuccessDataResult<BankaHesapHareket>(_bankaHesapHareketDal.Get(p => p.BelgeNo == belgeNo));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<BankaHesapHareket>> GetList()
         {
             return new SuccessDataResult<List<BankaHesapHareket>>(_bankaHesapHareketDal.GetAll());
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<BankaHesapHareket>> GetListByCariHarId(int cariHarId)
         {
             IResult result = BusinessRules.Run(
@@ -162,9 +154,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<BankaHesapHareket>>(_bankaHesapHareketDal.GetAll(p => p.CariHarId == cariHarId));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<BankaHesapHareket>> GetListByCikanMiktar(decimal cikanMiktar)
         {
             IResult result = BusinessRules.Run(
@@ -175,9 +165,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<BankaHesapHareket>>(_bankaHesapHareketDal.GetAll(p => p.CikanMiktar == cikanMiktar));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<BankaHesapHareket>> GetListByGirenMiktar(decimal girenMiktar)
         {
             IResult result = BusinessRules.Run(
@@ -188,9 +176,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<BankaHesapHareket>>(_bankaHesapHareketDal.GetAll(p => p.GirenMiktar == girenMiktar));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<BankaHesapHareket>> GetListByHesapId(int hesapId)
         {
             IResult result = BusinessRules.Run(
@@ -201,9 +187,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<BankaHesapHareket>>(_bankaHesapHareketDal.GetAll(p => p.HesapId == hesapId));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<BankaHesapHareket>> GetListByPersonelHarId(int personelHarId)
         {
             IResult result = BusinessRules.Run(
@@ -214,9 +198,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<BankaHesapHareket>>(_bankaHesapHareketDal.GetAll(p => p.PersonelHarId == personelHarId));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<BankaHesapHareket>> GetListByTarih(DateTime tarih)
         {
             IResult result = BusinessRules.Run(

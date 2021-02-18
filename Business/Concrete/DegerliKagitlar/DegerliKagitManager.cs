@@ -54,9 +54,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<TEntity> GetById(int Id)
         {
             IResult result = BusinessRules.Run(
@@ -67,9 +65,7 @@ namespace Business.Concrete
             return new SuccessDataResult<TEntity>(_degerliKagitDal.Get(p => p.Id == Id));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<TEntity>> GetListByTutar(decimal tutar)
         {
             IResult result = BusinessRules.Run(
@@ -80,9 +76,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<TEntity>>(_degerliKagitDal.GetAll(p => p.Tutar == tutar));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<TEntity>> GetListByVade(DateTime vade)
         {
             IResult result = BusinessRules.Run(
@@ -93,9 +87,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<TEntity>>(_degerliKagitDal.GetAll(p => p.Vade == vade));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<TEntity>> GetList()
         {
             return new SuccessDataResult<List<TEntity>>(_degerliKagitDal.GetAll());

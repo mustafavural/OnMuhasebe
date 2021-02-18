@@ -74,9 +74,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<TEntity> GetById(int cariId)
         {
             IResult result = BusinessRules.Run(
@@ -87,9 +85,7 @@ namespace Business.Concrete
             return new SuccessDataResult<TEntity>(_cariDal.Get(p => p.Id == cariId));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<TEntity> GetByKod(string cariKod)
         {
             IResult result = BusinessRules.Run(
@@ -100,9 +96,7 @@ namespace Business.Concrete
             return new SuccessDataResult<TEntity>(_cariDal.Get(p => p.Kod == cariKod));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<TEntity> GetByUnvan(string cariUnvan)
         {
             IResult result = BusinessRules.Run(
@@ -113,9 +107,7 @@ namespace Business.Concrete
             return new SuccessDataResult<TEntity>(_cariDal.Get(p => p.Unvan == cariUnvan));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<TEntity>> GetListByVergiDairesi(string vergiDairesi)
         {
             IResult result = BusinessRules.Run(
@@ -126,9 +118,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<TEntity>>(_cariDal.GetAll(p => p.VergiDairesi == vergiDairesi));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<TEntity>> GetListByGrupAd(string grupKodAd)
         {
             IResult result = BusinessRules.Run(
@@ -141,9 +131,7 @@ namespace Business.Concrete
                 _cariGrupKodService.GetByAd(grupKodAd).Data.Id).Data.Select(s => s.Id).Contains(p.Id)).ToList());
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<TEntity>> GetList()
         {
             return new SuccessDataResult<List<TEntity>>(_cariDal.GetAll());

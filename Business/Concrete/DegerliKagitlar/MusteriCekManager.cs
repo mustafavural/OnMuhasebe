@@ -106,9 +106,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<MusteriCek>> GetListByAlisTarihi(DateTime tarih)
         {
             IResult result = BusinessRules.Run(
@@ -119,9 +117,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<MusteriCek>>(_musteriCekDal.GetAll(p => p.AlisTarihi == tarih));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<MusteriCek>> GetListByAsilBorclu(string asilBorclu)
         {
             IResult result = BusinessRules.Run(
@@ -132,9 +128,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<MusteriCek>>(_musteriCekDal.GetAll(p => p.AsilBorclu == asilBorclu));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<MusteriCek>> GetListByCariIdCiroEden(int cariIdCiroEden)
         {
             IResult result = BusinessRules.Run(
@@ -145,9 +139,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<MusteriCek>>(_musteriCekDal.GetAll(p => p.CariIdCiroEden == cariIdCiroEden));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<MusteriCek>> GetListByCariIdCiroEdilen(int cariIdCiroEdilen)
         {
             IResult result = BusinessRules.Run(
@@ -158,9 +150,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<MusteriCek>>(_musteriCekDal.GetAll(p => p.CariIdCiroEdilen == cariIdCiroEdilen));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<MusteriCek>> GetListByCikisTarihi(DateTime tarih)
         {
             IResult result = BusinessRules.Run(
@@ -171,9 +161,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<MusteriCek>>(_musteriCekDal.GetAll(p => p.CikisTarihi == tarih));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<MusteriCek>> GetListByHesapIdTahsileVerilen(int hesapIdTahsileVerilen)
         {
             IResult result = BusinessRules.Run(

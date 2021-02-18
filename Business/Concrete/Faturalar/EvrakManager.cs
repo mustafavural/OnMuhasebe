@@ -103,9 +103,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<TEntity> GetById(int faturaId)
         {
             IResult result = BusinessRules.Run(
@@ -116,9 +114,7 @@ namespace Business.Concrete
             return new SuccessDataResult<TEntity>(_faturaDal.Get(p => p.Id == faturaId));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<TEntity> GetByCariHareketId(int cariHareketId)
         {
             IResult result = BusinessRules.Run(
@@ -129,9 +125,7 @@ namespace Business.Concrete
             return new SuccessDataResult<TEntity>(_faturaDal.Get(p => p.CariHarId == cariHareketId));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<TEntity> GetByPersonelHareketId(int personelHareketId)
         {
             IResult result = BusinessRules.Run(
@@ -142,9 +136,7 @@ namespace Business.Concrete
             return new SuccessDataResult<TEntity>(_faturaDal.Get(p => p.PersonelHarId == personelHareketId));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<TEntity>> GetListByCariId(int cariId)
         {
             IResult result = BusinessRules.Run(
@@ -156,9 +148,7 @@ namespace Business.Concrete
             _cariHareketService.GetListByCariId(cariId).Data.Select(s => s.Id).Contains(p.CariHarId)));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<TEntity>> GetListByPersonelId(int personelId)
         {
             IResult result = BusinessRules.Run(
@@ -170,9 +160,7 @@ namespace Business.Concrete
             _personelHareketService.GetListByPersonelId(personelId).Data.Select(s => s.PersonelId).Contains(p.PersonelHarId)));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<TEntity>> GetListByTarih(DateTime tarih)
         {
             IResult result = BusinessRules.Run(
@@ -183,9 +171,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<TEntity>>(_faturaDal.GetAll(p => p.Tarih == tarih));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<TEntity>> GetListByKayitTarihi(DateTime tarih)
         {
             IResult result = BusinessRules.Run(
@@ -196,9 +182,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<TEntity>>(_faturaDal.GetAll(p => p.KayitTarihi == tarih));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<TEntity>> GetList()
         {
             return new SuccessDataResult<List<TEntity>>(_faturaDal.GetAll());

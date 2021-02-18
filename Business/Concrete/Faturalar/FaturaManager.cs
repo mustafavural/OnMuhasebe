@@ -53,9 +53,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<Fatura> GetByNo(string faturaNo)
         {
             IResult result = BusinessRules.Run(

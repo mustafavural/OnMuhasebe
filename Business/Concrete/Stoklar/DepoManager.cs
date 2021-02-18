@@ -61,9 +61,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<Depo> GetById(int Id)
         {
             IResult result = BusinessRules.Run(
@@ -74,9 +72,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Depo>(_depoDal.Get(p => p.Id == Id));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<Depo> GetByAdresId(int adresId)
         {
             IResult result = BusinessRules.Run(
@@ -87,9 +83,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Depo>(_depoDal.Get(p => p.AdresId == adresId));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<Depo> GetByAd(string ad)
         {
             IResult result = BusinessRules.Run(
@@ -100,9 +94,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Depo>(_depoDal.Get(p => p.Ad == ad));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<Depo>> GetList()
         {
             return new SuccessDataResult<List<Depo>>(_depoDal.GetAll());

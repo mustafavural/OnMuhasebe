@@ -112,6 +112,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             // 
             this.dgvGruplar.AllowUserToAddRows = false;
             this.dgvGruplar.AllowUserToDeleteRows = false;
+            this.dgvGruplar.AllowUserToResizeRows = false;
             this.dgvGruplar.BackgroundColor = System.Drawing.Color.White;
             this.dgvGruplar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvGruplar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;

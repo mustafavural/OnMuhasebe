@@ -52,9 +52,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<Irsaliye> GetByNo(string irsaliyeNo)
         {
             IResult result = BusinessRules.Run(

@@ -92,9 +92,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<BankaHesap> GetById(int Id)
         {
             IResult result = BusinessRules.Run(
@@ -105,9 +103,7 @@ namespace Business.Concrete
             return new SuccessDataResult<BankaHesap>(_bankaHesapDal.Get(p => p.Id == Id));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<BankaHesap> GetByAd(string ad)
         {
             IResult result = BusinessRules.Run(
@@ -118,9 +114,7 @@ namespace Business.Concrete
             return new SuccessDataResult<BankaHesap>(_bankaHesapDal.Get(p => p.Ad == ad));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<BankaHesap> GetByIBAN(string iban)
         {
             IResult result = BusinessRules.Run(
@@ -131,9 +125,7 @@ namespace Business.Concrete
             return new SuccessDataResult<BankaHesap>(_bankaHesapDal.Get(p => p.IBAN == iban));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<BankaHesap> GetByNo(string no)
         {
             IResult result = BusinessRules.Run(
@@ -144,17 +136,13 @@ namespace Business.Concrete
             return new SuccessDataResult<BankaHesap>(_bankaHesapDal.Get(p => p.No == no));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<BankaHesap>> GetList()
         {
             return new SuccessDataResult<List<BankaHesap>>(_bankaHesapDal.GetAll());
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<BankaHesap>> GetListByMusteriYetkili(string musteriYetkili)
         {
             IResult result = BusinessRules.Run(
@@ -165,9 +153,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<BankaHesap>>(_bankaHesapDal.GetAll(p => p.MusteriYetkili == musteriYetkili));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<BankaHesap>> GetListBySubeId(int subeId)
         {
             IResult result = BusinessRules.Run(

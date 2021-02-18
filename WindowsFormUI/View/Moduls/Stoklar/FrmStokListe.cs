@@ -99,8 +99,14 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             if (_secimIcin)
             {
                 var secilenSatir = dgvStokListe.SelectedRows[0];
-                _secilenStok = _stokService.GetById((int)secilenSatir.Cells[0].Value).Data;
-                this.Close();
+                var secilenStok = _stokService.GetById((int)secilenSatir.Cells[0].Value);
+                if (secilenStok.Success)
+                {
+                    _secilenStok = secilenStok.Data;
+                    this.Close();
+                }
+                else
+                    MessageBox.Show(secilenStok.Message);
             }
         }
     }

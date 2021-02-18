@@ -194,6 +194,8 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             // 
             this.dgvStokListe.AllowUserToAddRows = false;
             this.dgvStokListe.AllowUserToDeleteRows = false;
+            this.dgvStokListe.AllowUserToResizeRows = false;
+            this.dgvStokListe.BackgroundColor = System.Drawing.Color.White;
             this.dgvStokListe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStokListe.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
@@ -201,7 +203,6 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.colBarkod,
             this.colAd});
             this.dgvStokListe.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvStokListe.GridColor = System.Drawing.Color.White;
             this.dgvStokListe.Location = new System.Drawing.Point(216, 0);
             this.dgvStokListe.Name = "dgvStokListe";
             this.dgvStokListe.ReadOnly = true;
@@ -279,7 +280,6 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         private System.Windows.Forms.ListView lstGrupView;
         private System.Windows.Forms.Button btnStokGrupSil;
         private System.Windows.Forms.Button btnStokGrupEkle;
-        private System.Windows.Forms.Button btn;
         private System.Windows.Forms.ColumnHeader colGrupTur;
         private System.Windows.Forms.ColumnHeader colGrupAd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;

@@ -75,9 +75,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<StokHareket> GetById(int stokHareketId)
         {
             IResult result = BusinessRules.Run(
@@ -88,9 +86,7 @@ namespace Business.Concrete
             return new SuccessDataResult<StokHareket>(_stokHareketDal.Get(p => p.Id == stokHareketId));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<StokHareket>> GetByDepoId(int depoId)
         {
             IResult result = BusinessRules.Run(
@@ -101,9 +97,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<StokHareket>>(_stokHareketDal.GetAll(p => p.DepoId == depoId));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<StokHareket>> GetByEvrakId(int evrakId)
         {
             IResult result = BusinessRules.Run(
@@ -114,9 +108,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<StokHareket>>(_stokHareketDal.GetAll(p => p.EvrakId == evrakId));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<StokHareket>> GetByStokId(int stokId)
         {
             IResult result = BusinessRules.Run(
@@ -127,17 +119,13 @@ namespace Business.Concrete
             return new SuccessDataResult<List<StokHareket>>(_stokHareketDal.GetAll(p => p.StokId == stokId));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<StokHareket>> GetList()
         {
             return new SuccessDataResult<List<StokHareket>>(_stokHareketDal.GetAll());
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<decimal> GetStokMiktar(int stokId)
         {
             IResult result = BusinessRules.Run(

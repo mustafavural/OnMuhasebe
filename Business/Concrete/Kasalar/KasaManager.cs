@@ -52,9 +52,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<Kasa> GetById(int Id)
         {
             var result = BusinessRules.Run(
@@ -65,9 +63,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Kasa>(_kasaDal.Get(p => p.Id == Id));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<Kasa> GetByAd(string ad)
         {
             var result = BusinessRules.Run(
@@ -78,9 +74,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Kasa>(_kasaDal.Get(p => p.Ad == ad));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<Kasa>> GetList()
         {
             return new SuccessDataResult<List<Kasa>>(_kasaDal.GetAll());

@@ -60,6 +60,16 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.colId = new System.Windows.Forms.ColumnHeader();
             this.uscStokEkleSilButon = new WindowsFormUI.View.UserControls.UscFormButtons();
             this.dgvStokListe = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colKod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBarkod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colKDV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBirim = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBirim2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOran2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBirim3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOran3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpStok.SuspendLayout();
             this.grpBirim.SuspendLayout();
             this.grpGrup.SuspendLayout();
@@ -346,19 +356,119 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.uscStokEkleSilButon.Name = "uscStokEkleSilButon";
             this.uscStokEkleSilButon.Size = new System.Drawing.Size(772, 46);
             this.uscStokEkleSilButon.TabIndex = 1;
+            this.uscStokEkleSilButon.ClickClear += new System.EventHandler(this.UscStokEkleSilButon_ClickEkraniTemizle);
+            this.uscStokEkleSilButon.ClickSave += new System.EventHandler(this.UscStokEkleSilButon_ClickEkleGuncelle);
+            this.uscStokEkleSilButon.ClickCancel += new System.EventHandler(this.UscStokEkleSilButon_ClickSecileniSil);
             // 
             // dgvStokListe
             // 
             this.dgvStokListe.AllowUserToAddRows = false;
             this.dgvStokListe.AllowUserToDeleteRows = false;
+            this.dgvStokListe.AllowUserToResizeRows = false;
+            this.dgvStokListe.BackgroundColor = System.Drawing.Color.White;
             this.dgvStokListe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStokListe.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.colKod,
+            this.colBarkod,
+            this.dataGridViewTextBoxColumn2,
+            this.colKDV,
+            this.colBirim,
+            this.colBirim2,
+            this.colOran2,
+            this.colBirim3,
+            this.colOran3});
             this.dgvStokListe.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvStokListe.Location = new System.Drawing.Point(0, 253);
             this.dgvStokListe.Name = "dgvStokListe";
             this.dgvStokListe.ReadOnly = true;
+            this.dgvStokListe.RowHeadersVisible = false;
             this.dgvStokListe.RowTemplate.Height = 25;
+            this.dgvStokListe.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStokListe.Size = new System.Drawing.Size(778, 184);
             this.dgvStokListe.TabIndex = 1;
+            this.dgvStokListe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvStokListe_CellDoubleClick);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            this.dataGridViewTextBoxColumn1.Frozen = true;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // colKod
+            // 
+            this.colKod.DataPropertyName = "Kod";
+            this.colKod.Frozen = true;
+            this.colKod.HeaderText = "Kod";
+            this.colKod.Name = "colKod";
+            this.colKod.ReadOnly = true;
+            // 
+            // colBarkod
+            // 
+            this.colBarkod.DataPropertyName = "Barkod";
+            this.colBarkod.Frozen = true;
+            this.colBarkod.HeaderText = "Barkod";
+            this.colBarkod.Name = "colBarkod";
+            this.colBarkod.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Ad";
+            this.dataGridViewTextBoxColumn2.Frozen = true;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Ad";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // colKDV
+            // 
+            this.colKDV.DataPropertyName = "KDV";
+            this.colKDV.Frozen = true;
+            this.colKDV.HeaderText = "KDV";
+            this.colKDV.Name = "colKDV";
+            this.colKDV.ReadOnly = true;
+            // 
+            // colBirim
+            // 
+            this.colBirim.DataPropertyName = "Birim";
+            this.colBirim.Frozen = true;
+            this.colBirim.HeaderText = "Birim";
+            this.colBirim.Name = "colBirim";
+            this.colBirim.ReadOnly = true;
+            // 
+            // colBirim2
+            // 
+            this.colBirim2.DataPropertyName = "Birim2";
+            this.colBirim2.Frozen = true;
+            this.colBirim2.HeaderText = "Birim2";
+            this.colBirim2.Name = "colBirim2";
+            this.colBirim2.ReadOnly = true;
+            // 
+            // colOran2
+            // 
+            this.colOran2.DataPropertyName = "Birim2Oran";
+            this.colOran2.Frozen = true;
+            this.colOran2.HeaderText = "Birim2Oran";
+            this.colOran2.Name = "colOran2";
+            this.colOran2.ReadOnly = true;
+            // 
+            // colBirim3
+            // 
+            this.colBirim3.DataPropertyName = "Birim3";
+            this.colBirim3.Frozen = true;
+            this.colBirim3.HeaderText = "Birim3";
+            this.colBirim3.Name = "colBirim3";
+            this.colBirim3.ReadOnly = true;
+            // 
+            // colOran3
+            // 
+            this.colOran3.DataPropertyName = "Birim3Oran";
+            this.colOran3.Frozen = true;
+            this.colOran3.HeaderText = "Birim3Oran";
+            this.colOran3.Name = "colOran3";
+            this.colOran3.ReadOnly = true;
             // 
             // FrmStokKart
             // 
@@ -369,6 +479,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.Controls.Add(this.grpStok);
             this.Name = "FrmStokKart";
             this.Text = "FrmStokKart";
+            this.Load += new System.EventHandler(this.FrmStokKart_Load);
             this.grpStok.ResumeLayout(false);
             this.grpStok.PerformLayout();
             this.grpBirim.ResumeLayout(false);
@@ -411,5 +522,15 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         private System.Windows.Forms.ColumnHeader ColAd;
         private System.Windows.Forms.ColumnHeader colId;
         private System.Windows.Forms.DataGridView dgvStokListe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colKod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBarkod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colKDV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBirim;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBirim2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOran2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBirim3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOran3;
     }
 }

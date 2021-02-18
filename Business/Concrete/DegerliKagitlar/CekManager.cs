@@ -43,9 +43,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<TEntity> GetByKod(string kod)
         {
             IResult result = BusinessRules.Run(
@@ -56,9 +54,7 @@ namespace Business.Concrete
             return new SuccessDataResult<TEntity>(_cekDal.Get(p => p.Kod == kod));
         }
 
-        [PerformanceAspect(1)]
-        [CacheAspect()]
-        [LogAspect()]
+        
         public IDataResult<List<TEntity>> GetListByBankaId(int bankaId)
         {
             IResult result = BusinessRules.Run(

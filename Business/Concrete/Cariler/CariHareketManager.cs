@@ -57,9 +57,7 @@ namespace Business.Concrete
         }
         #endregion
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<CariHareket> GetById(int cariHareketId)
         {
             IResult result = BusinessRules.Run(
@@ -70,9 +68,7 @@ namespace Business.Concrete
             return new SuccessDataResult<CariHareket>(_cariHareketDal.Get(p => p.Id == cariHareketId));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<decimal> GetTotalBorcOnCari(int cariId)
         {
             IResult result = BusinessRules.Run(
@@ -83,9 +79,7 @@ namespace Business.Concrete
             return new SuccessDataResult<decimal>(_cariHareketDal.GetAll(p => p.CariId == cariId).Select(s => s.Borc).Sum());
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<decimal> GetTotalAlacakOnCari(int cariId)
         {
             IResult result = BusinessRules.Run(
@@ -96,9 +90,7 @@ namespace Business.Concrete
             return new SuccessDataResult<decimal>(_cariHareketDal.GetAll(p => p.CariId == cariId).Select(s => s.Alacak).Sum());
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<decimal> GetTotalBakiye(int cariId)
         {
             IResult result = BusinessRules.Run(
@@ -109,17 +101,13 @@ namespace Business.Concrete
             return new SuccessDataResult<decimal>(GetTotalBorcOnCari(cariId).Data - GetTotalAlacakOnCari(cariId).Data);
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<CariHareket>> GetList()
         {
             return new SuccessDataResult<List<CariHareket>>(_cariHareketDal.GetAll());
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<CariHareket>> GetListByCariId(int cariId)
         {
             IResult result = BusinessRules.Run(
@@ -130,9 +118,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CariHareket>>(_cariHareketDal.GetAll(p => p.CariId == cariId));
         }
 
-        [PerformanceAspect(1)]
-        [LogAspect()]
-        [CacheAspect()]
+        
         public IDataResult<List<CariHareket>> GetListByDate(DateTime cariHareketTarih)
         {
             return new SuccessDataResult<List<CariHareket>>(_cariHareketDal.GetAll(p => p.Tarih == cariHareketTarih));
