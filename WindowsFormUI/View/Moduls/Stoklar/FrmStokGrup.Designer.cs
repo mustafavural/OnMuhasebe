@@ -29,7 +29,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         /// </summary>
         private void InitializeComponent()
         {
-            this.GrpEkleGuncelle = new System.Windows.Forms.GroupBox();
+            this.grpEkleGuncelle = new System.Windows.Forms.GroupBox();
             this.uscGruplar = new WindowsFormUI.View.UserControls.UscFormButtons();
             this.lblGrupAd = new System.Windows.Forms.Label();
             this.lblGrupKod = new System.Windows.Forms.Label();
@@ -39,24 +39,24 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTur = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GrpEkleGuncelle.SuspendLayout();
+            this.grpEkleGuncelle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGruplar)).BeginInit();
             this.SuspendLayout();
             // 
-            // GrpEkleGuncelle
+            // grpEkleGuncelle
             // 
-            this.GrpEkleGuncelle.Controls.Add(this.uscGruplar);
-            this.GrpEkleGuncelle.Controls.Add(this.lblGrupAd);
-            this.GrpEkleGuncelle.Controls.Add(this.lblGrupKod);
-            this.GrpEkleGuncelle.Controls.Add(this.txtGrupKodAd);
-            this.GrpEkleGuncelle.Controls.Add(this.txtGrupKodTur);
-            this.GrpEkleGuncelle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.GrpEkleGuncelle.Location = new System.Drawing.Point(0, 0);
-            this.GrpEkleGuncelle.Name = "GrpEkleGuncelle";
-            this.GrpEkleGuncelle.Size = new System.Drawing.Size(489, 127);
-            this.GrpEkleGuncelle.TabIndex = 0;
-            this.GrpEkleGuncelle.TabStop = false;
-            this.GrpEkleGuncelle.Text = "Grup Ekle Güncelle";
+            this.grpEkleGuncelle.Controls.Add(this.uscGruplar);
+            this.grpEkleGuncelle.Controls.Add(this.lblGrupAd);
+            this.grpEkleGuncelle.Controls.Add(this.lblGrupKod);
+            this.grpEkleGuncelle.Controls.Add(this.txtGrupKodAd);
+            this.grpEkleGuncelle.Controls.Add(this.txtGrupKodTur);
+            this.grpEkleGuncelle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpEkleGuncelle.Location = new System.Drawing.Point(0, 0);
+            this.grpEkleGuncelle.Name = "grpEkleGuncelle";
+            this.grpEkleGuncelle.Size = new System.Drawing.Size(489, 127);
+            this.grpEkleGuncelle.TabIndex = 0;
+            this.grpEkleGuncelle.TabStop = false;
+            this.grpEkleGuncelle.Text = "Grup Ekle Güncelle";
             // 
             // uscGruplar
             // 
@@ -165,12 +165,12 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(489, 319);
             this.Controls.Add(this.dgvGruplar);
-            this.Controls.Add(this.GrpEkleGuncelle);
+            this.Controls.Add(this.grpEkleGuncelle);
             this.Name = "FrmStokGrup";
             this.Text = "Stok Grupları";
             this.Load += new System.EventHandler(this.FrmStokGrup_Load);
-            this.GrpEkleGuncelle.ResumeLayout(false);
-            this.GrpEkleGuncelle.PerformLayout();
+            this.grpEkleGuncelle.ResumeLayout(false);
+            this.grpEkleGuncelle.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGruplar)).EndInit();
             this.ResumeLayout(false);
 
@@ -178,7 +178,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
         #endregion
 
-        private System.Windows.Forms.GroupBox GrpEkleGuncelle;
+        private System.Windows.Forms.GroupBox grpEkleGuncelle;
         private System.Windows.Forms.Label lblGrupAd;
         private System.Windows.Forms.Label lblGrupKod;
         private System.Windows.Forms.TextBox txtGrupKodAd;

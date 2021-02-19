@@ -2,7 +2,6 @@
 using Core.Utilities.Result;
 using Entities.Concrete;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace WindowsFormUI.View.Moduls.Stoklar
@@ -10,36 +9,34 @@ namespace WindowsFormUI.View.Moduls.Stoklar
     public partial class FrmStokGrup : FrmBase
     {
         IStokGrupKodService _stokGrupKodService;
+        bool _secimIcin = false;
+
         StokGrupKod _secilenKod;
-        bool _secimIcin;
-        public FrmStokGrup(IStokGrupKodService stokGrupKodService, bool secimIcin = false)
+        public FrmStokGrup(IStokGrupKodService stokGrupKodService)
         {
             InitializeComponent();
             _stokGrupKodService = stokGrupKodService;
-            _secimIcin = secimIcin;
         }
 
         private void FrmStokGrup_Load(object sender, EventArgs e)
         {
-            #region Seçim İçin
-            if(_secimIcin)
-            {
-                this.GrpEkleGuncelle.Visible = false;
-
-            }
-            #endregion
+            if (_secimIcin)
+                grpEkleGuncelle.Visible = false;
 
             UscGruplar_ClickClear(sender, e);
         }
 
+        private StokGrupKod GetStokGrupKodFromTextBoxes() =>
+            new StokGrupKod { Ad = txtGrupKodAd.Text.ToUpper(), Tur = txtGrupKodTur.Text.ToUpper() };
+
+        private StokGrupKod GetStokGrupKodFromDataGridView() =>
+            _secilenKod = (StokGrupKod)dgvGruplar.SelectedRows[0].DataBoundItem;
+
         private void UscGruplar_ClickClear(object sender, EventArgs e)
         {
-            IDataResult<List<StokGrupKod>> result = _stokGrupKodService.GetList();
+            var result = _stokGrupKodService.GetList();
             if (result.Success)
-            {
                 dgvGruplar.DataSource = result.Data;
-                dgvGruplar.Refresh();
-            }
             else
                 MessageBox.Show(result.Message);
 
@@ -52,13 +49,10 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             _secilenKod = null;
         }
 
-        private StokGrupKod GetStokGrupKodFromControls() =>
-            new StokGrupKod { Ad = txtGrupKodAd.Text.ToUpper(), Tur = txtGrupKodTur.Text.ToUpper() };
-
         private void UscGruplar_GrupEkleGuncelle(object sender, EventArgs e)
         {
             IResult result;
-            StokGrupKod secilen = GetStokGrupKodFromControls();
+            StokGrupKod secilen = GetStokGrupKodFromTextBoxes();
             if (_secilenKod == null)
                 result = _stokGrupKodService.Add(secilen);
             else
@@ -75,7 +69,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
         private void UscGruplar_GrupSil(object sender, EventArgs e)
         {
-            IResult result = _stokGrupKodService.Delete(_secilenKod);
+            var result = _stokGrupKodService.Delete(_secilenKod);
             if (result.Success)
                 UscGruplar_ClickClear(sender, e);
             MessageBox.Show(result.Message);
@@ -83,20 +77,14 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
         private void DgvGruplar_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var secilenSatir = dgvGruplar.SelectedRows[0];
-            _secilenKod = new StokGrupKod
-            {
-                Id = (int)secilenSatir.Cells[0].Value,
-                Tur = secilenSatir.Cells[1].Value.ToString(),
-                Ad = secilenSatir.Cells[2].Value.ToString()
-            };
+            var secilenSatir = GetStokGrupKodFromDataGridView();
 
-            if (_secimIcin) 
-                this.Close();
+            if (_secimIcin)
+                Close();
             else
             {
-                txtGrupKodTur.Text = secilenSatir.Cells[1].Value.ToString();
-                txtGrupKodAd.Text = secilenSatir.Cells[2].Value.ToString();
+                txtGrupKodTur.Text = secilenSatir.Tur;
+                txtGrupKodAd.Text = secilenSatir.Ad;
 
                 uscGruplar.BtnSave_Text = "Güncelle";
                 uscGruplar.BtnDelete_Enable = true;
@@ -105,8 +93,8 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
         public StokGrupKod SecimIcinAc()
         {
-            this._secimIcin = true;
-            this.ShowDialog();
+            _secimIcin = true;
+            ShowDialog();
             return _secilenKod;
         }
     }

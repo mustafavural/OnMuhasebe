@@ -16,9 +16,8 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         FrmStokGrup _frmStokGrup;
 
         IDataResult<List<Stok>> _stokResult;
-        StokGrupKod _secilenGrup;
+        StokGrupKod _secilenGrupKod;
         Stok _secilenStok;
-        bool _secimIcin = false;
         public FrmStokListe(IStokService stokService, IStokGrupKodService stokGrupService, FrmStokGrup frmStokGrup)
         {
             InitializeComponent();
@@ -27,87 +26,82 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             _stokGrupKodService = stokGrupService;
         }
 
+        private void FrmStokListe_Load(object sender, EventArgs e)
+        {
+            _stokResult = _stokService.GetList();
+            if (_stokResult.Success)
+                dgvStokListe.DataSource = _stokResult.Data;
+            else
+                MessageBox.Show(_stokResult.Message);
+        }
+
         private void ListeyiYenile()
         {
             dgvStokListe.DataSource = _stokResult.Data
                 .Where(p =>
                 {
-                    return p.Kod.Contains(txtStokKod.Text.ToUpper()) && 
-                    p.Barkod.Contains(txtBarkod.Text.ToUpper()) && 
+                    return p.Kod.Contains(txtStokKod.Text.ToUpper()) &&
+                    p.Barkod.Contains(txtBarkod.Text.ToUpper()) &&
                     p.Ad.Contains(txtStokAd.Text.ToUpper()) &&
                     p.KDV.ToString().Contains(txtKDV.Text.ToUpper());
                 }).Where(grup =>
                 {
-                    if (lstGrupView.Items.Count == 0)
+                    if (dgvGrupView.Rows.Count == 0)
                         return true;
                     else
                     {
-                        var stokGruplar = _stokGrupKodService.GetListByStokId(grup.Id).Data;
-                        foreach (var item in stokGruplar)
-                        {
-                            for (int i = 0; i < lstGrupView.Items.Count; i++)
-                            {
-                                if (item.Id.ToString() == lstGrupView.Items[i].SubItems[2].Text)
+                        var stokGrupKodlar = _stokGrupKodService.GetListByStokId(grup.Id).Data;
+                        foreach (var item in stokGrupKodlar)
+                            foreach (DataGridViewRow stokGrupKod in dgvGrupView.Rows)
+                                if (item.Id.ToString() == stokGrupKod.Cells[0].Value.ToString())
                                     return true;
-                            }
-                        }
                         return false;
                     }
-                }).Select(s => new { s.Kod, s.Barkod, s.Ad }).ToList();
-        }
-
-        private void FrmStokListe_Load(object sender, EventArgs e)
-        {
-            _stokResult = _stokService.GetList();
-            if (_stokResult.Success)
-                dgvStokListe.DataSource = _stokResult.Data.Select(s => new { s.Id, s.Kod, s.Barkod, s.Ad }).ToList();
-            else
-                MessageBox.Show(_stokResult.Message);
+                }).ToList();
         }
 
         private void BtnStokGrupEkle_Click(object sender, EventArgs e)
         {
-            _secilenGrup = _frmStokGrup.SecimIcinAc();
-            lstGrupView.Items.Add(_secilenGrup.Tur);
-            lstGrupView.Items[lstGrupView.Items.Count - 1].SubItems.Add(_secilenGrup.Ad);
-            lstGrupView.Items[lstGrupView.Items.Count - 1].SubItems.Add(_secilenGrup.Id.ToString());
+            _secilenGrupKod = _frmStokGrup.SecimIcinAc();
+            if (_secilenGrupKod != null)
+            {
+                var rowIndex = dgvGrupView.Rows.Add();
+                dgvGrupView.Rows[rowIndex].Cells["colGrupId"].Value = _secilenGrupKod.Id;
+                dgvGrupView.Rows[rowIndex].Cells["colGrupTur"].Value = _secilenGrupKod.Tur;
+                dgvGrupView.Rows[rowIndex].Cells["colGrupAd"].Value = _secilenGrupKod.Ad;
+            }
             ListeyiYenile();
         }
 
         private void BtnStokGrupSil_Click(object sender, EventArgs e)
         {
-            foreach (var item in lstGrupView.SelectedItems)
-                lstGrupView.Items.Remove((ListViewItem)item);
-
+            foreach (DataGridViewRow item in dgvGrupView.SelectedRows)
+                dgvGrupView.Rows.Remove(item);
             ListeyiYenile();
         }
-        
+
         private void TxtStokBilgiler_TextChanged(object sender, EventArgs e)
         {
             ListeyiYenile();
         }
 
-        public Stok SecimIcinAc()
-        {
-            this._secimIcin = true;
-            this.ShowDialog();
-            return _secilenStok;
-        }
-
         private void DgvStokListe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (_secimIcin)
+            Stok secilenSatir = (Stok)dgvStokListe.SelectedRows[0].DataBoundItem;
+            var secilenStok = _stokService.GetById(secilenSatir.Id);
+            if (secilenStok.Success)
             {
-                var secilenSatir = dgvStokListe.SelectedRows[0];
-                var secilenStok = _stokService.GetById((int)secilenSatir.Cells[0].Value);
-                if (secilenStok.Success)
-                {
-                    _secilenStok = secilenStok.Data;
-                    this.Close();
-                }
-                else
-                    MessageBox.Show(secilenStok.Message);
+                _secilenStok = secilenStok.Data;
+                Close();
             }
+            else
+                MessageBox.Show(secilenStok.Message);
+        }
+
+        public Stok SecimIcinAc()
+        {
+            ShowDialog();
+            return _secilenStok;
         }
     }
 }

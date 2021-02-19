@@ -54,10 +54,6 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.grpGrup = new System.Windows.Forms.GroupBox();
             this.btnGrupSil = new System.Windows.Forms.Button();
             this.btnGrupEkle = new System.Windows.Forms.Button();
-            this.lstGrup = new System.Windows.Forms.ListView();
-            this.ColTur = new System.Windows.Forms.ColumnHeader();
-            this.ColAd = new System.Windows.Forms.ColumnHeader();
-            this.colId = new System.Windows.Forms.ColumnHeader();
             this.uscStokEkleSilButon = new WindowsFormUI.View.UserControls.UscFormButtons();
             this.dgvStokListe = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,10 +66,15 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.colOran2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBirim3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOran3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvGrupView = new System.Windows.Forms.DataGridView();
+            this.colGrupId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGrupTur = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGrupAd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpStok.SuspendLayout();
             this.grpBirim.SuspendLayout();
             this.grpGrup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStokListe)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGrupView)).BeginInit();
             this.SuspendLayout();
             // 
             // grpStok
@@ -283,9 +284,9 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             // 
             // grpGrup
             // 
+            this.grpGrup.Controls.Add(this.dgvGrupView);
             this.grpGrup.Controls.Add(this.btnGrupSil);
             this.grpGrup.Controls.Add(this.btnGrupEkle);
-            this.grpGrup.Controls.Add(this.lstGrup);
             this.grpGrup.Dock = System.Windows.Forms.DockStyle.Right;
             this.grpGrup.Location = new System.Drawing.Point(468, 19);
             this.grpGrup.Name = "grpGrup";
@@ -312,37 +313,6 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.btnGrupEkle.TabIndex = 12;
             this.btnGrupEkle.UseVisualStyleBackColor = true;
             this.btnGrupEkle.Click += new System.EventHandler(this.BtnGrupEkle_Click);
-            // 
-            // lstGrup
-            // 
-            this.lstGrup.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ColTur,
-            this.ColAd,
-            this.colId});
-            this.lstGrup.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lstGrup.FullRowSelect = true;
-            this.lstGrup.HideSelection = false;
-            this.lstGrup.Location = new System.Drawing.Point(3, 19);
-            this.lstGrup.Name = "lstGrup";
-            this.lstGrup.Size = new System.Drawing.Size(249, 163);
-            this.lstGrup.TabIndex = 0;
-            this.lstGrup.UseCompatibleStateImageBehavior = false;
-            this.lstGrup.View = System.Windows.Forms.View.Details;
-            // 
-            // ColTur
-            // 
-            this.ColTur.Text = "Grup Türü";
-            this.ColTur.Width = 100;
-            // 
-            // ColAd
-            // 
-            this.ColAd.Text = "Grup Adı";
-            this.ColAd.Width = 100;
-            // 
-            // colId
-            // 
-            this.colId.Text = "";
-            this.colId.Width = 0;
             // 
             // uscStokEkleSilButon
             // 
@@ -470,6 +440,53 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.colOran3.Name = "colOran3";
             this.colOran3.ReadOnly = true;
             // 
+            // dgvGrupView
+            // 
+            this.dgvGrupView.AllowUserToAddRows = false;
+            this.dgvGrupView.AllowUserToDeleteRows = false;
+            this.dgvGrupView.AllowUserToResizeRows = false;
+            this.dgvGrupView.BackgroundColor = System.Drawing.Color.White;
+            this.dgvGrupView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGrupView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colGrupId,
+            this.colGrupTur,
+            this.colGrupAd});
+            this.dgvGrupView.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgvGrupView.Location = new System.Drawing.Point(3, 19);
+            this.dgvGrupView.Name = "dgvGrupView";
+            this.dgvGrupView.ReadOnly = true;
+            this.dgvGrupView.RowHeadersVisible = false;
+            this.dgvGrupView.RowTemplate.Height = 25;
+            this.dgvGrupView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvGrupView.Size = new System.Drawing.Size(240, 163);
+            this.dgvGrupView.TabIndex = 14;
+            // 
+            // colGrupId
+            // 
+            this.colGrupId.DataPropertyName = "Id";
+            this.colGrupId.Frozen = true;
+            this.colGrupId.HeaderText = "Id";
+            this.colGrupId.Name = "colGrupId";
+            this.colGrupId.ReadOnly = true;
+            this.colGrupId.Visible = false;
+            // 
+            // colGrupTur
+            // 
+            this.colGrupTur.DataPropertyName = "Tur";
+            this.colGrupTur.Frozen = true;
+            this.colGrupTur.HeaderText = "Grup Türü";
+            this.colGrupTur.Name = "colGrupTur";
+            this.colGrupTur.ReadOnly = true;
+            this.colGrupTur.Width = 90;
+            // 
+            // colGrupAd
+            // 
+            this.colGrupAd.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colGrupAd.DataPropertyName = "Ad";
+            this.colGrupAd.HeaderText = "Grup Adı";
+            this.colGrupAd.Name = "colGrupAd";
+            this.colGrupAd.ReadOnly = true;
+            // 
             // FrmStokKart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -486,6 +503,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.grpBirim.PerformLayout();
             this.grpGrup.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvStokListe)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGrupView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -517,10 +535,6 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         private System.Windows.Forms.TextBox txtStokBirim;
         private System.Windows.Forms.Button btnGrupSil;
         private System.Windows.Forms.Button btnGrupEkle;
-        private System.Windows.Forms.ListView lstGrup;
-        private System.Windows.Forms.ColumnHeader ColTur;
-        private System.Windows.Forms.ColumnHeader ColAd;
-        private System.Windows.Forms.ColumnHeader colId;
         private System.Windows.Forms.DataGridView dgvStokListe;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colKod;
@@ -532,5 +546,9 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         private System.Windows.Forms.DataGridViewTextBoxColumn colOran2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBirim3;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOran3;
+        private System.Windows.Forms.DataGridView dgvGrupView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colGrupId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colGrupTur;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colGrupAd;
     }
 }
