@@ -171,6 +171,16 @@ namespace Business.Concrete
             return new SuccessDataResult<List<StokGrupKod>>(_stokDal.GetStokGrupKodlar(stokId));
         }
 
+        public IDataResult<List<StokGrupKod>> GetStokGrupKodList(int stokId)
+        {
+            IResult result = BusinessRules.Run(
+                CheckIfValidId(stokId));
+            if (result != null)
+                return (IDataResult<List<StokGrupKod>>)result;
+
+            return new SuccessDataResult<List<StokGrupKod>>(_stokGrupKodService.)
+        }
+
         [PerformanceAspect(1)]
         [LogAspect()]
         [ValidationAspect(typeof(StokValidator))]
