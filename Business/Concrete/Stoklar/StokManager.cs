@@ -19,13 +19,11 @@ namespace Business.Concrete
     {
         IStokDal _stokDal;
         IStokGrupService _stokGrupService;
-        IStokGrupKodService _stokGrupKodService;
 
-        public StokManager(IStokDal stokDal, IStokGrupService stokGrupService, IStokGrupKodService stokGrupKodService)
+        public StokManager(IStokDal stokDal, IStokGrupService stokGrupService)
         {
             _stokDal = stokDal;
             _stokGrupService = stokGrupService;
-            _stokGrupKodService = stokGrupKodService;
         }
 
         #region BusinessRules
@@ -74,15 +72,6 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<Stok>();
         }
-        private IDataResult<List<Stok>> CheckIfListValidGrupKodAd(string grupKodAd)
-        {
-            var result = _stokGrupKodService.GetByAd(grupKodAd) == null;
-            if (result)
-            {
-                return new ErrorDataResult<List<Stok>>(Messages.ErrorMessages.StokGrupAdNotExists);
-            }
-            return new SuccessDataResult<List<Stok>>();
-        }
         private IDataResult<List<Stok>> CheckIfListValidKDV(int kdv)
         {
             var result = _stokDal.GetAll(p => p.KDV == kdv) == null;
@@ -94,7 +83,7 @@ namespace Business.Concrete
         }
         private IDataResult<List<Stok>> CheckIfListValidGrupId(int grupId)
         {
-            var result = _stokGrupKodService.GetById(grupId) == null;
+            var result = _stokGrupService.GetByStokGrupKodId(grupId) == null;
             if (result)
             {
                 return new ErrorDataResult<List<Stok>>(Messages.ErrorMessages.StokGrupNotExists);
@@ -135,7 +124,6 @@ namespace Business.Concrete
 
             return new SuccessDataResult<Stok>(_stokDal.Get(p => p.Barkod == stokBarkod));
         }
-
         
         public IDataResult<Stok> GetByAd(string stokAd)
         {
@@ -147,13 +135,11 @@ namespace Business.Concrete
             return new SuccessDataResult<Stok>(_stokDal.Get(p => p.Ad == stokAd));
         }
 
-        
         public IDataResult<List<Stok>> GetList()
         {
             return new SuccessDataResult<List<Stok>>(_stokDal.GetAll());
         }
 
-        
         public IDataResult<List<Stok>> GetListByKDV(int KDV)
         {
             IResult result = BusinessRules.Run(
@@ -163,20 +149,6 @@ namespace Business.Concrete
 
             return new SuccessDataResult<List<Stok>>(_stokDal.GetAll(p => p.KDV == KDV));
         }
-
-        
-        public IDataResult<List<Stok>> GetListByGrupKodAd(string grupKodAd)
-        {
-            IResult result = BusinessRules.Run(
-                CheckIfListValidGrupKodAd(grupKodAd));
-            if (result != null)
-                return (IDataResult<List<Stok>>)result;
-
-            return new SuccessDataResult<List<Stok>>(_stokDal.GetAll(p =>
-            _stokGrupService.GetByStokGrupKodId(
-                _stokGrupKodService.GetByAd(grupKodAd).Data.Id).Data.Select(s => s.StokId).Contains(p.Id)));
-        }
-
         
         public IDataResult<List<Stok>> GetListByGrupKodId(int grupKodId)
         {
@@ -187,6 +159,16 @@ namespace Business.Concrete
 
             return new SuccessDataResult<List<Stok>>(_stokDal.GetAll(p =>
             _stokGrupService.GetByStokGrupKodId(grupKodId).Data.Select(s => s.StokId).Contains(p.Id)));
+        }
+
+        public IDataResult<List<StokGrupKod>> GetListStokGrupKod(int stokId)
+        {
+            IResult result = BusinessRules.Run(
+                CheckIfValidId(stokId));
+            if (result != null)
+                return (IDataResult<List<StokGrupKod>>)result;
+
+            return new SuccessDataResult<List<StokGrupKod>>(_stokDal.GetStokGrupKodlar(stokId));
         }
 
         [PerformanceAspect(1)]

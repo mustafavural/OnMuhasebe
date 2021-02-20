@@ -11,7 +11,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
     {
         IStokService _stokService;
         IStokGrupService _stokGrupService;
-        IStokGrupKodService _stokGrupKodService;//TODO:Stoğa ait grupları getir işlemini stokservisine al
+        IStokGrupKodService _stokGrupKodService;
         FrmStokListe _frmStokListe;
         FrmStokGrup _frmStokGrup;
 
@@ -70,7 +70,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         {
             StokBilgileriniGoruntule(secilenStok);
 
-            var stokGruplari = _stokGrupKodService.GetListByStokId(secilenStok.Id);
+            var stokGruplari = _stokService.GetListStokGrupKod(secilenStok.Id);
             if (stokGruplari.Success)
             {
                 dgvGrupView.Rows.Clear();
@@ -81,7 +81,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
                 MessageBox.Show(stokGruplari.Message);
         }
 
-        private void EkrandakiBilgileriGetir(out Stok stok, out List<StokGrupKod> stokGrupKodlar)
+        private void EkrandakiBilgileriAl(out Stok stok, out List<StokGrupKod> stokGrupKodlar)
         {
             stok = new Stok
             {
@@ -126,6 +126,14 @@ namespace WindowsFormUI.View.Moduls.Stoklar
                 GrupBilgileriniGoruntule(secilenGrup);
         }
 
+        private void BtnGrupSil_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in dgvGrupView.SelectedRows)
+            {
+                dgvGrupView.Rows.Remove(item);
+            }
+        }
+
         private void DgvStokListe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var secilenStok = _stokService.GetById((int)dgvStokListe.SelectedRows[0].Cells[0].Value);
@@ -146,18 +154,18 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         {
             Stok stok;
             List<StokGrupKod> stokGrupKodlar;
-            EkrandakiBilgileriGetir(out stok, out stokGrupKodlar);
+            EkrandakiBilgileriAl(out stok, out stokGrupKodlar);
 
             if (_secilenStok == null)
             {
                 var stokResult = _stokService.Add(stok);
                 if(stokResult.Success)
-                    UscStokEkleSilButon_ClickEkraniTemizle(sender, e);
+                    MessageBox.Show("Test");//TODO:This
                 MessageBox.Show(stokResult.Message);
-                /*
-                 * TODO:Grupları kaydet
-                 */
 
+                var grupResult = AddGroupsToStok(stok.Id, stokGrupKodlar);
+                if(grupResult.Success)
+                    MessageBox.Show("Test");//TODO:This
             }
             else
             {
@@ -181,15 +189,44 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             }
         }
 
+        private IResult AddGroupsToStok(int stokId, List<StokGrupKod> grups)
+        {
+            foreach (StokGrupKod stokGrupKod in grups)
+            {
+                var addResult = _stokGrupService.Add(new StokGrup { StokGrupKodId = stokGrupKod.Id, StokId = stokId });
+                if (!addResult.Success)
+                    return new ErrorResult(addResult.Message);
+            }
+            return new SuccessResult();
+        }
+
+        private IResult DeleteGroupsFromStok(int stokId)
+        {
+            var relations = _stokGrupService.GetByStokId(stokId);
+            if (relations.Success)
+            {
+                foreach (var relation in relations.Data)
+                {
+                    var deleteResult = _stokGrupService.Delete(relation);
+                    if (!deleteResult.Success)
+                        return new ErrorResult(deleteResult.Message);
+                }
+                return new SuccessResult();
+            }
+            else
+                return new ErrorResult(relations.Message);
+        }
+
         private void UscStokEkleSilButon_ClickSecileniSil(object sender, EventArgs e)
         {
-            /*
-             * TODO:Grupları sil
-             */
-            IResult result = _stokService.Delete(_secilenStok);
-            if (result.Success)
+            var grupResult = DeleteGroupsFromStok(_secilenStok.Id);
+            if (!grupResult.Success)
+                MessageBox.Show(grupResult.Message);
+
+            var stokResult = _stokService.Delete(_secilenStok);
+            if (stokResult.Success)
                 UscStokEkleSilButon_ClickEkraniTemizle(sender, e);
-            MessageBox.Show(result.Message);
+            MessageBox.Show(stokResult.Message);
         }
     }
 }
