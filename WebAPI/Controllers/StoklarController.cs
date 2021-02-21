@@ -36,17 +36,6 @@ namespace WebAPI.Controllers
             return BadRequest(result.Message);
         }
 
-        [HttpGet("getbygrup")]
-        public IActionResult GetByGrup(string grupAd)
-        {
-            var result = _stokService.GetListByGrupKodAd(grupAd);
-            if (result.Success)
-            {
-                return Ok(result.Data);
-            }
-            return BadRequest(result.Message);
-        }
-
         [HttpPost("add")]
         public IActionResult Add(Stok stok)
         {

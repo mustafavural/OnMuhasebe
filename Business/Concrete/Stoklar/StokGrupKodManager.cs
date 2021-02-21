@@ -68,7 +68,7 @@ namespace Business.Concrete
 
         private IResult CheckIfValidStokId(int stokId)
         {
-            var result = _stokGrupService.GetByStokId(stokId) == null;
+            var result = _stokGrupService.GetListByStokId(stokId) == null;
             if (result)
             {
                 return new ErrorResult(Messages.ErrorMessages.StokGrupAssignmentNotExists);
@@ -125,7 +125,7 @@ namespace Business.Concrete
                 return (IDataResult<List<StokGrupKod>>)result;
 
             return new SuccessDataResult<List<StokGrupKod>>(_stokGrupKodDal.GetAll(p =>
-            _stokGrupService.GetByStokId(stokId).Data.Select(s => s.StokGrupKodId).Contains(p.Id)));
+            _stokGrupService.GetListByStokId(stokId).Data.Select(s => s.StokGrupKodId).Contains(p.Id)));
         }
 
         [PerformanceAspect(1)]

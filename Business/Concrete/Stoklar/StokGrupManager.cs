@@ -75,8 +75,21 @@ namespace Business.Concrete
             return new SuccessDataResult<StokGrup>(_stokGrupDal.Get(p =>
             p.Id == stokGrupId));
         }
-        
-        public IDataResult<List<StokGrup>> GetByStokGrupKodId(int stokGrupKodId)
+
+        public IDataResult<StokGrup> GetByBothId(int stokId, int stokGrupKodId)
+        {
+            IResult result = BusinessRules.Run(
+                CheckIfValidStokId(stokId),
+                CheckIfValidStokGrupKodId(stokGrupKodId));
+            if (result != null)
+                return (IDataResult<StokGrup>)result;
+
+            return new SuccessDataResult<StokGrup>(_stokGrupDal.Get(p =>
+            p.StokId == stokId &&
+            p.StokGrupKodId == stokGrupKodId)); ;
+        }
+
+        public IDataResult<List<StokGrup>> GetListByStokGrupKodId(int stokGrupKodId)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidStokGrupKodId(stokGrupKodId));
@@ -87,8 +100,8 @@ namespace Business.Concrete
             p.StokGrupKodId == stokGrupKodId));
         }
 
-        
-        public IDataResult<List<StokGrup>> GetByStokId(int stokId)
+
+        public IDataResult<List<StokGrup>> GetListByStokId(int stokId)
         {
             IResult result = BusinessRules.Run(
                 CheckIfValidStokId(stokId));

@@ -6,18 +6,6 @@ using System;
 
 namespace ConsoleUI.EntityTest
 {
-    public class StoklarDepended : TestBase
-    {
-        IStokService _stokService;
-        public StoklarDepended()
-        {
-            _stokService = new StokManager(
-                new EFStokDal(),
-                new StokGrupManager(new EFStokGrupDal()),
-                new StokGrupKodManager(new EFStokGrupKodDal(),
-                              new StokGrupManager(new EFStokGrupDal())));
-        }
-    }
     public class StoklarTest : TestBase
     {
         private IStokService _stokService;
@@ -66,11 +54,6 @@ namespace ConsoleUI.EntityTest
             var getList = _stokService.GetList();
             Console.WriteLine(getList.Message);
             base.EkranaYaz(getList.Data);
-
-            Console.WriteLine("getbyGrupAd");
-            var getbyGrupAd = _stokService.GetListByGrupKodAd("KIRMIZI");
-            Console.WriteLine(getbyGrupAd.Message);
-            base.EkranaYaz(getbyGrupAd.Data);
 
             Console.WriteLine("getListbyKDV");
             var getListbyKDV = _stokService.GetListByKDV(18);

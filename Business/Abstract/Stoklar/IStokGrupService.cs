@@ -7,7 +7,8 @@ namespace Business.Abstract
 {
     public interface IStokGrupService : IADU<StokGrup>, IGet<StokGrup>
     {
-        IDataResult<List<StokGrup>> GetByStokId(int stokId);
-        IDataResult<List<StokGrup>> GetByStokGrupKodId(int stokGrupKodId);
+        IDataResult<StokGrup> GetByBothId(int stokId, int stokGrupKodId);
+        IDataResult<List<StokGrup>> GetListByStokId(int stokId);
+        IDataResult<List<StokGrup>> GetListByStokGrupKodId(int stokGrupKodId);
     }
 }

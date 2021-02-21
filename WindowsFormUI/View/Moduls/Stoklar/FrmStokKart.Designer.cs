@@ -208,6 +208,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.txtStokOran3.Name = "txtStokOran3";
             this.txtStokOran3.Size = new System.Drawing.Size(79, 23);
             this.txtStokOran3.TabIndex = 16;
+            this.txtStokOran3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HarfEngelle_KeyPress);
             // 
             // txtStokBirim3
             // 
@@ -229,6 +230,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.txtStokOran2.Name = "txtStokOran2";
             this.txtStokOran2.Size = new System.Drawing.Size(79, 23);
             this.txtStokOran2.TabIndex = 13;
+            this.txtStokOran2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HarfEngelle_KeyPress);
             // 
             // txtStokBirim
             // 
@@ -365,10 +367,10 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             // uscStokEkleSilButon
             // 
             this.uscStokEkleSilButon.BtnClear_Visible = true;
-            this.uscStokEkleSilButon.BtnDelete_Enable = true;
+            this.uscStokEkleSilButon.BtnDelete_Enable = false;
             this.uscStokEkleSilButon.BtnDelete_Text = "Sil     ";
             this.uscStokEkleSilButon.BtnSave_Enable = true;
-            this.uscStokEkleSilButon.BtnSave_Text = "Kaydet";
+            this.uscStokEkleSilButon.BtnSave_Text = "Ekle";
             this.uscStokEkleSilButon.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.uscStokEkleSilButon.Location = new System.Drawing.Point(3, 204);
             this.uscStokEkleSilButon.Name = "uscStokEkleSilButon";
