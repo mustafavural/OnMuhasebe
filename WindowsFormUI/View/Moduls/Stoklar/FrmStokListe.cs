@@ -41,9 +41,9 @@ namespace WindowsFormUI.View.Moduls.Stoklar
                 .Where(p =>
                 {
                     return p.Kod.Contains(txtStokKod.Text.ToUpper()) &&
-                    p.Barkod.Contains(txtBarkod.Text.ToUpper()) &&
-                    p.Ad.Contains(txtStokAd.Text.ToUpper()) &&
-                    p.KDV.ToString().Contains(txtKDV.Text.ToUpper());
+                           p.Barkod.Contains(txtBarkod.Text.ToUpper()) &&
+                           p.Ad.Contains(txtStokAd.Text.ToUpper()) &&
+                           p.KDV.ToString().Contains(txtKDV.Text.ToUpper());
                 }).Where(grup =>
                 {
                     if (dgvGrupView.Rows.Count == 0)
@@ -66,9 +66,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             if (_secilenGrupKod != null)
             {
                 var rowIndex = dgvGrupView.Rows.Add();
-                dgvGrupView.Rows[rowIndex].Cells["colGrupId"].Value = _secilenGrupKod.Id;
-                dgvGrupView.Rows[rowIndex].Cells["colGrupTur"].Value = _secilenGrupKod.Tur;
-                dgvGrupView.Rows[rowIndex].Cells["colGrupAd"].Value = _secilenGrupKod.Ad;
+                dgvGrupView.Rows[rowIndex].SetValues(_secilenGrupKod.Id, _secilenGrupKod.Tur, _secilenGrupKod.Ad);
             }
             ListeyiYenile();
         }
