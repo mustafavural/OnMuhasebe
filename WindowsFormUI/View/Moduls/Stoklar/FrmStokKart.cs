@@ -72,6 +72,8 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
             uscStokEkleSilButon.BtnSave_Text = "Ekle";
             uscStokEkleSilButon.BtnDelete_Enable = false;
+
+            FrmStokKart_Load(sender, e);
         }
 
         private void UscStokEkleSilButon_ClickEkleGuncelle(object sender, EventArgs e)
@@ -271,8 +273,14 @@ namespace WindowsFormUI.View.Moduls.Stoklar
                 };
 
                 stokGrupKodlar = new List<StokGrupKod>();
-                foreach (DataGridViewRow item in dgvGrupView.Rows)//TODO: burada grup okurken hata var
-                    stokGrupKodlar.Add((StokGrupKod)item.DataBoundItem);
+                foreach (DataGridViewRow item in dgvGrupView.Rows)
+                    stokGrupKodlar.Add(
+                        new StokGrupKod
+                        {
+                            Id = Convert.ToInt32(item.Cells[0].Value),
+                            Tur = item.Cells[1].Value.ToString(),
+                            Ad = item.Cells[2].Value.ToString()
+                        });
             }
             else
             {
