@@ -12,17 +12,15 @@ namespace WindowsFormUI.View.Moduls.Stoklar
     {
         IStokService _stokService;
         IStokGrupService _stokGrupService;
-        IStokGrupKodService _stokGrupKodService;
         FrmStokListe _frmStokListe;
         FrmStokGrup _frmStokGrup;
         Stok _secilenStok;
 
-        public FrmStokKart(IStokService stokService, IStokGrupService stokGrupService, IStokGrupKodService stokGrupKodService, FrmStokListe frmStokListe, FrmStokGrup frmStokGrup)
+        public FrmStokKart(IStokService stokService, IStokGrupService stokGrupService, FrmStokListe frmStokListe, FrmStokGrup frmStokGrup)
         {
             InitializeComponent();
             _stokService = stokService;
             _stokGrupService = stokGrupService;
-            _stokGrupKodService = stokGrupKodService;
             _frmStokListe = frmStokListe;
             _frmStokGrup = frmStokGrup;
         }
@@ -79,32 +77,27 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         private void UscStokEkleSilButon_ClickEkleGuncelle(object sender, EventArgs e)
         {
             ReadFromScreen(out Stok stok, out List<StokGrupKod> stokGrupKodlar);
-
-            if (_secilenStok == null)
-            {
-                var newStokId = AddStok(stok);
-                if (newStokId > 0)
+            if (stok != null && stokGrupKodlar != null)
+                if (_secilenStok == null)
                 {
-                    foreach (var group in stokGrupKodlar)
+                    var newStokId = AddStok(stok);
+                    if (newStokId > 0)
                     {
-                        AddOneGroupToStok(newStokId, group.Id);
-                    }
-                    UscStokEkleSilButon_ClickEkraniTemizle(sender, e);
-                }
-            }
-            else
-            {
-                var stokResult = UpdateStok(stok);
-                if (stokResult.Success)
-                {
-                    var grupResult = UpdateStokGroups(stok.Id, stokGrupKodlar);
-                    if (grupResult.Success)
+                        foreach (var group in stokGrupKodlar)
+                            AddOneGroupToStok(newStokId, group.Id);
                         UscStokEkleSilButon_ClickEkraniTemizle(sender, e);
-                    else
-                        MessageBox.Show("Herhangi bir grup güncellenemedi");
+                    }
                 }
-                MessageBox.Show(stokResult.Message);
-            }
+                else
+                {
+                    var stokResult = UpdateStok(stok);
+                    if (stokResult.Success)
+                    {
+                        UpdateStokGroups(stok.Id, stokGrupKodlar);
+                        UscStokEkleSilButon_ClickEkraniTemizle(sender, e);
+                    }
+                    MessageBox.Show(stokResult.Message);
+                }
         }
 
         private void UscStokEkleSilButon_ClickSecileniSil(object sender, EventArgs e)
@@ -135,6 +128,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
                 MessageBox.Show(secilenStok.Message);
         }
 
+        #region KeyEvents
         private void HarfEngelle_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((TextBox)sender).Text.Contains(','))
@@ -142,6 +136,31 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             else
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ',';
         }
+
+        private void TxtStokBirim_TextChanged(object sender, EventArgs e)
+        {
+            txtStokBirim2.Enabled = txtStokBirim.Text != "";
+            TxtStokBirim2_TextChanged(sender, e);
+        }
+
+        private void TxtStokBirim2_TextChanged(object sender, EventArgs e)
+        {
+            txtStokOran2.Enabled = txtStokBirim2.Text != "" && txtStokBirim2.Enabled;
+            TxtStokOran2_TextChanged(sender, e);
+        }
+
+        private void TxtStokOran2_TextChanged(object sender, EventArgs e)
+        {
+            txtStokBirim3.Enabled = txtStokOran2.Text != "" && txtStokOran2.Enabled;
+            TxtStokBirim3_TextChanged(sender, e);
+        }
+
+        private void TxtStokBirim3_TextChanged(object sender, EventArgs e)
+        {
+            txtStokOran3.Enabled = txtStokBirim3.Text != "" && txtStokBirim3.Enabled;
+        }
+        #endregion
+
         #endregion
 
         #region PrivateMethods
@@ -193,49 +212,79 @@ namespace WindowsFormUI.View.Moduls.Stoklar
                 MessageBox.Show(relation.Message);
         }
 
-        private IResult UpdateStokGroups(int stokId, List<StokGrupKod> stokGrupKodlar)
+        private void UpdateStokGroups(int stokId, List<StokGrupKod> stokGrupKodlar)
         {
             List<StokGrupKod> mevcutlar = _stokService.GetListStokGrupKod(stokId).Data;
             foreach (var item in stokGrupKodlar)
-            {
-                if (mevcutlar.Contains(item))
-                    continue;
-                else
+                if (!mevcutlar.Contains(item))
                     AddOneGroupToStok(stokId, item.Id);
-            }
+
             foreach (var item in mevcutlar)
-            {
-                if (stokGrupKodlar.Contains(item))
-                    continue;
-                else
-                    _stokGrupService.Delete(new StokGrup { StokId = stokId, StokGrupKodId = item.Id });
-            }
-            return null;
+                if (!stokGrupKodlar.Contains(item))
+                    DeleteOneGroupFromStok(stokId, item.Id);
+        }
+
+        private List<string> CheckIfInputErrors()
+        {
+            List<string> errors = new List<string>();
+            if (txtStokKod.Text == "")
+                errors.Add("Stok Kodu Boş Olamaz");
+
+            if (txtStokAd.Text == "")
+                errors.Add("Stok Adı Boş Olamaz");
+
+            if (txtStokKDV.Text == "")
+                errors.Add("Stok KDV'si Boş Olamaz");
+
+            if (txtStokBirim.Text == "")
+                errors.Add("Stok Birimi Boş Olamaz");
+
+            if (txtStokOran2.Text == "" && txtStokBirim2.Enabled && txtStokBirim2.Text != "")
+                errors.Add("Stok 2. Birimi Girilmiş İken Oranı Boş Olamaz");
+
+            if (txtStokOran3.Text == "" && txtStokBirim3.Enabled && txtStokBirim3.Text != "")
+                errors.Add("Stok 3. Birimi Girilmiş İken Oranı Boş Olamaz");
+
+            if (txtStokOran2.Text == txtStokOran3.Text && txtStokOran2.Enabled && txtStokOran3.Enabled)
+                errors.Add("2. ve 3. Oran Birbiriyle Aynı Olamaz");
+
+            return errors;
         }
 
         private void ReadFromScreen(out Stok stok, out List<StokGrupKod> stokGrupKodlar)
         {
-            stok = new Stok();
+            var hatalar = CheckIfInputErrors();
 
-            if (txtStokKod.Text == "")
-                MessageBox.Show("Stok Kod Boş Olamaz");
-            else stok.Kod = txtStokKod.Text;
+            if (hatalar.Count == 0)
+            {
+                stok = new Stok
+                {
+                    Kod = txtStokKod.Text,
+                    Barkod = txtStokBarkod.Text,
+                    Ad = txtStokAd.Text,
+                    KDV = Convert.ToInt32(txtStokKDV.Text.Split(",", 2)[0]),
+                    Birim = txtStokBirim.Text,
+                    Birim2 = txtStokBirim2.Enabled ? txtStokBirim2.Text : "",
+                    Birim2Oran = txtStokBirim2.Enabled && txtStokBirim2.Text != "" ? Convert.ToDecimal(txtStokOran2.Text) : 0.0m,
+                    Birim3 = txtStokBirim3.Enabled ? txtStokBirim3.Text : "",
+                    Birim3Oran = txtStokBirim3.Enabled && txtStokBirim3.Text != "" ? Convert.ToDecimal(txtStokOran3.Text) : 0.0m
+                };
 
-            if (txtStokAd.Text == "") 
-                MessageBox.Show("Stok Ad Boş Olamaz");
-            else stok.Ad = txtStokAd.Text;
+                stokGrupKodlar = new List<StokGrupKod>();
+                foreach (DataGridViewRow item in dgvGrupView.Rows)//TODO: burada grup okurken hata var
+                    stokGrupKodlar.Add((StokGrupKod)item.DataBoundItem);
+            }
+            else
+            {
+                string result = "";
+                foreach (var item in hatalar)
+                    result += "--> " + item + "\n\n";
+                MessageBox.Show("Aşağıdaki hataları gözden geçirin...\n\n" + result,
+                    "Stok Bilgileri Eksik !!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            if (txtStokKDV.Text == "") 
-                MessageBox.Show("Stok KDV Boş Olamaz");
-            else stok.KDV = Convert.ToInt32(txtStokKDV.Text);
-
-            if (txtStokBirim.Text == "")
-                if (txtStokBirim2.Text != "" || txtStokBirim3.Text != "")
-                    MessageBox.Show("İlk Birim girilmemişken ikinci veya üçüncüsünü giremezsiniz");
-
-            stokGrupKodlar = new List<StokGrupKod>();
-            foreach (DataGridViewRow item in dgvGrupView.Rows)
-                stokGrupKodlar.Add((StokGrupKod)item.DataBoundItem);
+                stok = null;
+                stokGrupKodlar = null;
+            }
         }
 
         private void WriteToScreen(Stok secilenStok)

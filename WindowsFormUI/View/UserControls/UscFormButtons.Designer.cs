@@ -31,9 +31,9 @@ namespace WindowsFormUI.View.UserControls
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UscFormButtons));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BtnDelete = new System.Windows.Forms.Button();
-            this.BtnSave = new System.Windows.Forms.Button();
             this.BtnClear = new System.Windows.Forms.Button();
+            this.BtnSave = new System.Windows.Forms.Button();
+            this.BtnDelete = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,19 +49,19 @@ namespace WindowsFormUI.View.UserControls
             this.panel1.Size = new System.Drawing.Size(391, 52);
             this.panel1.TabIndex = 0;
             // 
-            // BtnDelete
+            // BtnClear
             // 
-            this.BtnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.BtnClear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnDelete.Image = ((System.Drawing.Image)(resources.GetObject("BtnDelete.Image")));
-            this.BtnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnDelete.Location = new System.Drawing.Point(305, 3);
-            this.BtnDelete.Name = "BtnDelete";
-            this.BtnDelete.Size = new System.Drawing.Size(79, 42);
-            this.BtnDelete.TabIndex = 0;
-            this.BtnDelete.Text = "Sil     ";
-            this.BtnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnDelete.UseVisualStyleBackColor = true;
+            this.BtnClear.Image = ((System.Drawing.Image)(resources.GetObject("BtnClear.Image")));
+            this.BtnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnClear.Location = new System.Drawing.Point(135, 3);
+            this.BtnClear.Name = "BtnClear";
+            this.BtnClear.Size = new System.Drawing.Size(79, 42);
+            this.BtnClear.TabIndex = 0;
+            this.BtnClear.Text = "Temizle";
+            this.BtnClear.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnClear.UseVisualStyleBackColor = true;
             // 
             // BtnSave
             // 
@@ -77,19 +77,19 @@ namespace WindowsFormUI.View.UserControls
             this.BtnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnSave.UseVisualStyleBackColor = true;
             // 
-            // BtnClear
+            // BtnDelete
             // 
-            this.BtnClear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.BtnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnClear.Image = ((System.Drawing.Image)(resources.GetObject("BtnClear.Image")));
-            this.BtnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnClear.Location = new System.Drawing.Point(135, 3);
-            this.BtnClear.Name = "BtnClear";
-            this.BtnClear.Size = new System.Drawing.Size(79, 42);
-            this.BtnClear.TabIndex = 2;
-            this.BtnClear.Text = "Temizle";
-            this.BtnClear.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnClear.UseVisualStyleBackColor = true;
+            this.BtnDelete.Image = ((System.Drawing.Image)(resources.GetObject("BtnDelete.Image")));
+            this.BtnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnDelete.Location = new System.Drawing.Point(305, 3);
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.Size = new System.Drawing.Size(79, 42);
+            this.BtnDelete.TabIndex = 2;
+            this.BtnDelete.Text = "Sil     ";
+            this.BtnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnDelete.UseVisualStyleBackColor = true;
             // 
             // UscFormButtons
             // 

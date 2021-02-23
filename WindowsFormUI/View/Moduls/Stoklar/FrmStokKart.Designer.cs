@@ -106,7 +106,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.btnStokBul.Location = new System.Drawing.Point(438, 22);
             this.btnStokBul.Name = "btnStokBul";
             this.btnStokBul.Size = new System.Drawing.Size(24, 23);
-            this.btnStokBul.TabIndex = 11;
+            this.btnStokBul.TabIndex = 2;
             this.btnStokBul.UseVisualStyleBackColor = true;
             this.btnStokBul.Click += new System.EventHandler(this.BtnStokBul_Click);
             // 
@@ -117,7 +117,8 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.txtStokKDV.Location = new System.Drawing.Point(74, 109);
             this.txtStokKDV.Name = "txtStokKDV";
             this.txtStokKDV.Size = new System.Drawing.Size(388, 23);
-            this.txtStokKDV.TabIndex = 10;
+            this.txtStokKDV.TabIndex = 8;
+            this.txtStokKDV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HarfEngelle_KeyPress);
             // 
             // txtStokAd
             // 
@@ -126,7 +127,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.txtStokAd.Location = new System.Drawing.Point(74, 80);
             this.txtStokAd.Name = "txtStokAd";
             this.txtStokAd.Size = new System.Drawing.Size(388, 23);
-            this.txtStokAd.TabIndex = 9;
+            this.txtStokAd.TabIndex = 6;
             // 
             // txtStokBarkod
             // 
@@ -135,7 +136,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.txtStokBarkod.Location = new System.Drawing.Point(74, 51);
             this.txtStokBarkod.Name = "txtStokBarkod";
             this.txtStokBarkod.Size = new System.Drawing.Size(388, 23);
-            this.txtStokBarkod.TabIndex = 8;
+            this.txtStokBarkod.TabIndex = 4;
             // 
             // txtStokKod
             // 
@@ -144,7 +145,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.txtStokKod.Location = new System.Drawing.Point(74, 22);
             this.txtStokKod.Name = "txtStokKod";
             this.txtStokKod.Size = new System.Drawing.Size(358, 23);
-            this.txtStokKod.TabIndex = 7;
+            this.txtStokKod.TabIndex = 1;
             // 
             // lblStokKDV
             // 
@@ -152,7 +153,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.lblStokKDV.Location = new System.Drawing.Point(39, 112);
             this.lblStokKDV.Name = "lblStokKDV";
             this.lblStokKDV.Size = new System.Drawing.Size(29, 15);
-            this.lblStokKDV.TabIndex = 6;
+            this.lblStokKDV.TabIndex = 7;
             this.lblStokKDV.Text = "KDV";
             // 
             // lblStokAd
@@ -170,7 +171,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.lblStokBarkod.Location = new System.Drawing.Point(17, 54);
             this.lblStokBarkod.Name = "lblStokBarkod";
             this.lblStokBarkod.Size = new System.Drawing.Size(51, 15);
-            this.lblStokBarkod.TabIndex = 4;
+            this.lblStokBarkod.TabIndex = 3;
             this.lblStokBarkod.Text = "Barkodu";
             // 
             // lblStokKod
@@ -179,7 +180,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.lblStokKod.Location = new System.Drawing.Point(7, 25);
             this.lblStokKod.Name = "lblStokKod";
             this.lblStokKod.Size = new System.Drawing.Size(61, 15);
-            this.lblStokKod.TabIndex = 3;
+            this.lblStokKod.TabIndex = 0;
             this.lblStokKod.Text = "Stok Kodu";
             // 
             // grpBirim
@@ -198,38 +199,45 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.grpBirim.Location = new System.Drawing.Point(3, 138);
             this.grpBirim.Name = "grpBirim";
             this.grpBirim.Size = new System.Drawing.Size(465, 66);
-            this.grpBirim.TabIndex = 2;
+            this.grpBirim.TabIndex = 9;
             this.grpBirim.TabStop = false;
             this.grpBirim.Text = "Birimler";
             // 
             // txtStokOran3
             // 
+            this.txtStokOran3.Enabled = false;
             this.txtStokOran3.Location = new System.Drawing.Point(376, 37);
             this.txtStokOran3.Name = "txtStokOran3";
             this.txtStokOran3.Size = new System.Drawing.Size(79, 23);
-            this.txtStokOran3.TabIndex = 16;
+            this.txtStokOran3.TabIndex = 9;
             this.txtStokOran3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HarfEngelle_KeyPress);
             // 
             // txtStokBirim3
             // 
+            this.txtStokBirim3.Enabled = false;
             this.txtStokBirim3.Location = new System.Drawing.Point(291, 37);
             this.txtStokBirim3.Name = "txtStokBirim3";
             this.txtStokBirim3.Size = new System.Drawing.Size(79, 23);
-            this.txtStokBirim3.TabIndex = 15;
+            this.txtStokBirim3.TabIndex = 7;
+            this.txtStokBirim3.TextChanged += new System.EventHandler(this.TxtStokBirim3_TextChanged);
             // 
             // txtStokBirim2
             // 
+            this.txtStokBirim2.Enabled = false;
             this.txtStokBirim2.Location = new System.Drawing.Point(109, 37);
             this.txtStokBirim2.Name = "txtStokBirim2";
             this.txtStokBirim2.Size = new System.Drawing.Size(79, 23);
-            this.txtStokBirim2.TabIndex = 14;
+            this.txtStokBirim2.TabIndex = 3;
+            this.txtStokBirim2.TextChanged += new System.EventHandler(this.TxtStokBirim2_TextChanged);
             // 
             // txtStokOran2
             // 
+            this.txtStokOran2.Enabled = false;
             this.txtStokOran2.Location = new System.Drawing.Point(194, 37);
             this.txtStokOran2.Name = "txtStokOran2";
             this.txtStokOran2.Size = new System.Drawing.Size(79, 23);
-            this.txtStokOran2.TabIndex = 13;
+            this.txtStokOran2.TabIndex = 6;
+            this.txtStokOran2.TextChanged += new System.EventHandler(this.TxtStokOran2_TextChanged);
             this.txtStokOran2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HarfEngelle_KeyPress);
             // 
             // txtStokBirim
@@ -237,7 +245,8 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.txtStokBirim.Location = new System.Drawing.Point(9, 37);
             this.txtStokBirim.Name = "txtStokBirim";
             this.txtStokBirim.Size = new System.Drawing.Size(79, 23);
-            this.txtStokBirim.TabIndex = 12;
+            this.txtStokBirim.TabIndex = 1;
+            this.txtStokBirim.TextChanged += new System.EventHandler(this.TxtStokBirim_TextChanged);
             // 
             // lblStokOran3
             // 
@@ -263,7 +272,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.lblStokOran2.Location = new System.Drawing.Point(194, 19);
             this.lblStokOran2.Name = "lblStokOran2";
             this.lblStokOran2.Size = new System.Drawing.Size(79, 15);
-            this.lblStokOran2.TabIndex = 6;
+            this.lblStokOran2.TabIndex = 4;
             this.lblStokOran2.Text = "2. Birim Oranı";
             // 
             // lblStokBirim2
@@ -272,7 +281,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.lblStokBirim2.Location = new System.Drawing.Point(109, 19);
             this.lblStokBirim2.Name = "lblStokBirim2";
             this.lblStokBirim2.Size = new System.Drawing.Size(50, 15);
-            this.lblStokBirim2.TabIndex = 5;
+            this.lblStokBirim2.TabIndex = 2;
             this.lblStokBirim2.Text = "2. Birimi";
             // 
             // lblStokBirim
@@ -281,7 +290,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.lblStokBirim.Location = new System.Drawing.Point(9, 19);
             this.lblStokBirim.Name = "lblStokBirim";
             this.lblStokBirim.Size = new System.Drawing.Size(38, 15);
-            this.lblStokBirim.TabIndex = 4;
+            this.lblStokBirim.TabIndex = 0;
             this.lblStokBirim.Text = "Birimi";
             // 
             // grpGrup
@@ -293,7 +302,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.grpGrup.Location = new System.Drawing.Point(468, 19);
             this.grpGrup.Name = "grpGrup";
             this.grpGrup.Size = new System.Drawing.Size(307, 185);
-            this.grpGrup.TabIndex = 0;
+            this.grpGrup.TabIndex = 10;
             this.grpGrup.TabStop = false;
             this.grpGrup.Text = "Grup Bilgileri";
             // 
@@ -316,7 +325,8 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.dgvGrupView.RowTemplate.Height = 25;
             this.dgvGrupView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvGrupView.Size = new System.Drawing.Size(240, 163);
-            this.dgvGrupView.TabIndex = 14;
+            this.dgvGrupView.TabIndex = 0;
+            this.dgvGrupView.TabStop = false;
             // 
             // colGrupId
             // 
@@ -350,7 +360,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.btnGrupSil.Location = new System.Drawing.Point(258, 85);
             this.btnGrupSil.Name = "btnGrupSil";
             this.btnGrupSil.Size = new System.Drawing.Size(40, 42);
-            this.btnGrupSil.TabIndex = 13;
+            this.btnGrupSil.TabIndex = 2;
             this.btnGrupSil.UseVisualStyleBackColor = true;
             this.btnGrupSil.Click += new System.EventHandler(this.BtnGrupSil_Click);
             // 
@@ -360,7 +370,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.btnGrupEkle.Location = new System.Drawing.Point(258, 22);
             this.btnGrupEkle.Name = "btnGrupEkle";
             this.btnGrupEkle.Size = new System.Drawing.Size(40, 45);
-            this.btnGrupEkle.TabIndex = 12;
+            this.btnGrupEkle.TabIndex = 1;
             this.btnGrupEkle.UseVisualStyleBackColor = true;
             this.btnGrupEkle.Click += new System.EventHandler(this.BtnGrupEkle_Click);
             // 
@@ -375,7 +385,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.uscStokEkleSilButon.Location = new System.Drawing.Point(3, 204);
             this.uscStokEkleSilButon.Name = "uscStokEkleSilButon";
             this.uscStokEkleSilButon.Size = new System.Drawing.Size(772, 46);
-            this.uscStokEkleSilButon.TabIndex = 1;
+            this.uscStokEkleSilButon.TabIndex = 11;
             this.uscStokEkleSilButon.ClickClear += new System.EventHandler(this.UscStokEkleSilButon_ClickEkraniTemizle);
             this.uscStokEkleSilButon.ClickSave += new System.EventHandler(this.UscStokEkleSilButon_ClickEkleGuncelle);
             this.uscStokEkleSilButon.ClickCancel += new System.EventHandler(this.UscStokEkleSilButon_ClickSecileniSil);
@@ -407,6 +417,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.dgvStokListe.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStokListe.Size = new System.Drawing.Size(778, 184);
             this.dgvStokListe.TabIndex = 1;
+            this.dgvStokListe.TabStop = false;
             this.dgvStokListe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvStokListe_CellDoubleClick);
             // 
             // dataGridViewTextBoxColumn1
