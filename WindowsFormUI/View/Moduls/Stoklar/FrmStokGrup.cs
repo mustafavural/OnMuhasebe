@@ -2,6 +2,8 @@
 using Core.Utilities.Result;
 using Entities.Concrete;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace WindowsFormUI.View.Moduls.Stoklar
@@ -10,6 +12,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
     {
         IStokGrupKodService _stokGrupKodService;
         bool _secimIcin = false;
+        List<string> _zatenVarOlanTurler;
 
         StokGrupKod _secilenKod;
         public FrmStokGrup(IStokGrupKodService stokGrupKodService)
@@ -35,10 +38,10 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         private void UscGruplar_ClickClear(object sender, EventArgs e)
         {
             var result = _stokGrupKodService.GetList();
-            if (result.Success)
-                dgvGruplar.DataSource = result.Data;
+            if (_zatenVarOlanTurler != null)
+                dgvGruplar.DataSource = result.Data.Where(p => !_zatenVarOlanTurler.Exists(z => z == p.Tur)).ToList();
             else
-                MessageBox.Show(result.Message);
+                dgvGruplar.DataSource = result.Data;
 
             txtGrupKodAd.Clear();
             txtGrupKodTur.Clear();
@@ -91,8 +94,9 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             }
         }
 
-        public StokGrupKod SecimIcinAc()
+        public StokGrupKod SecimIcinAc(List<string> turList)
         {
+            _zatenVarOlanTurler = turList;
             _secimIcin = true;
             ShowDialog();
             return _secilenKod;

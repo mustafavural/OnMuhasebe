@@ -37,32 +37,38 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
         private void ListeyiYenile()
         {
-            dgvStokListe.DataSource = _stokResult.Data
-                .Where(p =>
+            var stokResult = _stokResult.Data.Where(p =>
+                   p.Kod.Contains(txtStokKod.Text.ToUpper()) &&
+                   p.Barkod.Contains(txtBarkod.Text.ToUpper()) &&
+                   p.Ad.Contains(txtStokAd.Text.ToUpper()) &&
+                   p.KDV.ToString().Contains(txtKDV.Text.ToUpper())).ToList();
+
+            stokResult = stokResult.Where(p =>
+            {
+                if (dgvGrupView.Rows.Count == 0)
+                    return true;
+                else
                 {
-                    return p.Kod.Contains(txtStokKod.Text.ToUpper()) &&
-                           p.Barkod.Contains(txtBarkod.Text.ToUpper()) &&
-                           p.Ad.Contains(txtStokAd.Text.ToUpper()) &&
-                           p.KDV.ToString().Contains(txtKDV.Text.ToUpper());
-                }).Where(grup =>
-                {
-                    if (dgvGrupView.Rows.Count == 0)
-                        return true;
-                    else
-                    {
-                        var stokGrupKodlar = _stokGrupKodService.GetListByStokId(grup.Id).Data;
-                        foreach (var item in stokGrupKodlar)
-                            foreach (DataGridViewRow stokGrupKod in dgvGrupView.Rows)
-                                if (item.Id.ToString() == stokGrupKod.Cells[0].Value.ToString())
-                                    return true;
-                        return false;
-                    }
-                }).ToList();
+                    var stokGrupKodlar = _stokGrupKodService.GetListByStokId(p.Id).Data;
+                    foreach (var item in stokGrupKodlar)
+                        foreach (DataGridViewRow stokGrupKod in dgvGrupView.Rows)
+                            if (item.Id.ToString() == stokGrupKod.Cells[0].Value.ToString())
+                                return true;
+                    return false;
+                }
+            }).ToList();
+
+            dgvStokListe.DataSource = stokResult;
         }
 
         private void BtnStokGrupEkle_Click(object sender, EventArgs e)
         {
-            _secilenGrupKod = _frmStokGrup.SecimIcinAc();
+            var turList = new List<string>();
+            foreach (DataGridViewRow row in dgvGrupView.Rows)
+                turList.Add(row.Cells[1].Value.ToString());
+
+
+            _secilenGrupKod = _frmStokGrup.SecimIcinAc(turList);
             if (_secilenGrupKod != null)
             {
                 var rowIndex = dgvGrupView.Rows.Add();
