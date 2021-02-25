@@ -146,6 +146,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.txtStokKod.Name = "txtStokKod";
             this.txtStokKod.Size = new System.Drawing.Size(358, 23);
             this.txtStokKod.TabIndex = 1;
+            this.txtStokKod.Leave += new System.EventHandler(this.TxtStokKod_Leave);
             // 
             // lblStokKDV
             // 

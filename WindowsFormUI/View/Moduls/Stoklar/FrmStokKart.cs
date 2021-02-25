@@ -1,10 +1,9 @@
 ﻿using Business.Abstract;
-using Business.ValidationRules.FluentValidation;
-using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Result;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace WindowsFormUI.View.Moduls.Stoklar
@@ -35,6 +34,15 @@ namespace WindowsFormUI.View.Moduls.Stoklar
                 dgvStokListe.DataSource = stoklar.Data;
             else
                 MessageBox.Show(stoklar.Message);
+        }
+
+        private void TxtStokKod_Leave(object sender, EventArgs e)
+        {
+            if (txtStokKod.Text != "")
+            {
+                _secilenStok = _stokService.GetByKod(txtStokKod.Text).Data;
+                WriteToScreen(_secilenStok);
+            }
         }
 
         private void BtnStokBul_Click(object sender, EventArgs e)
@@ -85,54 +93,54 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         {
             ReadFromScreen(out Stok stok, out List<StokGrupKod> stokGrupKodlar);
             if (stok != null && stokGrupKodlar != null)
+            {
                 if (_secilenStok == null)
                 {
-                    var addResult = AddStok(stok, out int addedId);
-                    if (addResult.Success)
-                    {
+                    var added = AddStok(stok, out int addedId);
+                    if (added.Success)
                         foreach (var group in stokGrupKodlar)
-                            AddOneGroupToStok(addedId, group.Id);
-                        UscStokEkleSilButon_ClickEkraniTemizle(sender, e);
-                    }
+                        {
+                            var groupAdded = AddOneGroupToStok(addedId, group.Id);
+                            if (groupAdded.Success) UscStokEkleSilButon_ClickEkraniTemizle(sender, e);
+                            else MessageBox.Show(groupAdded.Message);
+                        }
+                    else MessageBox.Show(added.Message);
                 }
                 else
                 {
-                    var stokResult = UpdateStok(stok);
-                    if (stokResult.Success)
+                    var updated = UpdateStok(stok);
+                    if (updated.Success)
                     {
-                        UpdateStokGroups(_secilenStok.Id, stokGrupKodlar);
-                        UscStokEkleSilButon_ClickEkraniTemizle(sender, e);
+                        var groupUpdated = UpdateStokGroups(_secilenStok.Id, stokGrupKodlar);
+                        if (groupUpdated.Success) UscStokEkleSilButon_ClickEkraniTemizle(sender, e);
+                        else MessageBox.Show(groupUpdated.Message);
                     }
-                    MessageBox.Show(stokResult.Message);
+                    else MessageBox.Show(updated.Message);
                 }
+            }
         }
 
         private void UscStokEkleSilButon_ClickSecileniSil(object sender, EventArgs e)
         {
-            var groupsResult = _stokService.GetListStokGrupKod(_secilenStok.Id);
-            if (groupsResult.Success)
-                foreach (var item in groupsResult.Data)
-                    DeleteOneGroupFromStok(_secilenStok.Id, item.Id);
-            else
-                MessageBox.Show(groupsResult.Message);
+            var groupsResult = _stokService.GetListStokGrupKod(_secilenStok.Id).Data;
+            foreach (var item in groupsResult)
+            {
+                var deleteResult = DeleteOneGroupFromStok(_secilenStok.Id, item.Id);
+                if (!deleteResult.Success)
+                    MessageBox.Show(deleteResult.Message);
+            }
 
-            var stokResult = _stokService.Delete(_secilenStok);
-            if (stokResult.Success)
+            var deletedResult = DeleteStok(_secilenStok);
+            if (deletedResult.Success)
                 UscStokEkleSilButon_ClickEkraniTemizle(sender, e);
-            MessageBox.Show(stokResult.Message);
+            MessageBox.Show(deletedResult.Message);
         }
 
         private void DgvStokListe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var secilenStok = _stokService.GetById((int)dgvStokListe.SelectedRows[0].Cells[0].Value);
-
-            if (secilenStok.Success)
-            {
-                _secilenStok = secilenStok.Data;
-                WriteToScreen(secilenStok.Data);
-            }
-            else
-                MessageBox.Show(secilenStok.Message);
+            var ciftTiklanan = (Stok)dgvStokListe.SelectedRows[0].DataBoundItem;
+            _secilenStok = _stokService.GetById(ciftTiklanan.Id).Data;
+            WriteToScreen(_secilenStok);
         }
 
         #region KeyEvents
@@ -174,111 +182,102 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
         private IResult AddStok(Stok stok, out int Id)
         {
-            IResult stokResult;
             try
             {
-                stokResult = _stokService.Add(stok);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            finally
-            {
-                if (stokResult.Success)
-                {
-                    var addedStok = _stokService.GetByKod(stok.Kod);
-                    Id = addedStok.Data.Id;
-                }
-                else
-                {
-                    MessageBox.Show(stokResult.Message);
-                    Id = -1;
-                }
-            }
+                var stokResult = _stokService.Add(stok);
+                var addedStok = _stokService.GetByKod(stok.Kod);
+                Id = addedStok.Data.Id;
                 return stokResult;
+            }
+            catch (Exception err)
+            {
+                Id = -1;
+                return new ErrorResult(err.Message);
+            }
+        }
+
+        private IResult DeleteStok(Stok stok)
+        {
+            try
+            {
+                stok.Id = _secilenStok.Id;
+                var result = _stokService.Delete(stok);
+                _secilenStok = stok;
+                return result;
+            }
+            catch (Exception err)
+            {
+                return new ErrorResult(err.Message);
+            }
         }
 
         private IResult UpdateStok(Stok stok)
         {
-            _secilenStok.Kod = stok.Kod;
-            _secilenStok.Barkod = stok.Barkod;
-            _secilenStok.Ad = stok.Ad;
-            _secilenStok.KDV = stok.KDV;
-            _secilenStok.Birim = stok.Birim;
-            _secilenStok.Birim2 = stok.Birim2;
-            _secilenStok.Birim2Oran = stok.Birim2Oran;
-            _secilenStok.Birim3 = stok.Birim3;
-            _secilenStok.Birim3Oran = stok.Birim3Oran;
-
-            return _stokService.Update(_secilenStok);
-        }
-
-        private void AddOneGroupToStok(int stokId, int stokGrupKodId)
-        {
-            var addResult = _stokGrupService.Add(new StokGrup { StokGrupKodId = stokGrupKodId, StokId = stokId });
-            if (!addResult.Success)
-                MessageBox.Show(addResult.Message);
-        }
-
-        private void DeleteOneGroupFromStok(int stokId, int stokGrupKodId)
-        {
-            var relation = _stokGrupService.GetByBothId(stokId, stokGrupKodId);
-            if (relation.Success)
+            try
             {
-                var deleteResult = _stokGrupService.Delete(relation.Data);
-                if (!deleteResult.Success)
-                    MessageBox.Show(deleteResult.Message);
+                stok.Id = _secilenStok.Id;
+                var result = _stokService.Update(stok);
+                _secilenStok = stok;
+                return result;
             }
-            else
-                MessageBox.Show(relation.Message);
+            catch (Exception err)
+            {
+                return new ErrorResult(err.Message);
+            }
         }
 
-        private void UpdateStokGroups(int stokId, List<StokGrupKod> stokGrupKodlar)
+        private IResult UpdateStokGroups(int stokId, List<StokGrupKod> stokGrupKodlar)
         {
             List<StokGrupKod> mevcutlar = _stokService.GetListStokGrupKod(stokId).Data;
-            foreach (var item in stokGrupKodlar)
-                if (!mevcutlar.Contains(item))
-                    AddOneGroupToStok(stokId, item.Id);
 
-            foreach (var item in mevcutlar)
-                if (!stokGrupKodlar.Contains(item))
-                    DeleteOneGroupFromStok(stokId, item.Id);
+            var eklenecekler = stokGrupKodlar.Where(s => !mevcutlar.Exists(m => m.Id == s.Id)).ToList();
+            var silinecekler = mevcutlar.Where(m => !stokGrupKodlar.Exists(s => s.Id == m.Id)).ToList();
+
+            foreach (var item in eklenecekler)
+            {
+                var addGrupResult = AddOneGroupToStok(stokId, item.Id);
+                if (!addGrupResult.Success)
+                    return new ErrorResult(addGrupResult.Message);
+            }
+
+            foreach (var item in silinecekler)
+            {
+                var deleteGrupResult = DeleteOneGroupFromStok(stokId, item.Id);
+                if (!deleteGrupResult.Success)
+                    return new ErrorResult(deleteGrupResult.Message);
+            }
+
+            return new SuccessResult();
         }
 
-        private List<string> CheckIfInputErrors()
+        private IResult AddOneGroupToStok(int stokId, int stokGrupKodId)
         {
-            List<string> errors = new List<string>();
-            if (txtStokKod.Text == "")
-                errors.Add("Stok Kodu Boş Olamaz");
+            var stok = new StokGrup { StokGrupKodId = stokGrupKodId, StokId = stokId };
+            try
+            {
+                return _stokGrupService.Add(stok);
+            }
+            catch (Exception err)
+            {
+                return new ErrorResult(err.Message);
+            }
+        }
 
-            if (txtStokAd.Text == "")
-                errors.Add("Stok Adı Boş Olamaz");
-
-            if (txtStokKDV.Text == "")
-                errors.Add("Stok KDV'si Boş Olamaz");
-
-            if (txtStokBirim.Text == "")
-                errors.Add("Stok Birimi Boş Olamaz");
-
-            if (txtStokOran2.Text == "" && txtStokBirim2.Enabled && txtStokBirim2.Text != "")
-                errors.Add("Stok 2. Birimi Girilmiş İken Oranı Boş Olamaz");
-
-            if (txtStokOran3.Text == "" && txtStokBirim3.Enabled && txtStokBirim3.Text != "")
-                errors.Add("Stok 3. Birimi Girilmiş İken Oranı Boş Olamaz");
-
-            if (txtStokOran2.Text == txtStokOran3.Text && txtStokOran2.Enabled && txtStokOran3.Enabled)
-                errors.Add("2. ve 3. Oran Birbiriyle Aynı Olamaz");
-
-            return errors;
+        private IResult DeleteOneGroupFromStok(int stokId, int stokGrupKodId)
+        {
+            var relation = _stokGrupService.GetByBothId(stokId, stokGrupKodId).Data;
+            try
+            {
+                return _stokGrupService.Delete(relation);
+            }
+            catch(Exception err)
+            {
+                return new ErrorResult(err.Message);
+            }
         }
 
         private void ReadFromScreen(out Stok stok, out List<StokGrupKod> stokGrupKodlar)
         {
-            //var hatalar = CheckIfInputErrors();
-
-            //if (hatalar.Count == 0)
-            //{
             stok = new Stok();
             stok.Kod = txtStokKod.Text;
             stok.Barkod = txtStokBarkod.Text;
@@ -293,64 +292,43 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             decimal.TryParse(txtStokOran3.Text, out decimal oran3);
             stok.Birim3Oran = txtStokBirim3.Enabled && txtStokBirim3.Text != "" ? oran3 : 0.0m;
 
-                stokGrupKodlar = new List<StokGrupKod>();
-                foreach (DataGridViewRow item in dgvGrupView.Rows)
-                    stokGrupKodlar.Add(
-                        new StokGrupKod
-                        {
-                            Id = Convert.ToInt32(item.Cells[0].Value),
-                            Tur = item.Cells[1].Value.ToString(),
-                            Ad = item.Cells[2].Value.ToString()
-                        });
-            //}
-            //else
-            //{
-            //    string result = "";
-            //    foreach (var item in hatalar)
-            //        result += "--> " + item + "\n\n";
-            //    MessageBox.Show("Aşağıdaki hataları gözden geçirin...\n\n" + result,
-            //        "Stok Bilgileri Eksik !!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            //    stok = null;
-            //    stokGrupKodlar = null;
-            //}
+            stokGrupKodlar = new List<StokGrupKod>();
+            foreach (DataGridViewRow item in dgvGrupView.Rows)
+                stokGrupKodlar.Add(
+                    new StokGrupKod
+                    {
+                        Id = Convert.ToInt32(item.Cells[0].Value),
+                        Tur = item.Cells[1].Value.ToString(),
+                        Ad = item.Cells[2].Value.ToString()
+                    });
         }
 
         private void WriteToScreen(Stok secilenStok)
         {
-            StokBilgileriniGoruntule(secilenStok);
-
-            var stokGruplari = _stokService.GetListStokGrupKod(secilenStok.Id);
-            if (stokGruplari.Success)
+            if (secilenStok != null)
             {
+                txtStokKod.Text = secilenStok.Kod;
+                txtStokBarkod.Text = secilenStok.Barkod;
+                txtStokAd.Text = secilenStok.Ad;
+                txtStokKDV.Text = secilenStok.KDV.ToString();
+                txtStokBirim.Text = secilenStok.Birim;
+                txtStokBirim2.Text = secilenStok.Birim2;
+                txtStokOran2.Text = secilenStok.Birim2Oran.ToString();
+                txtStokBirim3.Text = secilenStok.Birim3;
+                txtStokOran3.Text = secilenStok.Birim3Oran.ToString();
+
+                var stokGruplari = _stokService.GetListStokGrupKod(secilenStok.Id).Data;
                 dgvGrupView.Rows.Clear();
-                foreach (var item in stokGruplari.Data)
+                foreach (var item in stokGruplari)
                     AddOneToGroupList(item);
+
+                uscStokEkleSilButon.BtnSave_Text = "Güncelle";
+                uscStokEkleSilButon.BtnDelete_Enable = true;
             }
-            else
-                MessageBox.Show(stokGruplari.Message);
-
-            uscStokEkleSilButon.BtnSave_Text = "Güncelle";
-            uscStokEkleSilButon.BtnDelete_Enable = true;
         }
 
-        private void StokBilgileriniGoruntule(Stok stok)
-        {
-            txtStokKod.Text = stok.Kod;
-            txtStokBarkod.Text = stok.Barkod;
-            txtStokAd.Text = stok.Ad;
-            txtStokKDV.Text = stok.KDV.ToString();
-            txtStokBirim.Text = stok.Birim;
-            txtStokBirim2.Text = stok.Birim2;
-            txtStokOran2.Text = stok.Birim2Oran.ToString();
-            txtStokBirim3.Text = stok.Birim3;
-            txtStokOran3.Text = stok.Birim3Oran.ToString();
-        }
-
-        private void AddOneToGroupList(StokGrupKod stokGrupKod)
-        {
-            dgvGrupView.Rows[dgvGrupView.Rows.Add()].SetValues(stokGrupKod.Id, stokGrupKod.Tur, stokGrupKod.Ad);
-        }
+        private void AddOneToGroupList(StokGrupKod grupKod) =>
+            dgvGrupView.Rows[dgvGrupView.Rows.Add()].SetValues(grupKod.Id, grupKod.Tur, grupKod.Ad);
         #endregion
     }
 }
