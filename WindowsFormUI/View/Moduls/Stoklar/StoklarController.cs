@@ -11,11 +11,9 @@ namespace WindowsFormUI.View.Moduls.Stoklar
     {
         IStokService _stokService;
         IStokGrupService _stokGrupService;
-        Stok _secilenStok;
-        public StoklarController(IStokService stokService, IStokGrupService stokGrupService, Stok secilenStok)
+        public StoklarController(IStokService stokService, IStokGrupService stokGrupService)
         {
             _stokService = stokService;
-            _secilenStok = secilenStok;
             _stokGrupService = stokGrupService;
         }
 
@@ -23,10 +21,10 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         {
             try
             {
-                var stokResult = _stokService.Add(stok);
+                var addResult = _stokService.Add(stok);
                 var addedStok = _stokService.GetByKod(stok.Kod);
                 Id = addedStok.Data.Id;
-                return stokResult;
+                return addResult;
             }
             catch (Exception err)
             {
@@ -39,10 +37,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         {
             try
             {
-                stok.Id = _secilenStok.Id;
-                var result = _stokService.Delete(stok);
-                _secilenStok = stok;
-                return result;
+                return _stokService.Delete(stok);
             }
             catch (Exception err)
             {
@@ -50,14 +45,12 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             }
         }
 
-        public IResult UpdateStok(Stok stok)
+        public IResult UpdateStok(Stok stok, int stokId)
         {
             try
             {
-                stok.Id = _secilenStok.Id;
-                var result = _stokService.Update(stok);
-                _secilenStok = stok;
-                return result;
+                stok.Id = stokId;
+                return _stokService.Update(stok);
             }
             catch (Exception err)
             {
@@ -91,10 +84,9 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
         public IResult AddOneGroupToStok(int stokId, int stokGrupKodId)
         {
-            var stok = new StokGrup { StokGrupKodId = stokGrupKodId, StokId = stokId };
             try
             {
-                return _stokGrupService.Add(stok);
+                return _stokGrupService.Add(new StokGrup { StokGrupKodId = stokGrupKodId, StokId = stokId });
             }
             catch (Exception err)
             {
@@ -104,15 +96,19 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
         public IResult DeleteOneGroupFromStok(int stokId, int stokGrupKodId)
         {
-            var relation = _stokGrupService.GetByBothId(stokId, stokGrupKodId).Data;
             try
             {
-                return _stokGrupService.Delete(relation);
+                return _stokGrupService.Delete(_stokGrupService.GetByBothId(stokId, stokGrupKodId).Data);
             }
             catch (Exception err)
             {
                 return new ErrorResult(err.Message);
             }
         }
+
+        public IDataResult<List<Stok>> GetList() => _stokService.GetList();
+        public IDataResult<Stok> GetByKod(string kod) => _stokService.GetByKod(kod);
+        public IDataResult<List<StokGrupKod>> GetListStokGrupKod(int Id) => _stokService.GetListStokGrupKod(Id);
+        public IDataResult<Stok> GetById(int Id) => _stokService.GetById(Id);
     }
 }

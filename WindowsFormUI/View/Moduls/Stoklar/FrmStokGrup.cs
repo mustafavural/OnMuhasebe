@@ -10,7 +10,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 {
     public partial class FrmStokGrup : FrmBase
     {
-        IStokGrupKodService _stokGrupKodService;
+        IStokGrupKodService _stokGrupKodService; //TODO: servisi controller içine al
         bool _secimIcin = false;
         List<string> _zatenVarOlanTurler;
 

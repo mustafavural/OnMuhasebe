@@ -1,34 +1,29 @@
-﻿using Business.Abstract;
-using Core.Utilities.Result;
-using Entities.Concrete;
+﻿using Entities.Concrete;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace WindowsFormUI.View.Moduls.Stoklar
 {
     public partial class FrmStokKart : FrmBase
     {
-        IStokService _stokService;
         FrmStokListe _frmStokListe;
         FrmStokGrup _frmStokGrup;
         StoklarController _stoklarController;
         Stok _secilenStok;
 
-        public FrmStokKart(IStokService stokService, IStokGrupService stokGrupService, FrmStokListe frmStokListe, FrmStokGrup frmStokGrup)
+        public FrmStokKart(StoklarController stoklarController, FrmStokListe frmStokListe, FrmStokGrup frmStokGrup)
         {
             InitializeComponent();
-            _stokService = stokService;
             _frmStokListe = frmStokListe;
             _frmStokGrup = frmStokGrup;
-            _stoklarController = new StoklarController(stokService, stokGrupService, _secilenStok);
+            _stoklarController = stoklarController;
         }
 
         #region Events
         private void FrmStokKart_Load(object sender, EventArgs e)
         {
-            var stoklar = _stokService.GetList();
+            var stoklar = _stoklarController.GetList();
             if (stoklar.Success)
                 dgvStokListe.DataSource = stoklar.Data;
             else
@@ -39,7 +34,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         {
             if (txtStokKod.Text != "")
             {
-                _secilenStok = _stokService.GetByKod(txtStokKod.Text).Data;
+                _secilenStok = _stoklarController.GetByKod(txtStokKod.Text).Data;
                 WriteToScreen(_secilenStok);
             }
         }
@@ -111,7 +106,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
                 }
                 else
                 {
-                    var updated = _stoklarController.UpdateStok(stok);
+                    var updated = _stoklarController.UpdateStok(stok, _secilenStok.Id);
                     if (updated.Success)
                     {
                         var groupUpdated = _stoklarController.UpdateStokGroups(_secilenStok.Id, stokGrupKodlar);
@@ -125,7 +120,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
         private void UscStokEkleSilButon_ClickSecileniSil(object sender, EventArgs e)
         {
-            var groupsResult = _stokService.GetListStokGrupKod(_secilenStok.Id).Data;
+            var groupsResult = _stoklarController.GetListStokGrupKod(_secilenStok.Id).Data;
             foreach (var item in groupsResult)
             {
                 var deleteResult = _stoklarController.DeleteOneGroupFromStok(_secilenStok.Id, item.Id);
@@ -142,7 +137,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         private void DgvStokListe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var ciftTiklanan = (Stok)dgvStokListe.SelectedRows[0].DataBoundItem;
-            _secilenStok = _stokService.GetById(ciftTiklanan.Id).Data;
+            _secilenStok = _stoklarController.GetById(ciftTiklanan.Id).Data;
             WriteToScreen(_secilenStok);
         }
         #endregion
@@ -224,7 +219,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
                 txtStokBirim3.Text = secilenStok.Birim3;
                 txtStokOran3.Text = secilenStok.Birim3Oran.ToString();
 
-                var stokGruplari = _stokService.GetListStokGrupKod(secilenStok.Id).Data;
+                var stokGruplari = _stoklarController.GetListStokGrupKod(secilenStok.Id).Data;
                 dgvGrupView.Rows.Clear();
                 foreach (var item in stokGruplari)
                     AddOneToGroupList(item);

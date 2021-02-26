@@ -33,6 +33,7 @@ namespace WindowsFormUI
             builder.RegisterType<FrmStokGrup>().AsSelf();
             builder.RegisterType<FrmStokListe>().AsSelf();
             builder.RegisterType<FrmStokKart>().AsSelf();
+            builder.RegisterType<StoklarController>().AsSelf();
 
             return builder.Build();
         }

@@ -1,5 +1,4 @@
-﻿using Business.Abstract;
-using Core.Utilities.Result;
+﻿using Core.Utilities.Result;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -11,24 +10,22 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 {
     public partial class FrmStokListe : FrmBase
     {
-        IStokService _stokService;
-        IStokGrupKodService _stokGrupKodService;
+        StoklarController _stoklarController;
         FrmStokGrup _frmStokGrup;
 
         IDataResult<List<Stok>> _stokResult;
         StokGrupKod _secilenGrupKod;
         Stok _secilenStok;
-        public FrmStokListe(IStokService stokService, IStokGrupKodService stokGrupService, FrmStokGrup frmStokGrup)
+        public FrmStokListe(FrmStokGrup frmStokGrup, StoklarController stoklarController)
         {
             InitializeComponent();
-            _stokService = stokService;
             _frmStokGrup = frmStokGrup;
-            _stokGrupKodService = stokGrupService;
+            _stoklarController = stoklarController;
         }
 
         private void FrmStokListe_Load(object sender, EventArgs e)
         {
-            _stokResult = _stokService.GetList();
+            _stokResult = _stoklarController.GetList();
             if (_stokResult.Success)
                 dgvStokListe.DataSource = _stokResult.Data;
             else
@@ -37,26 +34,25 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
         private void ListeyiYenile()
         {
+            var groupFilters = new List<int>();
+            foreach (DataGridViewRow item in dgvGrupView.Rows)
+                groupFilters.Add((int)item.Cells[0].Value);
+
             var stokResult = _stokResult.Data.Where(p =>
                    p.Kod.Contains(txtStokKod.Text.ToUpper()) &&
                    p.Barkod.Contains(txtBarkod.Text.ToUpper()) &&
                    p.Ad.Contains(txtStokAd.Text.ToUpper()) &&
                    p.KDV.ToString().Contains(txtKDV.Text.ToUpper())).ToList();
 
-            stokResult = stokResult.Where(p =>
+            foreach (var item in groupFilters)
             {
-                if (dgvGrupView.Rows.Count == 0)
-                    return true;
-                else
+                stokResult = stokResult.Where(p =>
                 {
-                    var stokGrupKodlar = _stokGrupKodService.GetListByStokId(p.Id).Data;
-                    foreach (var item in stokGrupKodlar)
-                        foreach (DataGridViewRow stokGrupKod in dgvGrupView.Rows)
-                            if (item.Id.ToString() == stokGrupKod.Cells[0].Value.ToString())
-                                return true;
-                    return false;
-                }
-            }).ToList();
+                    var gruplar = _stoklarController.GetListStokGrupKod(p.Id).Data;
+                    var Idler = gruplar.Select(s => s.Id).ToList();
+                    return Idler.Exists(s => s == item);
+                }).ToList();
+            }
 
             dgvStokListe.DataSource = stokResult;
         }
@@ -92,14 +88,8 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         private void DgvStokListe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             Stok secilenSatir = (Stok)dgvStokListe.SelectedRows[0].DataBoundItem;
-            var secilenStok = _stokService.GetById(secilenSatir.Id);
-            if (secilenStok.Success)
-            {
-                _secilenStok = secilenStok.Data;
-                Close();
-            }
-            else
-                MessageBox.Show(secilenStok.Message);
+            _secilenStok = _stoklarController.GetById(secilenSatir.Id).Data;
+            Close();
         }
 
         public Stok SecimIcinAc()

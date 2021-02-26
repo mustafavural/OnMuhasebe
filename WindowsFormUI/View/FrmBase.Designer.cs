@@ -40,7 +40,6 @@ namespace WindowsFormUI.View
             this.MinimizeBox = false;
             this.Name = "FrmBase";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmBase";
             this.ResumeLayout(false);
