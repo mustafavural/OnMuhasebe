@@ -25,7 +25,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
         private void FrmStokListe_Load(object sender, EventArgs e)
         {
-            _stokResult = _stoklarController.GetList();
+            _stokResult = _stoklarController.GetStokList();
             if (_stokResult.Success)
                 dgvStokListe.DataSource = _stokResult.Data;
             else

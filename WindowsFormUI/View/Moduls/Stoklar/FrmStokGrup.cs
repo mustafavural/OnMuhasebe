@@ -1,5 +1,4 @@
-﻿using Business.Abstract;
-using Core.Utilities.Result;
+﻿using Core.Utilities.Result;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,15 +9,15 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 {
     public partial class FrmStokGrup : FrmBase
     {
-        IStokGrupKodService _stokGrupKodService; //TODO: servisi controller içine al
+        StoklarController _stoklarController;
         bool _secimIcin = false;
         List<string> _zatenVarOlanTurler;
 
         StokGrupKod _secilenKod;
-        public FrmStokGrup(IStokGrupKodService stokGrupKodService)
+        public FrmStokGrup(StoklarController stoklarController)
         {
             InitializeComponent();
-            _stokGrupKodService = stokGrupKodService;
+            _stoklarController = stoklarController;
         }
 
         private void FrmStokGrup_Load(object sender, EventArgs e)
@@ -37,7 +36,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
         private void UscGruplar_ClickClear(object sender, EventArgs e)
         {
-            var result = _stokGrupKodService.GetList();
+            var result = _stoklarController.GetStokGrupList();
             if (_zatenVarOlanTurler != null)
                 dgvGruplar.DataSource = result.Data.Where(p => !_zatenVarOlanTurler.Exists(z => z == p.Tur)).ToList();
             else
@@ -57,12 +56,12 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             IResult result;
             StokGrupKod secilen = GetStokGrupKodFromTextBoxes();
             if (_secilenKod == null)
-                result = _stokGrupKodService.Add(secilen);
+                result = _stoklarController.AddGrupKod(secilen, out int Id);
             else
             {
                 _secilenKod.Ad = secilen.Ad;
                 _secilenKod.Tur = secilen.Tur;
-                result = _stokGrupKodService.Update(_secilenKod);
+                result = _stoklarController.UpdateGrupKod(_secilenKod, _secilenKod.Id);
             }
 
             if (result.Success)
@@ -72,7 +71,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
         private void UscGruplar_GrupSil(object sender, EventArgs e)
         {
-            var result = _stokGrupKodService.Delete(_secilenKod);
+            var result = _stoklarController.DeleteGrupKod(_secilenKod);
             if (result.Success)
                 UscGruplar_ClickClear(sender, e);
             MessageBox.Show(result.Message);

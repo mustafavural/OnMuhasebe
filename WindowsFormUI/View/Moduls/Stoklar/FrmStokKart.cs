@@ -23,7 +23,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         #region Events
         private void FrmStokKart_Load(object sender, EventArgs e)
         {
-            var stoklar = _stoklarController.GetList();
+            var stoklar = _stoklarController.GetStokList();
             if (stoklar.Success)
                 dgvStokListe.DataSource = stoklar.Data;
             else
@@ -98,7 +98,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
                     if (added.Success)
                         foreach (var group in stokGrupKodlar)
                         {
-                            var groupAdded = _stoklarController.AddOneGroupToStok(addedId, group.Id);
+                            var groupAdded = _stoklarController.AddOneRelation(addedId, group.Id);
                             if (groupAdded.Success) UscStokEkleSilButon_ClickEkraniTemizle(sender, e);
                             else MessageBox.Show(groupAdded.Message);
                         }
@@ -109,7 +109,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
                     var updated = _stoklarController.UpdateStok(stok, _secilenStok.Id);
                     if (updated.Success)
                     {
-                        var groupUpdated = _stoklarController.UpdateStokGroups(_secilenStok.Id, stokGrupKodlar);
+                        var groupUpdated = _stoklarController.UpdateRelations(_secilenStok.Id, stokGrupKodlar);
                         if (groupUpdated.Success) UscStokEkleSilButon_ClickEkraniTemizle(sender, e);
                         else MessageBox.Show(groupUpdated.Message);
                     }
@@ -123,7 +123,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             var groupsResult = _stoklarController.GetListStokGrupKod(_secilenStok.Id).Data;
             foreach (var item in groupsResult)
             {
-                var deleteResult = _stoklarController.DeleteOneGroupFromStok(_secilenStok.Id, item.Id);
+                var deleteResult = _stoklarController.DeleteOneRelation(_secilenStok.Id, item.Id);
                 if (!deleteResult.Success)
                     MessageBox.Show(deleteResult.Message);
             }

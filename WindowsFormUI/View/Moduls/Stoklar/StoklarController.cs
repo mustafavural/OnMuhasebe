@@ -11,10 +11,12 @@ namespace WindowsFormUI.View.Moduls.Stoklar
     {
         IStokService _stokService;
         IStokGrupService _stokGrupService;
-        public StoklarController(IStokService stokService, IStokGrupService stokGrupService)
+        IStokGrupKodService _stokGrupKodService;
+        public StoklarController(IStokService stokService, IStokGrupService stokGrupService, IStokGrupKodService stokGrupKodService)
         {
             _stokService = stokService;
             _stokGrupService = stokGrupService;
+            _stokGrupKodService = stokGrupKodService;
         }
 
         public IResult AddStok(Stok stok, out int Id)
@@ -58,7 +60,48 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             }
         }
 
-        public IResult UpdateStokGroups(int stokId, List<StokGrupKod> stokGrupKodlar)
+        public IResult AddGrupKod(StokGrupKod stokGrupKod, out int Id)
+        {
+            try
+            {
+                var addResult = _stokGrupKodService.Add(stokGrupKod);
+                var addedGrupKod = _stokGrupKodService.GetByTurAndAd(stokGrupKod.Tur, stokGrupKod.Ad);
+                Id = addedGrupKod.Data.Id;
+                return addResult;
+            }
+            catch (Exception err)
+            {
+                Id = -1;
+                return new ErrorResult(err.Message);
+            }
+        }
+
+        public IResult DeleteGrupKod(StokGrupKod stokGrupKod)
+        {
+            try
+            {
+                return _stokGrupKodService.Delete(stokGrupKod);
+            }
+            catch (Exception err)
+            {
+                return new ErrorResult(err.Message);
+            }
+        }
+
+        public IResult UpdateGrupKod(StokGrupKod stokGrupKod, int Id)
+        {
+            try
+            {
+                stokGrupKod.Id = Id;
+                return _stokGrupKodService.Update(stokGrupKod);
+            }
+            catch (Exception err)
+            {
+                return new ErrorResult(err.Message);
+            }
+        }
+
+        public IResult UpdateRelations(int stokId, List<StokGrupKod> stokGrupKodlar)
         {
             var mevcutlar = _stokService.GetListStokGrupKod(stokId).Data;
 
@@ -67,14 +110,14 @@ namespace WindowsFormUI.View.Moduls.Stoklar
 
             foreach (var item in eklenecekler)
             {
-                var addGrupResult = AddOneGroupToStok(stokId, item.Id);
+                var addGrupResult = AddOneRelation(stokId, item.Id);
                 if (!addGrupResult.Success)
                     return new ErrorResult(addGrupResult.Message);
             }
 
             foreach (var item in silinecekler)
             {
-                var deleteGrupResult = DeleteOneGroupFromStok(stokId, item.Id);
+                var deleteGrupResult = DeleteOneRelation(stokId, item.Id);
                 if (!deleteGrupResult.Success)
                     return new ErrorResult(deleteGrupResult.Message);
             }
@@ -82,7 +125,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             return new SuccessResult();
         }
 
-        public IResult AddOneGroupToStok(int stokId, int stokGrupKodId)
+        public IResult AddOneRelation(int stokId, int stokGrupKodId)
         {
             try
             {
@@ -94,7 +137,7 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             }
         }
 
-        public IResult DeleteOneGroupFromStok(int stokId, int stokGrupKodId)
+        public IResult DeleteOneRelation(int stokId, int stokGrupKodId)
         {
             try
             {
@@ -106,7 +149,8 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             }
         }
 
-        public IDataResult<List<Stok>> GetList() => _stokService.GetList();
+        public IDataResult<List<Stok>> GetStokList() => _stokService.GetList();
+        public IDataResult<List<StokGrupKod>> GetStokGrupList() => _stokGrupKodService.GetList();
         public IDataResult<Stok> GetByKod(string kod) => _stokService.GetByKod(kod);
         public IDataResult<List<StokGrupKod>> GetListStokGrupKod(int Id) => _stokService.GetListStokGrupKod(Id);
         public IDataResult<Stok> GetById(int Id) => _stokService.GetById(Id);

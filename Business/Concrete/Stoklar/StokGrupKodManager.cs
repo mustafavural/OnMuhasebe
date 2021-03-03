@@ -99,7 +99,18 @@ namespace Business.Concrete
             return new SuccessDataResult<StokGrupKod>(_stokGrupKodDal.Get(p => p.Ad == stokGrupKodAd));
         }
 
-        
+        public IDataResult<StokGrupKod> GetByTurAndAd(string tur, string ad)
+        {
+            IResult result = BusinessRules.Run(
+                CheckIfValidTur(tur),
+                CheckIfValidAd(ad));
+            if (result != null)
+                return (IDataResult<StokGrupKod>)result;
+
+            return new SuccessDataResult<StokGrupKod>(_stokGrupKodDal.Get(p => p.Tur == tur && p.Ad == ad));
+        }
+
+
         public IDataResult<List<StokGrupKod>> GetList()
         {
             return new SuccessDataResult<List<StokGrupKod>>(_stokGrupKodDal.GetAll());
