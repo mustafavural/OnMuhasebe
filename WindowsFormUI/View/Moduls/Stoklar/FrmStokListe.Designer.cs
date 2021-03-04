@@ -30,6 +30,12 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmStokListe));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grpStokListe = new System.Windows.Forms.GroupBox();
             this.dgvGrupView = new System.Windows.Forms.DataGridView();
             this.colGrupId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,14 +54,10 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.dgvStokListe = new System.Windows.Forms.DataGridView();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colKod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBarkod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colKDV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBirim = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBirim2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOran2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBirim3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOran3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnvan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colVergiDairesi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colVergiNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTCNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpStokListe.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStokListe)).BeginInit();
@@ -228,14 +230,10 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.dgvStokListe.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
             this.colKod,
-            this.colBarkod,
-            this.colAd,
-            this.colKDV,
-            this.colBirim,
-            this.colBirim2,
-            this.colOran2,
-            this.colBirim3,
-            this.colOran3});
+            this.colUnvan,
+            this.colVergiDairesi,
+            this.colVergiNo,
+            this.colTCNo});
             this.dgvStokListe.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvStokListe.Location = new System.Drawing.Point(216, 0);
             this.dgvStokListe.Name = "dgvStokListe";
@@ -243,106 +241,83 @@ namespace WindowsFormUI.View.Moduls.Stoklar
             this.dgvStokListe.RowHeadersVisible = false;
             this.dgvStokListe.RowTemplate.Height = 25;
             this.dgvStokListe.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvStokListe.Size = new System.Drawing.Size(570, 443);
+            this.dgvStokListe.Size = new System.Drawing.Size(671, 443);
             this.dgvStokListe.TabIndex = 1;
             this.dgvStokListe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvStokListe_CellDoubleClick);
             // 
             // colId
             // 
             this.colId.DataPropertyName = "Id";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.colId.DefaultCellStyle = dataGridViewCellStyle1;
             this.colId.Frozen = true;
             this.colId.HeaderText = "Id";
             this.colId.Name = "colId";
             this.colId.ReadOnly = true;
+            this.colId.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.colId.Visible = false;
             // 
             // colKod
             // 
             this.colKod.DataPropertyName = "Kod";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.colKod.DefaultCellStyle = dataGridViewCellStyle2;
             this.colKod.Frozen = true;
-            this.colKod.HeaderText = "Stok Kodu";
+            this.colKod.HeaderText = "Cari Kodu";
             this.colKod.Name = "colKod";
             this.colKod.ReadOnly = true;
-            this.colKod.Width = 150;
+            this.colKod.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // colBarkod
+            // colUnvan
             // 
-            this.colBarkod.DataPropertyName = "Barkod";
-            this.colBarkod.Frozen = true;
-            this.colBarkod.HeaderText = "Barkodu";
-            this.colBarkod.Name = "colBarkod";
-            this.colBarkod.ReadOnly = true;
-            this.colBarkod.Width = 150;
+            this.colUnvan.DataPropertyName = "Unvan";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.colUnvan.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colUnvan.Frozen = true;
+            this.colUnvan.HeaderText = "Unvanı";
+            this.colUnvan.Name = "colUnvan";
+            this.colUnvan.ReadOnly = true;
+            this.colUnvan.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colUnvan.Width = 267;
             // 
-            // colAd
+            // colVergiDairesi
             // 
-            this.colAd.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colAd.DataPropertyName = "Ad";
-            this.colAd.Frozen = true;
-            this.colAd.HeaderText = "Stok Adı";
-            this.colAd.Name = "colAd";
-            this.colAd.ReadOnly = true;
-            this.colAd.Width = 267;
+            this.colVergiDairesi.DataPropertyName = "VergiDairesi";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.colVergiDairesi.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colVergiDairesi.Frozen = true;
+            this.colVergiDairesi.HeaderText = "Vergi Dairesi";
+            this.colVergiDairesi.Name = "colVergiDairesi";
+            this.colVergiDairesi.ReadOnly = true;
+            this.colVergiDairesi.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // colKDV
+            // colVergiNo
             // 
-            this.colKDV.DataPropertyName = "KDV";
-            this.colKDV.Frozen = true;
-            this.colKDV.HeaderText = "KDV";
-            this.colKDV.Name = "colKDV";
-            this.colKDV.ReadOnly = true;
-            this.colKDV.Visible = false;
+            this.colVergiNo.DataPropertyName = "VergiNo";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.colVergiNo.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colVergiNo.Frozen = true;
+            this.colVergiNo.HeaderText = "Vergi No";
+            this.colVergiNo.Name = "colVergiNo";
+            this.colVergiNo.ReadOnly = true;
+            this.colVergiNo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // colBirim
+            // colTCNo
             // 
-            this.colBirim.DataPropertyName = "Birim";
-            this.colBirim.Frozen = true;
-            this.colBirim.HeaderText = "Birim";
-            this.colBirim.Name = "colBirim";
-            this.colBirim.ReadOnly = true;
-            this.colBirim.Visible = false;
-            // 
-            // colBirim2
-            // 
-            this.colBirim2.DataPropertyName = "Birim2";
-            this.colBirim2.Frozen = true;
-            this.colBirim2.HeaderText = "Birim2";
-            this.colBirim2.Name = "colBirim2";
-            this.colBirim2.ReadOnly = true;
-            this.colBirim2.Visible = false;
-            // 
-            // colOran2
-            // 
-            this.colOran2.DataPropertyName = "Birim2Oran";
-            this.colOran2.Frozen = true;
-            this.colOran2.HeaderText = "Birim2Oran";
-            this.colOran2.Name = "colOran2";
-            this.colOran2.ReadOnly = true;
-            this.colOran2.Visible = false;
-            // 
-            // colBirim3
-            // 
-            this.colBirim3.DataPropertyName = "Birim3";
-            this.colBirim3.Frozen = true;
-            this.colBirim3.HeaderText = "Birim3";
-            this.colBirim3.Name = "colBirim3";
-            this.colBirim3.ReadOnly = true;
-            this.colBirim3.Visible = false;
-            // 
-            // colOran3
-            // 
-            this.colOran3.DataPropertyName = "Birim3Oran";
-            this.colOran3.Frozen = true;
-            this.colOran3.HeaderText = "Birim3Oran";
-            this.colOran3.Name = "colOran3";
-            this.colOran3.ReadOnly = true;
-            this.colOran3.Visible = false;
+            this.colTCNo.DataPropertyName = "TCNo";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.colTCNo.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colTCNo.Frozen = true;
+            this.colTCNo.HeaderText = "TC No";
+            this.colTCNo.Name = "colTCNo";
+            this.colTCNo.ReadOnly = true;
+            this.colTCNo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // FrmStokListe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(786, 443);
+            this.ClientSize = new System.Drawing.Size(887, 443);
             this.Controls.Add(this.dgvStokListe);
             this.Controls.Add(this.grpStokListe);
             this.Name = "FrmStokListe";
@@ -376,13 +351,9 @@ namespace WindowsFormUI.View.Moduls.Stoklar
         private System.Windows.Forms.DataGridViewTextBoxColumn colGrupAd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colKod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBarkod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colKDV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBirim;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBirim2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOran2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBirim3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOran3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnvan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colVergiDairesi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colVergiNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTCNo;
     }
 }
